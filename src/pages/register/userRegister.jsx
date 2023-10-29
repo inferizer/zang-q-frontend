@@ -1,43 +1,37 @@
-import { UseValidation } from '../../hook/useValidation'
+
 import Input from '../../component/input'
-import { UseAuth } from '../../hook/useAuthContext';
+import { useAuth } from '../../hook/useAuthContext';
 export default function UserRegister() {
-    const { hdl_input,input} = UseValidation();
-    const {hdl_register_submit} = UseAuth()
-    console.log(hdl_register_submit)
+
+    const { hdl_input,input,hdl_user_register_submit} = useAuth()
 
     const inputTag = [
-        { name: "username" },
-        { name: "password" },
-        { name: "confirmPassword" },
-        { name: "emailOrMobile" },
-        { name: "location" },
+        { id:1,name: "username" },
+        { id:2,name: "password" },
+        { id:3,name: "confirmPassword" },
+        { id:4,name: "emailOrMobile" },
+        
     ]
 
     return (
         <>
-            <form className=' flex flex-col' onSubmit={(e) => {
+            <form key="1"className=' flex flex-col' onSubmit={(e) => {
                 e.preventDefault()
-                hdl_register_submit(input)
+                hdl_user_register_submit(input)
             }}>
 
-                {inputTag.map((el, id) => {
+                {inputTag.map((el) => {
                     return (
                         <>
                             <label>{el.name}</label>
-                            <Input id={id} name={el.name} type='text' placeholder="enter here" onChange={hdl_input} />
+                            <Input key={el.id} name={el.name} type='text' placeholder="enter here" onChange={hdl_input} />
                         </>
                     )
                 }
                 )
 
                 }
-                <select name='role' onChange={hdl_input}>
-                    <option value={"user"}>user</option>
-                    <option value={"shop_admin"}>Shop admin</option>
-                    <option value={"shop_super_admin"}>shop super admin</option>
-                    <option value={"super_admin"}>super admin</option>
-                </select>
+             
                 <button>submit</button>
             </form>
         </>
