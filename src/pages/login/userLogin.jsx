@@ -1,5 +1,7 @@
 import { useAuth } from "../../hook/useAuthContext";
 import Input from "../../component/input";
+import { FRONTEND_URL } from "../../config/env";
+
 export default function UserLogin() {
   const { hdl_input, hdl_user_login_submit } = useAuth();
 
@@ -7,6 +9,10 @@ export default function UserLogin() {
     { id: 4, name: "emailOrMobile" },
     { id: 2, name: "password" },
   ];
+
+  const handleGoogleRedirect = ({ token }) => {
+    if (token) window.location.href = `${FRONTEND_URL}/?token=${token}`;
+  };
   return (
     <>
       <form
@@ -34,6 +40,7 @@ export default function UserLogin() {
 
         <button>login</button>
       </form>
+      <button onClick={handleGoogleRedirect}>Login with Google</button>
     </>
   );
 }

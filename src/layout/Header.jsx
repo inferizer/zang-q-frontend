@@ -22,30 +22,13 @@ export default function Header() {
       );
     }
 
-    if (authUser.role == "admin"){
-        return (
-            <div
-              className=" mobile:bg-red-200 desktop:bg-green-200 mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
-                                 desktop:flex desktop:flex-col "
-            >
-              <h1> admin app bar</h1>
-              <button
-                onClick={() => {
-                  hdl_logout();
-                }}
-              >
-                log out
-              </button>
-            </div>
-          );
-    
-    }
-    return (
+    if (authUser.role == "admin") {
+      return (
         <div
           className=" mobile:bg-red-200 desktop:bg-green-200 mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
-                             desktop:flex desktop:flex-col "
+                                 desktop:flex desktop:flex-col "
         >
-          <h1> user app bar</h1>
+          <h1> admin app bar</h1>
           <button
             onClick={() => {
               hdl_logout();
@@ -54,8 +37,23 @@ export default function Header() {
             log out
           </button>
         </div>
-      ) ;
-
+      );
+    }
+    return (
+      <div
+        className=" mobile:bg-red-200 desktop:bg-green-200 mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
+                             desktop:flex desktop:flex-col "
+      >
+        <h1> user app bar</h1>
+        <button
+          onClick={() => {
+            hdl_logout();
+          }}
+        >
+          log out
+        </button>
+      </div>
+    );
   }
   return <h1>no app bar</h1>;
 }
