@@ -14,18 +14,20 @@ export default function AuthContextProvider({ children }) {
 
 
     // line 
-    // useEffect(() => {
-    //     liff.init({ liffId:'2001390459-y9GRwgp7'})
-    //     .then(async()=>  {
-    //         const profile  = await liff.getProfile()
-    //         loginLine(profile)
-    //     })
-    //     },[])
-    //     const loginLine = async (input) => {
-
-    //             await axios.post('/auth/loginLine', input);
-    //     }
-  
+    useEffect(() => {
+        liff.init({ liffId:'2001390459-y9GRwgp7'})
+        .then(async()=>  {
+            const profile  = await liff.getProfile()
+            loginLine(profile)
+        })
+        },[])
+        const loginLine = async (input) => {
+            try {
+                await axios.post('/auth/loginLine', input);
+            } catch (error) {
+                console.error(error);
+            }
+        };  
         const handleLogin = async () => {
             try {      
                 liff.login()
@@ -33,7 +35,7 @@ export default function AuthContextProvider({ children }) {
                 console.log(err)
             }
         }
-
+    // line
 
     useEffect(() => {
         const token = getAccessToken()
