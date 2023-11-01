@@ -9,6 +9,7 @@ import VendorRegistor from "../pages/register/vendorRegister";
 
 import RedirectIfAuth from "../redirect/redirectIfAuth";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },
+      
     ],
   },
   {
@@ -28,18 +30,19 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
+
+      
     ],
   },
   {
     path: "/register",
     element: (
-    
         <Layout />
-     
     ),
     children: [
       { path: "/register/user", element: <UserRegister /> },
       { path: "/register/vendor", element: <VendorRegistor /> },
+      
     ],
   },
 ]);
