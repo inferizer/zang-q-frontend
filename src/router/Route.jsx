@@ -8,6 +8,9 @@ import UserRegister from "../pages/register/userRegister";
 import VendorRegistor from "../pages/register/vendorRegister";
 
 import RedirectIfAuth from "../redirect/redirectIfAuth";
+import VendorApplication from "../pages/vendor/VendorApplication";
+import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
+import VendorContextProvider from "../context/vendor_context";
 
 const router = createBrowserRouter([
   {
@@ -22,7 +25,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
       <RedirectIfAuth>
-          <Layout />
+        <Layout />
       </RedirectIfAuth>
     ),
     children: [
@@ -32,15 +35,22 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: (
-    
-        <Layout />
-     
-    ),
+    element: <Layout />,
     children: [
       { path: "/register/user", element: <UserRegister /> },
       { path: "/register/vendor", element: <VendorRegistor /> },
     ],
+  },
+  {
+    path: "/vendor",
+    element: (
+      <RedirectIfNotVendor>
+        <VendorContextProvider>
+          <Layout />
+        </VendorContextProvider>
+      </RedirectIfNotVendor>
+    ),
+    children: [{ path: "/vendor/application", element: <VendorApplication /> }],
   },
 ]);
 export default function Router() {
