@@ -2,8 +2,9 @@ import {useAuth} from '../../hook/useAuthContext'
 import Input from '../../component/input';
 import { useNavigate } from 'react-router-dom';
 import { useVendor } from '../../hook/useVendor';
+
 export default function VendorApplication(){        
-    const { hdl_input,} = useVendor
+    const { hdl_input,hdl_application_submit,setShopPictureFile,setIdCardFile,idCardFile,shopPictureFile} = useVendor()
     const navigate = useNavigate();
   
     const inputTag = [
@@ -24,7 +25,7 @@ export default function VendorApplication(){
   
     const hdl_submit =  async (e) =>{ 
       e.preventDefault();
-
+      hdl_application_submit()
     }
     return (
       <>
@@ -49,11 +50,28 @@ export default function VendorApplication(){
                   </div>
             );
           })}
-            <div>
 
-          <input type='file'/>
+
+            <div>
+              {shopPictureFile? <img  src={URL.createObjectURL(shopPictureFile)}/>:null}
+            <label>shop picture file</label>
+          <input type='file' onChange={e=>{
+            if(e.target.files[[0]]){
+              setShopPictureFile(e.target.files[[0]])
+            }
+
+          }}/>
             </div>
-          <input type='file'/>
+            <div>
+            {idCardFile? <img  src={URL.createObjectURL(idCardFile)}/>:null}
+            <label>shop picture file</label>
+          <input type='file' onChange={e=>{
+            console.log(setIdCardFile)
+              if(e.target.files[[0]]){
+                setIdCardFile(e.target.files[[0]])
+              }
+          }}/>
+            </div>
   
           <button>submit</button>
         </form>
