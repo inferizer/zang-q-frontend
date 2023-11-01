@@ -5,9 +5,17 @@ import CategoryPage from "../pages/user/CategoryPage";
 import UserLogin from "../pages/login/userLogin";
 import VendorLogin from "../pages/login/vendorLogin";
 import UserRegister from "../pages/register/userRegister";
-import VendorRegistor from "../pages/register/vendorRegister";
+import VendorRegister from "../pages/register/vendorRegister";
 
 import RedirectIfAuth from "../redirect/redirectIfAuth";
+import File from "../pages/register/Attachfile";
+import UploadIdUser from "../pages/register/UploadIdUser";
+import RegisterUserReal from "../pages/register/registerUserReal";
+import UploadIdPeople from "../pages/register/UploadIdPeople";
+import AddStore from "../pages/register/AddStore";
+import MapStore from "../pages/register/MapStore";
+import ResearchStore from "../pages/register/ResearchStore";
+import RegisterVender from "../pages/register/RegisterVender";
 
 
 const router = createBrowserRouter([
@@ -24,7 +32,7 @@ const router = createBrowserRouter([
     path: "/login",
     element: (
       <RedirectIfAuth>
-          <Layout />
+        <Layout />
       </RedirectIfAuth>
     ),
     children: [
@@ -36,13 +44,33 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: (
-        <Layout />
-    ),
+    element: <Layout />,
     children: [
       { path: "/register/user", element: <UserRegister /> },
-      { path: "/register/vendor", element: <VendorRegistor /> },
-      
+      { path: "/register/vendor", element: <VendorRegister /> },
+    ],
+  },
+  {
+    path: "/test",
+    element: <Layout />,
+    children: [
+      { path: "/test", element: <RegisterUserReal /> },
+      { path: "/test/file", element: <File /> },
+      { path: "/test/file/iduser", element: <UploadIdUser /> },
+      { path: "/test/file/iduser/idpeople", element: <UploadIdPeople /> },
+      { path: "/test/file/iduser/idpeople/addstore", element: <AddStore /> },
+      {
+        path: "/test/file/iduser/idpeople/addstore/mapstore",
+        element: <MapStore />,
+      },
+      {
+        path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore",
+        element: <ResearchStore />,
+      },
+      {
+        path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore/registervender",
+        element: <RegisterVender />,
+      },
     ],
   },
 ]);
