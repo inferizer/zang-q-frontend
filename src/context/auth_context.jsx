@@ -12,6 +12,7 @@ export default function AuthContextProvider({children}){
     const [input,SetInput] = useState({})
     useEffect(()=>{
         const token = getAccessToken()
+        
         if(token){
             axios.get('/auth').then(res => {
     

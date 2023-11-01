@@ -6,11 +6,11 @@ import UserLogin from "../pages/login/userLogin";
 import VendorLogin from "../pages/login/vendorLogin";
 import UserRegister from "../pages/register/userRegister";
 import VendorRegistor from "../pages/register/vendorRegister";
-
 import RedirectIfAuth from "../redirect/redirectIfAuth";
 import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
+import VendorLanding from "../pages/vendor/VendorLanding";
 
 const router = createBrowserRouter([
   {
@@ -50,7 +50,10 @@ const router = createBrowserRouter([
         </VendorContextProvider>
       </RedirectIfNotVendor>
     ),
-    children: [{ path: "/vendor/application", element: <VendorApplication /> }],
+    children: [
+      { path: "/vendor", element: <VendorLanding /> },
+      { path: "/vendor/application", element: <VendorApplication /> },
+    ],
   },
 ]);
 export default function Router() {
