@@ -20,6 +20,11 @@ export default {
     gray30: "AAAAAA",
     gray20: "CCCCCC",
     gray10: "EEEEEE",
+    greenLight: "56CA76",
+    greenKauai: "56CAAE",
+  },
+  fontfamily: {
+    thaisans: "BM Plex Sans Thai",
   },
   theme: {
     screens: {

@@ -11,6 +11,9 @@ dependencies:
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
+  heroicons:
+    specifier: ^2.0.18
+    version: 2.0.18
   joi:
     specifier: ^17.11.0
     version: 17.11.0
@@ -1722,6 +1725,10 @@ packages:
     dependencies:
       function-bind: 1.1.2
     dev: true
+
+  /heroicons@2.0.18:
+    resolution: {integrity: sha512-3iaqznaz5GJ8Mox/eDfKHo7tYKuPiZV4vbg6pB6wjJhBa7ZKQlXT1KuUnsjkEiPy/ezyiqppOX6wUqYguMIq8w==}
+    dev: false
 
   /ignore@5.2.4:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
