@@ -15,11 +15,8 @@ import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import ResearchStore from "../pages/register/ResearchStore";
 import RegisterVender from "../pages/register/RegisterVender";
-
 import LinePage from "../pages/login/lineLogin";
 import CallbackPage from "../pages/user/CallbackPage";
-
-import VendorRegistor from "../pages/register/vendorRegister";
 import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
@@ -86,8 +83,8 @@ const router = createBrowserRouter([
 
     path: '/line-callback',
     element: <CallbackPage />
-  }
-
+  },
+{
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
