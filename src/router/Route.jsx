@@ -6,7 +6,6 @@ import UserLogin from "../pages/login/userLogin";
 import VendorLogin from "../pages/login/vendorLogin";
 import UserRegister from "../pages/register/userRegister";
 import VendorRegister from "../pages/register/vendorRegister";
-
 import RedirectIfAuth from "../redirect/redirectIfAuth";
 import File from "../pages/register/Attachfile";
 import UploadIdUser from "../pages/register/UploadIdUser";
@@ -16,6 +15,11 @@ import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import ResearchStore from "../pages/register/ResearchStore";
 import RegisterVender from "../pages/register/RegisterVender";
+import VendorRegistor from "../pages/register/vendorRegister";
+import VendorApplication from "../pages/vendor/VendorApplication";
+import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
+import VendorContextProvider from "../context/vendor_context";
+import VendorLanding from "../pages/vendor/VendorLanding";
 
 const router = createBrowserRouter([
   {
@@ -67,6 +71,20 @@ const router = createBrowserRouter([
         path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore/registervender",
         element: <RegisterVender />,
       },
+    ],
+  },
+  {
+    path: "/vendor",
+    element: (
+      <RedirectIfNotVendor>
+        <VendorContextProvider>
+          <Layout />
+        </VendorContextProvider>
+      </RedirectIfNotVendor>
+    ),
+    children: [
+      { path: "/vendor", element: <VendorLanding /> },
+      { path: "/vendor/application", element: <VendorApplication /> },
     ],
   },
 ]);
