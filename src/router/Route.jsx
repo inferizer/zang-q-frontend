@@ -17,6 +17,7 @@ import MapStore from "../pages/register/MapStore";
 import ResearchStore from "../pages/register/ResearchStore";
 import RegisterVender from "../pages/register/RegisterVender";
 import LinePage from "../pages/login/lineLogin";
+import CallbackPage from "../pages/user/CallbackPage";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: '/line-callback',
+    element: <CallbackPage />
+  }
 ]);
 export default function Router() {
   return <RouterProvider router={router} />;
