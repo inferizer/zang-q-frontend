@@ -2,10 +2,12 @@
 import { useAuth } from "../../hook/useAuthContext";
 import Input from "../../component/input";
 import LineLoginButton from "../../component/LineLoginButton";
+import liff from '@line/liff'
 export default function UserLogin(){
-    
     const {hdl_input,input,hdl_user_login_submit} = useAuth()
 
+    liff.init({ liffId:'2001390459-y9GRwgp7'})
+    
     const inputTag = [
         { id:4,name: "emailOrMobile" },
         { id:2,name: "password" },
@@ -31,9 +33,10 @@ export default function UserLogin(){
                 }
              
                 <button>login</button>
-                
-                <LineLoginButton />
-            </form>
+              
+
+            </form>  
+                <LineLoginButton/>
         </>
     
         

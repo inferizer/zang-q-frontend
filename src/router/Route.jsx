@@ -16,7 +16,7 @@ import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import ResearchStore from "../pages/register/ResearchStore";
 import RegisterVender from "../pages/register/RegisterVender";
-
+import LinePage from "../pages/login/lineLogin";
 
 const router = createBrowserRouter([
   {
@@ -38,10 +38,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
-
+      { path: "/login/line",element: <LinePage/>}
       
     ],
   },
+
   {
     path: "/register",
     element: <Layout />,

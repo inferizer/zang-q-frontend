@@ -2,7 +2,7 @@ import axios from "../config/axios";
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { addAccessToken, getAccessToken } from "../utils/localStorage";
-import liff from '@line/liff'
+// import liff from '@line/liff'
 
 
 export const AuthContext = createContext()
@@ -12,30 +12,6 @@ export default function AuthContextProvider({ children }) {
     const [authUser, setAuthUser] = useState(null)
     const [input, SetInput] = useState({})
 
-
-    // line 
-    useEffect(() => {
-        liff.init({ liffId:'2001390459-y9GRwgp7'})
-        .then(async()=>  {
-            const profile  = await liff.getProfile()
-            loginLine(profile)
-        })
-        },[])
-        const loginLine = async (input) => {
-            try {
-                await axios.post('/auth/loginLine', input);
-            } catch (error) {
-                console.error(error);
-            }
-        };  
-        const handleLogin = async () => {
-            try {      
-                liff.login()
-            } catch (err) {
-                console.log(err)
-            }
-        }
-    // line
 
     useEffect(() => {
         const token = getAccessToken()
@@ -82,8 +58,8 @@ export default function AuthContextProvider({ children }) {
     const hdl_input = (e) => {
         SetInput({ ...input, [e.target.name]: e.target.value })
     }
-    
-    
+
+
 
     return (<AuthContext.Provider value={{
         hdl_user_register_submit,
@@ -93,7 +69,7 @@ export default function AuthContextProvider({ children }) {
         setInitLoading,
         hdl_input,
         input,
-        handleLogin,
+        // handleLoginLiff,
         authUser
     }}>
         {children}
