@@ -1,6 +1,7 @@
 import axios from "../config/axios";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { createContext } from "react";
+
 import { addAccessToken,getAccessToken,removeAccessToken } from "../utils/localStorage";
 
 
@@ -14,17 +15,21 @@ export default function AuthContextProvider({children}){
         const token = getAccessToken()
         
         if(token){
+
             axios.get('/auth').then(res => {
     
                 setAuthUser(res.data.user)
-            }).catch(console.log).finally( ()=>{
+
+
+            }).catch(console.log).finally(() => {
+
                 setInitLoading(false)
             })
         }
 
         else setInitLoading(false)
-        } 
-        ,[])
+    }
+        , [])
 
 
     const hdl_user_register_submit=  async () =>{
@@ -45,6 +50,7 @@ export default function AuthContextProvider({children}){
             SetInput({})
         }
         ).catch( error =>{
+
             console.log(error.response.data.message)
         })
     }
@@ -57,21 +63,25 @@ export default function AuthContextProvider({children}){
      })
     }
 
+
     const hdl_vendor_register_submit = async() =>{
         await axios.post('/vendor/register',input).then(res=>{
+
             addAccessToken(res.data.accessToken)
             setAuthUser(res.data.user)
             SetInput({})
         }
-        ).catch( error =>{
+        ).catch(error => {
             console.log(error.response.data.message)
             throw error
         })
 
+
     }
-    const hdl_input = (e) =>{
-        SetInput({...input, [e.target.name]:e.target.value})
+    const hdl_input = (e) => {
+        SetInput({ ...input, [e.target.name]: e.target.value })
     }
+
 
 
     const hdl_logout = () =>{
@@ -90,6 +100,7 @@ export default function AuthContextProvider({children}){
     hdl_logout,
     hdl_vendor_register_submit,
     hdl_vendor_login_submit}}>
+
         {children}
     </AuthContext.Provider>)
 }
