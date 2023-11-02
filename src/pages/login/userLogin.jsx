@@ -1,8 +1,13 @@
 import { useAuth } from "../../hook/useAuthContext";
-import Input from "../../component/input";
-export default function UserLogin() {
-  const { hdl_input, hdl_user_login_submit } = useAuth();
+import {GoogleLogin} from "react-google-login"
 
+import Input from "../../component/input";
+import { useEffect } from "react";
+export default function UserLogin() {
+  
+  const { hdl_input, hdl_user_login_submit,SuccessGoogle,failGoogle } = useAuth();
+ const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
+ 
   const inputTag = [
     { id: 4, name: "emailOrMobile" },
     { id: 2, name: "password" },
@@ -33,6 +38,17 @@ export default function UserLogin() {
         })}
 
         <button>login</button>
+
+<GoogleLogin 
+clientId={clientId}
+buttonText="sign in with google"
+onSuccess={SuccessGoogle}
+onFailure={failGoogle}
+cookiePolicy="single_host_origin"
+isSignedIn={true}
+
+/>
+
       </form>
     </>
   );
