@@ -13,7 +13,6 @@ export default function VendorContextProvider({ children }) {
       for(let k in appInput){
       formData.append(k,appInput[k])       
       }
-    
         return formData
     }
     const hdl_input = (e) =>{
@@ -21,15 +20,10 @@ export default function VendorContextProvider({ children }) {
     }
 
     const hdl_application_submit = () =>{
-  
         const formData = hdl_formdata(appInput)
         if(shopPictureFile) formData.append("shopPicture",shopPictureFile)    
         if(idCardFile) formData.append("idCard",idCardFile)    
-      axios.post("/vendor/application",formData)
-
-      
-
-      
+      axios.post("/vendor/application",formData)      
     }
 
 

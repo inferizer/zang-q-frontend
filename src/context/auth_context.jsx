@@ -1,13 +1,9 @@
 import axios from "../config/axios";
 import { useEffect, useState } from "react";
 import { createContext } from "react";
-
 import { addAccessToken,getAccessToken,removeAccessToken } from "../utils/localStorage";
-
-
 export const AuthContext = createContext()
 export default function AuthContextProvider({children}){
-    
     const [initLoading,setInitLoading] = useState(true)
     const [authUser,setAuthUser] = useState(null)
     const [input,SetInput] = useState({})
