@@ -3,6 +3,7 @@ import { createContext } from "react";
 import axios from "../config/axios";
 export const VendorContext = createContext();
 export default function VendorContextProvider({ children }) {
+
   const [shopPictureFile, setShopPictureFile] = useState(null)
   const [idCardFile, setIdCardFile] = useState(null)
   const [appInput, setAppInput] = useState({})
@@ -16,9 +17,9 @@ export default function VendorContextProvider({ children }) {
     for (let k in appInput) {
       formData.append(k, appInput[k])
     }
-
     return formData
   }
+  
   const hdl_input = (e) => {
     setAppInput({ ...appInput, [e.target.name]: e.target.value })
   }
@@ -26,8 +27,6 @@ export default function VendorContextProvider({ children }) {
   const hdl_application_submit = () => {
 
     const formData = hdl_formdata(appInput, searchLocation)
-
-
     if (shopPictureFile) formData.append("shopPicture", shopPictureFile)
     if (idCardFile) formData.append("idCard", idCardFile)
 
@@ -35,11 +34,6 @@ export default function VendorContextProvider({ children }) {
     formData.append("shopLan", mapClicked?.lng || searchLocation?.lng)
 
     axios.post("/vendor/application", formData)
-
-
-
-
-
   }
 
 
@@ -47,6 +41,3 @@ export default function VendorContextProvider({ children }) {
     {children}
   </VendorContext.Provider>;
 }
-
-// lat: mapClicked?.lat || searchLocation?.lat,
-//   lng: mapClicked?.lng || searchLocation?.lng,

@@ -16,30 +16,7 @@ export default function LinePage() {
         setisLoading(false)
     }
         , [])
-    // const handleLogin = () => liff.init({ liffId: '2001390459-y9GRwgp7' })
-    //     .then( () => {
-    //         if (liff?.isLoggedIn()) {
-    //            liff.ready.then(()=> {
-    //             liff.getProfile().then(res=>{
-    //                 console.log(res)
-    //                 // setLineProfile(res)
-    //                 // senddata()
-    //                 axios.post('/auth/loginLine',res)
-    //                 .then((res)=> {
-    //                     console.log(res.data)
-    //                     addAccessToken(res.data.accessToken)
-    //                 })
-    //             });
-
-    //            })
-    //         } else {
-    //             liff.login();
-
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     })
+    
     const handleLogin = () => liff.init({ liffId: '2001390459-y9GRwgp7' }, () => {
         if (liff.isLoggedIn()) {
             liff.ready.then(() => {
