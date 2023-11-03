@@ -2,6 +2,8 @@ import { useAuth } from "../../hook/useAuthContext";
 import Input from "../../component/input";
 import { useNavigate } from "react-router-dom";
 import { useVendor } from "../../hook/useVendor";
+import Map from "../map/Map";
+import { useEffect } from "react";
 
 export default function VendorApplication() {
   const {
@@ -11,13 +13,18 @@ export default function VendorApplication() {
     setIdCardFile,
     idCardFile,
     shopPictureFile,
+    appInput,
   } = useVendor();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log('appInput',appInput)
+  }, [])
+
+  console.log('appInput',appInput)
+
   const inputTag = [
     { id: 1, name: "shopName" },
-    { id: 2, name: "shopLat" },
-    { id: 3, name: "shopLan" },
     { id: 4, name: "shopMobile" },
     { id: 5, name: "openingTimes" },
     { id: 6, name: "closingTimes" },
@@ -74,6 +81,10 @@ export default function VendorApplication() {
             }}
           />
         </div>
+
+        <h1>google map api</h1>
+        {/* <Map viewMode= {true} location={{lat: 13.7462, lng: 100.5347}} data={inputTag} /> */}
+        <Map viewMode={false} />
 
         <button>submit</button>
       </form>
