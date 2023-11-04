@@ -15,11 +15,13 @@ import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import ResearchStore from "../pages/register/ResearchStore";
 import RegisterVender from "../pages/register/RegisterVender";
-import VendorRegistor from "../pages/register/vendorRegister";
+import LinePage from "../pages/login/lineLogin";
+import CallbackPage from "../pages/user/CallbackPage";
 import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
+
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },
+      
     ],
   },
   {
@@ -40,8 +43,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
+      { path: "/login/line",element: <LinePage/>}
+      
     ],
   },
+
   {
     path: "/register",
     element: <Layout />,
@@ -74,6 +80,11 @@ const router = createBrowserRouter([
     ],
   },
   {
+
+    path: '/line-callback',
+    element: <CallbackPage />
+  },
+{
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
@@ -87,6 +98,7 @@ const router = createBrowserRouter([
       { path: "/vendor/application", element: <VendorApplication /> },
     ],
   },
+
 ]);
 export default function Router() {
   return <RouterProvider router={router} />;

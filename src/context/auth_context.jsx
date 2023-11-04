@@ -1,5 +1,5 @@
 import axios from "../config/axios";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { addAccessToken,getAccessToken,removeAccessToken } from "../utils/localStorage";
 import {gapi} from "gapi-script"
@@ -33,12 +33,21 @@ export default function AuthContextProvider({children}){
     const [initLoading,setInitLoading] = useState(true)
     const [authUser,setAuthUser] = useState(null)
     const [input,SetInput] = useState({})
+    const hdl_google_login = (profileObj) =>{
+        const data = {}
+        data.username = profileObj.givenName 
+        data.email = profileObj.email
+        data.googleId = profileObj.googleId
+        data.profileImage = profileObj.imageUrl
+        return data
 
+    }
   const SuccessGoogle = (res) =>{
-    let data = {}
-
-
-    console.log(res.profileObj)
+    let data = hdl_google_login(res.profileObj)
+    axios.post('/auth/login/google',data).then( res=>{
+        setAuthUser(res.data.user)
+        addAccessToken(res.data.accessToken)
+    })
     
   }
   const failGoogle = (res) =>{
@@ -65,6 +74,7 @@ export default function AuthContextProvider({children}){
             SetInput({})
         }
         ).catch( error =>{
+
             console.log(error.response.data.message)
         })
     }
@@ -77,21 +87,25 @@ export default function AuthContextProvider({children}){
      })
     }
 
+
     const hdl_vendor_register_submit = async() =>{
         await axios.post('/vendor/register',input).then(res=>{
+
             addAccessToken(res.data.accessToken)
             setAuthUser(res.data.user)
             SetInput({})
         }
-        ).catch( error =>{
+        ).catch(error => {
             console.log(error.response.data.message)
             throw error
         })
 
+
     }
-    const hdl_input = (e) =>{
-        SetInput({...input, [e.target.name]:e.target.value})
+    const hdl_input = (e) => {
+        SetInput({ ...input, [e.target.name]: e.target.value })
     }
+
 
 
     const hdl_logout = () =>{
