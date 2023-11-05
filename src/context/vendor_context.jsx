@@ -27,13 +27,14 @@ export default function VendorContextProvider({ children }) {
   const hdl_application_submit = () => {
 
     const formData = hdl_formdata(appInput, searchLocation)
-    if (shopPictureFile) formData.append("shopPicture", shopPictureFile)
-    if (idCardFile) formData.append("idCard", idCardFile)
-
+    formData.append("shopPicture", shopPictureFile)
+    formData.append("idCard", idCardFile)
     formData.append("shopLat", mapClicked?.lat || searchLocation?.lat)
     formData.append("shopLan", mapClicked?.lng || searchLocation?.lng)
 
-    axios.post("/vendor/application", formData)
+    axios.post("/vendor/application", formData).then().catch( error =>{
+      alert(error.response.data.message)
+    })
   }
 
 

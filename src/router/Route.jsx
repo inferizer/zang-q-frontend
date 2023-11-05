@@ -21,7 +21,10 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
-
+import VendorManagement from "../pages/admin/VendorsManagement"
+import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
+import AdminContextProvider from "../context/admin_context";
+import ApproveVendor from "../pages/admin/ApproveVendor";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +33,7 @@ const router = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },
-      
+
     ],
   },
   {
@@ -43,11 +46,10 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
-      { path: "/login/line",element: <LinePage/>}
-      
+      { path: "/login/line", element: <LinePage /> }
+
     ],
   },
-
   {
     path: "/register",
     element: <Layout />,
@@ -80,11 +82,10 @@ const router = createBrowserRouter([
     ],
   },
   {
-
     path: '/line-callback',
     element: <CallbackPage />
   },
-{
+  {
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
@@ -97,6 +98,21 @@ const router = createBrowserRouter([
       { path: "/vendor", element: <VendorLanding /> },
       { path: "/vendor/application", element: <VendorApplication /> },
     ],
+  },
+  {
+    path: "/admin",
+    element: (
+      <RedirectIfNotAdmin>
+        <AdminContextProvider>
+
+          <Layout />
+        </AdminContextProvider>
+      </RedirectIfNotAdmin>
+    ),
+    children: [
+      { path: "/admin/vendor", element: < VendorManagement /> },
+      {path: "/admin/pending",element: < ApproveVendor />,},
+    ]
   },
 
 ]);
