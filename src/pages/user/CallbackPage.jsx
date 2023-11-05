@@ -1,13 +1,28 @@
 import React, { useEffect } from 'react'
 import { addAccessToken } from '../../utils/localStorage';
-
+import { useAuth } from "../../hook/useAuthContext"
+import { useNavigate } from 'react-router-dom';
 export default function CallbackPage() {
-    useEffect(() => {
+  const navigate = useNavigate()
+  const { setAuthUser } = useAuth()
+  useEffect(() => {
+    
+    const urlParams = new URLSearchParams(window.location.search)
+    for( let i of urlParams){
+      console.log(i)
+    }
+    addAccessToken(urlParams.get('token'))
+    const role = (urlParams.get('role').trim())
+    const lineId = (urlParams.get('lineId').trim())
+    console.log(role,lineId)
+    setAuthUser({role,lineId})
+    navigate('/')
+    // if(role !== 'user') {
+            // window.location.replace('/')
+    //   } 
+        
 
-        const urlParams = new URLSearchParams(window.location.search);
-        addAccessToken(urlParams.get('token'))
-        window.location.replace('/')
-    }, [])
+  }, [])
   return (
     <div>CallbackPage</div>
   )

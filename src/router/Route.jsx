@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
-      { path: "/login/line",element: <LinePage/>}
+      { path: "/login/line",element: <LinePage/>},
       
     ],
   },
@@ -86,8 +86,8 @@ const router = createBrowserRouter([
 
     path: '/line-callback',
     element: <CallbackPage />
-  }
-
+  },
+  {
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
