@@ -6,7 +6,6 @@ import UserLogin from "../pages/login/userLogin";
 import VendorLogin from "../pages/login/vendorLogin";
 import UserRegister from "../pages/register/userRegister";
 import VendorRegister from "../pages/register/vendorRegister";
-
 import RedirectIfAuth from "../redirect/redirectIfAuth";
 import File from "../pages/register/Attachfile";
 import UploadIdUser from "../pages/register/UploadIdUser";
@@ -23,6 +22,12 @@ import ApproveUserFrom from "../component/admin/ApproveUserForm";
 import VendorFooter from "../component/footers/VendorFooter";
 import UserFooter from "../component/footers/UserFooter";
 import Calender from "../component/Calender";
+import LinePage from "../pages/login/lineLogin";
+import CallbackPage from "../pages/user/CallbackPage";
+import VendorApplication from "../pages/vendor/VendorApplication";
+import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
+import VendorContextProvider from "../context/vendor_context";
+import VendorLanding from "../pages/vendor/VendorLanding";
 
 const router = createBrowserRouter([
   {
@@ -43,8 +48,10 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
+      { path: "/login/line", element: <LinePage /> },
     ],
   },
+
   {
     path: "/register",
     element: <Layout />,
@@ -98,6 +105,24 @@ const router = createBrowserRouter([
         path: "/test/user/calender",
         element: <Calender />,
       },
+    ],
+  },
+  {
+    path: "/line-callback",
+    element: <CallbackPage />,
+  },
+  {
+    path: "/vendor",
+    element: (
+      <RedirectIfNotVendor>
+        <VendorContextProvider>
+          <Layout />
+        </VendorContextProvider>
+      </RedirectIfNotVendor>
+    ),
+    children: [
+      { path: "/vendor", element: <VendorLanding /> },
+      { path: "/vendor/application", element: <VendorApplication /> },
     ],
   },
 ]);
