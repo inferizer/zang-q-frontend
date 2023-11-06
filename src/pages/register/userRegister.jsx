@@ -28,9 +28,6 @@ export default function UserRegister() {
         console.log(err);
       });
   }
-
-  
-
   return (
     <>
       <form
