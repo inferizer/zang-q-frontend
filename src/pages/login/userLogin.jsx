@@ -5,7 +5,6 @@ import Input from "../../component/input";
 
 import LineLoginButton from "../../component/LineLoginButton";
 import liff from '@line/liff'
-import { useEffect } from "react";
 export default function UserLogin(){
     
   const {hdl_input,input,hdl_user_login_submit,SuccessGoogle,failGoogle} = useAuth()
@@ -14,12 +13,12 @@ export default function UserLogin(){
      const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
  
     const inputTag = [
-        { id:4,name: "emailOrMobile" },
-        { id:2,name: "password" },
+        { id: 4, name: "emailOrMobile" },
+        { id: 2, name: "password" },
     ]
     return (
         <>
-            <form key="1"className=' flex flex-col' onSubmit={(e) => {
+            <form key="1" className=' flex flex-col' onSubmit={(e) => {
                 e.preventDefault()
                 hdl_user_login_submit(input)
             }}>
@@ -29,16 +28,13 @@ export default function UserLogin(){
                         <>
                             <label>{el.name}</label>
                             <Input key={el.id} name={el.name} type='text' placeholder="enter here" onChange={hdl_input} />
-                        
+
                         </>
                     )
                 }
                 )
 
                 }
-             
-                <button>login</button>
-              
 
       
 <GoogleLogin 
@@ -54,9 +50,8 @@ isSignedIn={false}
       </form>  
                 <LineLoginButton/>
         </>
-    
-        
-        
+
+
+
     )
 }
-
