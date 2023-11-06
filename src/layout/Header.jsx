@@ -8,7 +8,7 @@ export default function Header() {
     if (authUser?.role == 'vendor') {
       return (
         <div
-          className=" mobile:bg-red-200 desktop:bg-green-200 mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
+          className=" mobile:bg-primaryRed desktop:bg-greenLight mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
                              desktop:flex desktop:flex-col "
         >
           <h1> vendor app bar</h1>
@@ -26,7 +26,7 @@ export default function Header() {
     if (authUser?.role == "admin"){
         return (
             <div
-              className=" mobile:bg-red-200 desktop:bg-green-200 mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
+              className=" mobile:bg-primaryRed desktop:bg-greenLight mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
                                  desktop:flex desktop:flex-col "
             >
               <h1> admin app bar</h1>
@@ -43,7 +43,7 @@ export default function Header() {
     }
     return (
         <div
-          className=" mobile:bg-red-200 desktop:bg-green-200 mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
+          className=" mobile:bg-primaryRed desktop:bg-greenLight mobile:w-[1rem] desktop:w-full mobile:flex mobile:justify-between 
                              desktop:flex desktop:flex-col "
         >
           <h1> user app bar</h1>
