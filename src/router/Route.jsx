@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "../layout/Layout";
-import HomePage from "../pages/user/HomePage";
+// import HomePage from "../pages/user/HomePage";
 import CategoryPage from "../pages/user/CategoryPage";
 import UserLogin from "../pages/login/userLogin";
 import VendorLogin from "../pages/login/vendorLogin";
@@ -16,13 +16,20 @@ import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import ResearchStore from "../pages/register/ResearchStore";
 import RegisterVender from "../pages/register/RegisterVender";
+// import { element } from "prop-types";
+import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
+import UserManagementForm from "../component/admin/UserManagementForm";
+import ApproveUserFrom from "../component/admin/ApproveUserForm";
+import VendorFooter from "../component/footers/VendorFooter";
+import UserFooter from "../component/footers/UserFooter";
+import Calender from "../component/Calender";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { path: "", element: <HomePage /> },
+      // { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },
     ],
   },
@@ -66,6 +73,30 @@ const router = createBrowserRouter([
       {
         path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore/registervender",
         element: <RegisterVender />,
+      },
+      {
+        path: "/test/admin/restaurant-datails",
+        element: <RestaurantDetailsForm />,
+      },
+      {
+        path: "/test/user/management",
+        element: <UserManagementForm />,
+      },
+      {
+        path: "/test/user/approve",
+        element: <ApproveUserFrom />,
+      },
+      {
+        path: "/test/vendor/footer",
+        element: <VendorFooter />,
+      },
+      {
+        path: "/test/user/footer",
+        element: <UserFooter />,
+      },
+      {
+        path: "/test/user/calender",
+        element: <Calender />,
       },
     ],
   },

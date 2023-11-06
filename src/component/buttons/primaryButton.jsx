@@ -1,5 +1,5 @@
 import React from "react";
-const PrimmaryButton = ({ children, onClick }) => {
+const PrimaryButton = ({ children, onClick }) => {
   return (
     <button
       className="bg-primaryBlack hover:bg-gray60 text-white font-semibold py-4 px-6 rounded-full"
@@ -10,4 +10,4 @@ const PrimmaryButton = ({ children, onClick }) => {
   );
 };
 
-export default PrimmaryButton;
+export default PrimaryButton;
