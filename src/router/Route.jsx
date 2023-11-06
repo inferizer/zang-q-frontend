@@ -111,7 +111,7 @@ const router = createBrowserRouter([
     path: "/line-callback",
     element: <CallbackPage />,
   },
-{
+  {
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
