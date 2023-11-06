@@ -19,7 +19,7 @@ export default function LinePage() {
 
     }
         , [])
-
+    
     const handleLogin = () => liff.init({ liffId: '2001390459-y9GRwgp7' }, () => {
         if (liff.isLoggedIn()) {
             liff.ready.then(() => {

@@ -60,9 +60,8 @@ export default function AuthContextProvider({ children }) {
         await axios.post('/auth/register', input).then(res => {
             addAccessToken(res.data.accessToken)
             setAuthUser(res.data.user)
-            SetInput({})
-        }).catch(error => {
-            throw error
+        }).catch(console.log).finally( ()=>{
+            setInitLoading(false)
         })
     }
     const hdl_user_login_submit = () => {
