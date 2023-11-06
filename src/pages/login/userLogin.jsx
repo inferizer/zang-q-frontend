@@ -1,14 +1,18 @@
 import { useAuth } from "../../hook/useAuthContext";
+import {GoogleLogin} from "react-google-login"
+
 import Input from "../../component/input";
 
 import LineLoginButton from "../../component/LineLoginButton";
 import liff from '@line/liff'
+import { useEffect } from "react";
+export default function UserLogin(){
+    
+  const {hdl_input,input,hdl_user_login_submit,SuccessGoogle,failGoogle} = useAuth()
 
-export default function UserLogin() {
-    const { hdl_input, input, hdl_user_login_submit } = useAuth()
-
-    liff.init({ liffId: '2001390459-y9GRwgp7' })
-
+    liff.init({ liffId:'2001390459-y9GRwgp7'})
+     const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
+ 
     const inputTag = [
         { id: 4, name: "emailOrMobile" },
         { id: 2, name: "password" },
@@ -33,11 +37,19 @@ export default function UserLogin() {
 
                 }
 
-                <button>login</button>
+      
+<GoogleLogin 
+clientId={clientId}
+buttonText="sign in with google"
+onSuccess={SuccessGoogle}
+onFailure={failGoogle}
+cookiePolicy="single_host_origin"
+isSignedIn={false}
 
+/>
 
-            </form>
-            <LineLoginButton />
+      </form>  
+                <LineLoginButton/>
         </>
 
 

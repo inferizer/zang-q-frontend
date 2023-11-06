@@ -11,10 +11,10 @@ export default function LinePage() {
     const [isloading, setisLoading] = useState(true)
 
     useEffect(() => {
-        if(getLineToken()) {
+        if (getLineToken()) {
             handlelogout()
             navigate('/')
-        } 
+        }
         handleLogin()
 
     }
@@ -51,7 +51,7 @@ export default function LinePage() {
     return (
         <div>
             {isloading ? <Loading /> : <div>
-        
+
             </div>
             }
         </div>
