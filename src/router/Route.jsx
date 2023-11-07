@@ -14,6 +14,13 @@ import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import ResearchStore from "../pages/register/ResearchStore";
 import RegisterVender from "../pages/register/RegisterVender";
+// import { element } from "prop-types";
+import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
+import UserManagementForm from "../component/admin/UserManagementForm";
+import ApproveUserFrom from "../component/admin/ApproveUserForm";
+import VendorFooter from "../component/footers/VendorFooter";
+import UserFooter from "../component/footers/UserFooter";
+import Calender from "../component/Calender";
 import LinePage from "../pages/login/lineLogin";
 import CallbackPage from "../pages/user/CallbackPage";
 import VendorApplication from "../pages/vendor/VendorApplication";
@@ -78,6 +85,30 @@ const router = createBrowserRouter([
       {
         path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore/registervender",
         element: <RegisterVender />,
+      },
+      {
+        path: "/test/admin/restaurant-datails",
+        element: <RestaurantDetailsForm />,
+      },
+      {
+        path: "/test/user/management",
+        element: <UserManagementForm />,
+      },
+      {
+        path: "/test/user/approve",
+        element: <ApproveUserFrom />,
+      },
+      {
+        path: "/test/vendor/footer",
+        element: <VendorFooter />,
+      },
+      {
+        path: "/test/user/footer",
+        element: <UserFooter />,
+      },
+      {
+        path: "/test/user/calender",
+        element: <Calender />,
       },
     ],
   },

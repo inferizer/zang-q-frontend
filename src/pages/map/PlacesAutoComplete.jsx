@@ -1,7 +1,6 @@
 // npm i use-places-autocomplete
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 
-
 function PlacesAutoComplete({ handleSearchLocation }) {
 
     const {
