@@ -31,11 +31,10 @@ export default function RegisterUserReal() {
                 />
                 {/* mobile:mt-[25px] w-[350px] flex justify-center items-center */}
               </div>
-              <button
+              < button
                 type="button"
                 className="mobile: mt-[25px] ml-[9px] w-[350px] flex justify-center items-center focus:outline-none text-white bg-[#56CAAE] hover:bg-teal-400 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
-              >
-                Continue
+              >                Continue
               </button>
               <div className="mobile: inline-flex items-center justify-center w-full">
                 <hr className="mobile: w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-700" />
