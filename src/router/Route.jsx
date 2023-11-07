@@ -87,6 +87,9 @@ const router = createBrowserRouter([
         element: <RegisterVender />,
       },
       {
+        path: "/test/user/homepage",
+        element: <HomePage/>
+      },
         path: "/test/admin/restaurant-datails",
         element: <RestaurantDetailsForm />,
       },
