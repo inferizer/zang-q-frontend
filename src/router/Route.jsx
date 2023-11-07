@@ -90,6 +90,7 @@ const router = createBrowserRouter([
         path: "/test/user/homepage",
         element: <HomePage/>
       },
+      {
         path: "/test/admin/restaurant-datails",
         element: <RestaurantDetailsForm />,
       },
