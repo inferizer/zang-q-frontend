@@ -77,6 +77,10 @@ const router = createBrowserRouter([
         path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore/registervender",
         element: <RegisterVender />,
       },
+      {
+        path: "/test/user/homepage",
+        element: <HomePage/>
+      }
     ],
   },
   {
