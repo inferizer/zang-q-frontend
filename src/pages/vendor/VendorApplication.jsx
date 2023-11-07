@@ -14,14 +14,16 @@ export default function VendorApplication() {
     idCardFile,
     shopPictureFile,
     appInput,
+    hdl_checkBox,
+    allCategory,
   } = useVendor();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('appInput',appInput)
+    
   }, [])
 
-  console.log('appInput',appInput)
+  
 
   const inputTag = [
     { id: 1, name: "shopName" },
@@ -81,6 +83,13 @@ export default function VendorApplication() {
             }}
           />
         </div>
+            <h1>select your category</h1>
+        {allCategory.map(el=>{
+          return <div>
+            <label>{el.name}</label>
+            <input type="checkbox" value={el.id} onChange={hdl_checkBox}/>
+          </div>
+        })}
 
         <h1>google map api</h1>
         {/* <Map viewMode= {true} location={{lat: 13.7462, lng: 100.5347}} data={inputTag} /> */}
