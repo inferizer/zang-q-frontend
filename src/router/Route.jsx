@@ -11,6 +11,12 @@ import RedirectIfAuth from "../redirect/redirectIfAuth";
 import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
+import VendorScreenMornitorHome from "../pages/vendor/VendorScreenMornitorHome";
+import AdminLogin from "../pages/login/AdminLogin";
+import UserLookMap from "../pages/user/UserLookMap";
+import UserProfile from "../pages/user/UserProfile";
+import UserBookPage from "../pages/user/UserBookPage";
+import UserHadQPage from "../pages/user/UserHadQPage";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +37,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
+      { path: "/login/admin", element: <AdminLogin /> },
     ],
   },
   {
@@ -42,6 +49,16 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/user",
+    element: <Layout />,
+    children: [
+      { path: "/user/profile", element: <UserProfile /> },
+      { path: "/user/map", element: <UserLookMap /> },
+      { path: "/user/book", element: <UserBookPage /> },
+      { path: "/user/q", element: <UserHadQPage /> },
+    ],
+  },
+  {
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
@@ -50,9 +67,19 @@ const router = createBrowserRouter([
         </VendorContextProvider>
       </RedirectIfNotVendor>
     ),
-    children: [{ path: "/vendor/application", element: <VendorApplication /> }],
+    children: [
+      { path: "/vendor/application", element: <VendorApplication /> },
+      {
+        path: "/vendor/SMH",
+        element: <VendorScreenMornitorHome />,
+      },
+    ],
   },
 ]);
 export default function Router() {
   return <RouterProvider router={router} />;
 }
+
+// /vendor/application
+// /vendor/Test
+// /vendor/SMH

@@ -25,26 +25,30 @@ export default function VendorLogin() {
                   <div className="mobile:  justify-center items-center h-screen flex">
                     <form className="mobile">
                       <h1 className="mobile: mb-[25px]">
-                        <b className="mobile">Saved</b>
+                        <b className="mobile: text-[25px]">Saved</b>
                       </h1>
-                      <div className="mobile: border-solid border-2 mb-4 border-[#BDBDBD]">
-                        <label className="mobile" for="email"></label>
+                      <div className="mobile: border-[#BDBDBD] flex flex-col gap-2 items-start">
+                        <label className="mobile" for="email">
+                          email
+                        </label>
                         <input
                           onChange={hdl_input}
-                          className="mobile: w-[367px]"
-                          placeholder="teenoi_chulapark@gmail.com"
+                          className={`mobile: w-[367px] mobile: border-solid border-2 mb-2 border-[#BDBDBD]`}
+                          placeholder="email"
                           type="text"
                           id="email"
                           name="email"
                         />
                       </div>
-                      <div className="mobile: border-solid border-2 border-[#BDBDBD] ">
-                        <label className="mobile" for="password"></label>
+                      <div className="mobile: border-[#BDBDBD] flex flex-col gap-2 items-start ">
+                        <label className="mobile" for="password">
+                          Enter Password
+                        </label>
                         <input
                           onChange={hdl_input}
-                          className="mobile: w-[367px]"
+                          className={`mobile: w-[367px] mobile: border-solid border-2 mb-2 border-[#BDBDBD]`}
                           type="password"
-                          placeholder="Enter Password"
+                          placeholder="Enter Password:"
                           name="password"
                           required
                         />
