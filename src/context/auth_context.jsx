@@ -104,8 +104,8 @@ export default function AuthContextProvider({ children }) {
 
     // dont forget set NGROCK
     const hdl_logout = () => {
-        if (authUser.hasOwnProperty('lineId')) {
-            window.location.replace('https://b7c5-125-25-205-80.ngrok-free.app/login/line')
+        if (authUser == null) {
+            window.location.replace('http://localhost:5173')
         }
         removeAccessToken()
         setAuthUser(null)
