@@ -27,21 +27,20 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
-import VendorManagement from "../pages/admin/VendorsManagement"
+import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
 import CategoryPage from "../pages/admin/category";
+import RedirectIfNotUser from "../redirect/redirectIfNotUser";
+import UserContextProvider from "../context/user_context";
+import ShopList from "../pages/user/ShopList";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [
-      { path: "", element: <HomePage /> },
-  
-
-    ],
+    children: [{ path: "", element: <HomePage /> }],
   },
   {
     path: "/login",
@@ -53,8 +52,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
-      { path: "/login/line", element: <LinePage /> }
-
+      { path: "/login/line", element: <LinePage /> },
     ],
   },
   {
@@ -113,8 +111,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/line-callback',
-    element: <CallbackPage />
+    path: "/line-callback",
+    element: <CallbackPage />,
   },
   {
     path: "/vendor",
@@ -135,18 +133,31 @@ const router = createBrowserRouter([
     element: (
       <RedirectIfNotAdmin>
         <AdminContextProvider>
-
           <Layout />
         </AdminContextProvider>
       </RedirectIfNotAdmin>
     ),
     children: [
-      { path: "/admin/vendor", element: < VendorManagement /> },
-      {path: "/admin/pending",element: < ApproveVendor />,},
-      {path: "/admin/category",element:<CategoryPage />},
-    ]
+      { path: "/admin/vendor", element: <VendorManagement /> },
+      { path: "/admin/pending", element: <ApproveVendor /> },
+      { path: "/admin/category", element: <CategoryPage /> },
+    ],
   },
-
+  {
+    path: "/user",
+    element: (
+      <RedirectIfNotUser>
+        <UserContextProvider>
+          <Layout />
+        </UserContextProvider>
+      </RedirectIfNotUser>
+    ),
+    children: [{ path: "/user/shopList", element:< ShopList /> }, 
+    {}, 
+    {}, 
+    {}, 
+    {}],
+  },
 ]);
 export default function Router() {
   return <RouterProvider router={router} />;

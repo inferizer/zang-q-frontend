@@ -1,5 +1,6 @@
 import { useAuth } from "../../hook/useAuthContext";
 import { GoogleLogin } from "react-google-login"
+import { useNavigate } from "react-router-dom";
 
 // import Input from "../../component/input";
 
@@ -8,6 +9,7 @@ import liff from '@line/liff'
 export default function UserLogin() {
 
     const { hdl_input, input, hdl_user_login_submit, SuccessGoogle, failGoogle } = useAuth()
+    const navigate = useNavigate()
 
     liff.init({ liffId: '2001390459-y9GRwgp7' })
     const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
@@ -106,7 +108,11 @@ export default function UserLogin() {
                                 <div className="mobile:text-center">
                                     <span className="mobile">Don't have an account?</span>
                                     <span className="mobile:ml-4">
-                                        <u className="mobile">Sign up</u>
+                                        <u className="mobile hover:cursor-pointer"
+                                        onClick={()=>{
+                                            navigate('/register/user')
+                                        }}
+                                        >Sign up</u>
                                     </span>
                                 </div>
                             </form>
