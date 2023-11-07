@@ -18,7 +18,7 @@ export default function UserLogin(){
     ]
     return (
         <>
-            <form key="1" className=' flex flex-col' onSubmit={(e) => {
+            <form key="1" className=' flex flex-col mb-10' onSubmit={(e) => {
                 e.preventDefault()
                 hdl_user_login_submit(input)
             }}>
@@ -35,8 +35,10 @@ export default function UserLogin(){
                 )
 
                 }
+                <button>submit</button>
 
       
+</form>  
 <GoogleLogin 
 clientId={clientId}
 buttonText="sign in with google"
@@ -47,7 +49,6 @@ isSignedIn={false}
 
 />
 
-      </form>  
                 <LineLoginButton/>
         </>
 

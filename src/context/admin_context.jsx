@@ -33,8 +33,8 @@ export default function AdminContextProvider({ children }) {
       setPendingVendor(res.data.result);
     });
   };
-  const hdl_reject_application = (id) => {
-    axios.delete(`/admin/pending/${id}`).then((res) => {
+  const hdl_reject_application = (id,shopId) => {
+    axios.delete(`/admin/pending/${id}/${shopId}`).then((res) => {
       setPendingVendor(res.data.result);
     });
   };

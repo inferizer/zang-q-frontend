@@ -55,7 +55,7 @@ export default function ApproveVendor(){
                             >see info</button>
                             <button
                             onClick={()=>{
-                            hdl_reject_application(el.id)
+                            hdl_reject_application(el.id,el.shopAccountId)
                             }}
                             >reject</button>
                             <button
