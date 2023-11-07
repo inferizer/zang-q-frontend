@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "../layout/Layout";
 import HomePage from "../pages/user/HomePage";
-import CategoryPage from "../pages/user/CategoryPage";
 import UserLogin from "../pages/login/userLogin";
 import VendorLogin from "../pages/login/vendorLogin";
 import UserRegister from "../pages/register/userRegister";
@@ -25,6 +24,7 @@ import VendorManagement from "../pages/admin/VendorsManagement"
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
+import CategoryPage from "../pages/admin/category";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "", element: <HomePage /> },
-      { path: "Category", element: <CategoryPage /> },
+  
 
     ],
   },
@@ -112,6 +112,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/admin/vendor", element: < VendorManagement /> },
       {path: "/admin/pending",element: < ApproveVendor />,},
+      {path: "/admin/category",element:<CategoryPage />},
     ]
   },
 

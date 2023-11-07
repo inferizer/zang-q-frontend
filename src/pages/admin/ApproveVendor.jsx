@@ -3,7 +3,7 @@ import { useAdmin } from "../../hook/useAdmin"
 import Modal from "../../component/modal"
 
 export default function ApproveVendor(){
-    const {pendingVendor,hdl_view_pending_detail,singlePendingVendor} = useAdmin()
+    const {pendingVendor,hdl_view_pending_detail,singlePendingVendor,hdl_approved_submit,hdl_reject_application} = useAdmin()
     const [isOpen,setIsOpen] = useState(false)
     if(isOpen) return < Modal onClose={()=>{
         setIsOpen(false)
@@ -36,6 +36,9 @@ export default function ApproveVendor(){
     </Modal>
     return(
         <div >
+            <h1 onClick={()=>{
+                hdl_approved_submit()
+            }}>test</h1>
             {pendingVendor ? pendingVendor.map( el=>{
                 return(
                     <div key={el.id} className="flex gap-32 bg-green-200 justify-center py-8">
@@ -50,8 +53,16 @@ export default function ApproveVendor(){
                                 hdl_view_pending_detail(el.shopAccountId)
                             }}
                             >see info</button>
-                            <button>reject</button>
-                            <button>approved</button>
+                            <button
+                            onClick={()=>{
+                            hdl_reject_application(el.id)
+                            }}
+                            >reject</button>
+                            <button
+                            onClick={()=>{
+                                hdl_approved_submit(el.id)
+                            }}
+                            >approved</button>
                         </div>
                     </div>
                 )
