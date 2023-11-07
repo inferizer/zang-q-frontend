@@ -7,8 +7,6 @@ import VendorLogin from "../pages/login/vendorLogin";
 import UserRegister from "../pages/register/userRegister";
 import VendorRegister from "../pages/register/vendorRegister";
 import RedirectIfAuth from "../redirect/redirectIfAuth";
-import BookingPage from "../pages/user/BookingPage";
-import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
 import File from "../pages/register/Attachfile";
 import UploadIdUser from "../pages/register/UploadIdUser";
 import RegisterUserReal from "../pages/register/registerUserReal";
@@ -30,6 +28,9 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
+import BookingPage from "../pages/user/BookingPage";
+import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
+import TestQPage from "../pages/TestQPage";
 
 const router = createBrowserRouter([
   {
@@ -38,8 +39,9 @@ const router = createBrowserRouter([
     children: [
       // { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },
-      { path: "shop", element: <VendorQueueManagement /> },
-      { path: "user", element: <BookingPage /> },
+      { path: "test/q", element: <TestQPage /> },
+      // { path: "user", element: <BookingPage /> },
+      // { path: "shop", element: <VendorQueueManagement /> },
     ],
   },
   {
