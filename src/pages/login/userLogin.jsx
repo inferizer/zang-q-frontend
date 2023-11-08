@@ -5,6 +5,9 @@ import { GoogleLogin } from "react-google-login"
 
 import LineLoginButton from "../../component/LineLoginButton";
 import liff from '@line/liff'
+import icongoogle from '../../assets/images/icongoogle.svg'
+
+
 export default function UserLogin() {
 
     const { hdl_input, input, hdl_user_login_submit, SuccessGoogle, failGoogle } = useAuth()
@@ -12,10 +15,6 @@ export default function UserLogin() {
     liff.init({ liffId: '2001390459-y9GRwgp7' })
     const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
 
-    // const inputTag = [
-    //     { id: 4, name: "emailOrMobile" },
-    //     { id: 2, name: "password" },
-    // ]
     return (
         <>
             <form key="1" className=' flex flex-col' onSubmit={(e) => {
@@ -23,8 +22,8 @@ export default function UserLogin() {
                 hdl_user_login_submit(input)
             }}>
 
-                <div className="mobile">
-                    <header className="mobile">
+                <div className="mobile:">
+                    <header className='mobile:'>
                         <div className="mobile:justify-center items-center h-screen flex">
                             <form className="mobile" onSubmit={hdl_user_login_submit}>
                                 <h1 className="mobile:mb-[25px]">
@@ -36,7 +35,7 @@ export default function UserLogin() {
                                     </label>
                                     <input
                                         onChange={hdl_input}
-                                        className={`mobile: w-[367px] mobile:border-solid mobile:border-2 mb-2 border-[#BDBDBD]`}
+                                        className={`mobile:w-[367px] mobile:border-solid mobile:border-2 mb-2 border-[#BDBDBD]`}
                                         placeholder="Email or Mobile:"
                                         type="text"
                                         id="emailOrMobile"
@@ -77,36 +76,38 @@ export default function UserLogin() {
                                     <LineLoginButton />
                                 </div>
 
-                                <div className="mobile:pl-[10px]">
-                                    <button
-                                        type="button"
-                                        className="mobile:w-[350px]  py-2.5 px-5  text-sm 
-                                        font-medium text-gray60 focus:outline-none bg-primaryWhite rounded-lg border border-gray20 hover:bg-gray10 hover:text-blueSum focus:z-10 focus:ring-4 focus:ring-gray20 dark:focus:ring-gray50 dark:bg-gray60 dark:text-gray40 dark:border-gray60 dark:hover:text-primaryWhite dark:hover:bg-gray60"
-                                    >
-                                        <div className="mobile:pr-[73px] flex justify-center items-center">
-                                            {/* <img
-                      className="mobile:inline w-[45px] h-[45px] mr-[50px]"
-                    //   src={icongoogle}
-                      alt=""
-                    />
-                    <div>Continue with Google </div> */}
-                                            <GoogleLogin
-                                                clientId={clientId}
-                                                buttonText="sign in with google"
-                                                onSuccess={SuccessGoogle}
-                                                onFailure={failGoogle}
-                                                cookiePolicy="single_host_origin"
-                                                isSignedIn={false}
-                                            />
-                                        </div>
-                                    </button>
+                                <div className="mobile: pl-[10px]" >
+                                    <div>
+                                        <GoogleLogin
+                                            clientId={clientId}
+                                            buttonText="Continue with Google"
+                                            onSuccess={SuccessGoogle}
+                                            onFailure={failGoogle}
+                                            cookiePolicy="single_host_origin"
+                                            isSignedIn={false}
+                                            type="button"
+                                            render={renderProps => (
+                                                <button onClick={renderProps.onClick} disabled={renderProps.disabled}
+                                                    className="mobile: w-[350px]  py-2.5 px-5  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                                    <div className="mobile: pr-[73px]">
+                                                        <img
+                                                            className="mobile: inline w-[45px] h-[45px] mr-[50px]"
+                                                            src={icongoogle}
+                                                            alt=""
+                                                        />
+                                                        Continue with Google
+                                                    </div></button>
+                                            )}
+                                        />
+                                    </div>
+
                                     <br className="mobile" />
-                                    <br cassName="mobile" />
+                                    <br className="mobile" />
                                 </div>
                                 <div className="mobile:text-center">
                                     <span className="mobile">Don't have an account?</span>
                                     <span className="mobile:ml-4">
-                                        <u className="mobile">Sign up</u>
+                                        <button className="mobile">Sign up</button>
                                     </span>
                                 </div>
                             </form>

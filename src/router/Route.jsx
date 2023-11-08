@@ -32,6 +32,7 @@ import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
 import CategoryPage from "../pages/admin/category";
+import AdminLogin from "../pages/login/adminLogin";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +54,8 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
-      { path: "/login/line", element: <LinePage /> }
+      { path: "/login/line", element: <LinePage /> },
+      {path: "/login/admin",element: <AdminLogin/>}
 
     ],
   },
@@ -135,13 +137,12 @@ const router = createBrowserRouter([
     element: (
       <RedirectIfNotAdmin>
         <AdminContextProvider>
-
           <Layout />
         </AdminContextProvider>
       </RedirectIfNotAdmin>
     ),
     children: [
-      { path: "/admin/vendor", element: < VendorManagement /> },
+      {path: "/admin/vendor", element: < VendorManagement /> },
       {path: "/admin/pending",element: < ApproveVendor />,},
       {path: "/admin/category",element:<CategoryPage />},
     ]
