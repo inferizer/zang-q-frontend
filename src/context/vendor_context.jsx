@@ -36,12 +36,14 @@ export default function VendorContextProvider({ children }) {
     formData.append("idCard", idCardFile);
     formData.append("shopLat", mapClicked?.lat || searchLocation?.lat);
     formData.append("shopLan", mapClicked?.lng || searchLocation?.lng);
-
     
-    axios.post('/vendor/category',checkInput)
+    
     axios
       .post("/vendor/application", formData)
-      .then()
+      .then(res=>{
+
+        axios.post(`/vendor/category/${res.data.result.id}`,checkInput)
+      })
       .catch((error) => {
         alert(error.response.data.message);
       });
