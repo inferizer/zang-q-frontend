@@ -21,7 +21,7 @@ export default function VendorLogin() {
           return (
             <>
               <label>{el.name}</label>
-              <Input
+              <input
                 key={el.id}
                 name={el.name}
                 type="text"
