@@ -1,14 +1,13 @@
-// import Input from "../../component/input";
+import Input from "../../component/input";
 import { useAuth } from "../../hook/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import Joi from "joi";
-import { useState, useRef } from "react";
+import { useState} from "react";
 import LineLoginButtton from '../../component/LineLoginButton'
 import liff from "@line/liff";
 import icongoogle from '../../assets/images/icongoogle.svg'
 import InputErrorMessage from "./InputErrorMessage";
 import { GoogleLogin } from "react-google-login"
-
 
 export default function UserRegister() {
   const registerSchema = Joi.object({
@@ -36,7 +35,6 @@ export default function UserRegister() {
       return result;
     }
   };
-  const inputEL = useRef(null)
 
   liff.init({ liffId: '2001390459-y9GRwgp7' })
   const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
@@ -63,9 +61,6 @@ export default function UserRegister() {
         console.log(err);
       });
   };
-
-
-
   return (
     <div className="mobile ">
       <header className="mobile">
@@ -79,12 +74,8 @@ export default function UserRegister() {
                 {" "}
                 username
               </label>
-              <input
+              <Input
                 onChange={hdl_input}
-                className={`mobile:w-[367px] mobile:border-solid border-2 mb-2 border-[#BDBDBD]${error
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-blue-300 focus:border-blue-500 border-gray-300"
-                  }`}
                 placeholder="username:"
                 type="text"
                 id="username"
@@ -97,11 +88,7 @@ export default function UserRegister() {
               <label className="mobile" for="password">
                 password
               </label>
-              <input
-                className={`mobile: w-[367px] mobile: border-solid border-2 mb-2 border-[#BDBDBD]${error
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-blue-300 focus:border-blue-500 border-gray-300"
-                  }`}
+              <Input
                 onChange={hdl_input}
                 type="password"
                 placeholder="password:"
@@ -115,12 +102,8 @@ export default function UserRegister() {
               <label className="mobile" for="confirmPassword">
                 confirmPassword
               </label>
-              <input
+              <Input
                 onChange={hdl_input}
-                className={`mobile: w-[367px] border-solid border-2 mb-2 border-[#BDBDBD]${error
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-blue-300 focus:border-blue-500 border-gray-300"
-                  }`}
                 type="password"
                 placeholder="confirmPassword"
                 name="confirmPassword"
@@ -135,12 +118,8 @@ export default function UserRegister() {
               <label className="mobile" for="emailOrMobile">
                 emailOrMobile
               </label>
-              <input
+              <Input
                 onChange={hdl_input}
-                className={`mobile: w-[367px] border-solid border-2 mb-2 border-[#BDBDBD]${error
-                  ? "border-red-500 focus:ring-red-300"
-                  : "focus:ring-blue-300 focus:border-blue-500 border-gray-300"
-                  }`}
                 placeholder="emailOrMobile:"
                 type="text"
                 id="emailOrMobile"
@@ -199,7 +178,7 @@ export default function UserRegister() {
             <div className="mobile: text-center">
               <span className="mobile">Don't have an account?</span>
               <span className="mobile: ml-4">
-               <button className="mobile" onClick={()=> (navigate('/login/user'))} >Sign in</button>
+              <button className="mobile"onClick={() => {navigate('/login/user')}} >Sign in</button>
 
               </span>
             </div>

@@ -40,7 +40,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "", element: <HomePage /> },
-  
+
 
     ],
   },
@@ -55,13 +55,16 @@ const router = createBrowserRouter([
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
       { path: "/login/line", element: <LinePage /> },
-      {path: "/login/admin",element: <AdminLogin/>}
+      { path: "/login/admin", element: <AdminLogin /> }
 
     ],
   },
   {
     path: "/register",
-    element: <Layout />,
+    element: 
+    <RedirectIfAuth>
+    <Layout />
+    </RedirectIfAuth>,
     children: [
       { path: "/register/user", element: <UserRegister /> },
       { path: "/register/vendor", element: <VendorRegister /> },
@@ -69,7 +72,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/test",
-    element: <Layout />,
+    element:
+        <Layout />,
     children: [
       { path: "/test", element: <RegisterUserReal /> },
       { path: "/test/file", element: <File /> },
@@ -142,9 +146,9 @@ const router = createBrowserRouter([
       </RedirectIfNotAdmin>
     ),
     children: [
-      {path: "/admin/vendor", element: < VendorManagement /> },
-      {path: "/admin/pending",element: < ApproveVendor />,},
-      {path: "/admin/category",element:<CategoryPage />},
+      { path: "/admin/vendor", element: < VendorManagement /> },
+      { path: "/admin/pending", element: < ApproveVendor />, },
+      { path: "/admin/category", element: <CategoryPage /> },
     ]
   },
 
