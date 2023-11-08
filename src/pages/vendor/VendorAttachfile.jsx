@@ -1,7 +1,9 @@
 import React from "react";
 import { LiaGreaterThanSolid } from "react-icons/lia";
+import { useNavigate } from "react-router-dom";
 
-export default function file() {
+export default function   VendorAttachfile() {
+  const navigate = useNavigate()
   return (
     <>
       <div className="mobile: flex justify-center items-center h-screen bg-back">
@@ -681,10 +683,10 @@ export default function file() {
             />
           </svg>
 
-          <h5 className="mobile: text-center mt-[44px]">กรุณากรอกข้อมูล</h5>
-          <div className="mobile: flex flex-col items-center gap-[16px]">
-            <button className="mobile">
-              <div className="mobile: bg-black w-[200px] h-[30px] text-white rounded-[40px] mt-[16px] hover:text-white border border-gray-800 hover:bg-gray-900 ">
+          <h5 className="mobile:text-center mt-[44px]">กรุณากรอกข้อมูล</h5>
+          <div className="mobile:flex flex-col items-center gap-[16px]">
+            <button className="mobile" onClick={()=>{navigate('/vendor/application')}}>
+              <div className="mobile:bg-black w-[200px] h-[30px] text-white rounded-[40px] mt-[16px] hover:text-white border border-gray-800 hover:bg-gray40 ">
                 document
                 <LiaGreaterThanSolid className="mobile: inline ml-[10px]" />
               </div>

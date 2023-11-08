@@ -23,7 +23,6 @@ export default function VendorApplication() {
     
   }, [])
 
-  
 
   const inputTag = [
     { id: 1, name: "shopName" },
