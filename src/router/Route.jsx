@@ -3,21 +3,19 @@ import Layout from "../layout/Layout";
 import HomePage from "../pages/user/HomePage";
 import UserLogin from "../pages/login/userLogin";
 import VendorLogin from "../pages/login/vendorLogin";
+import AdminLogin from "../pages/login/AdminLogin";
 import UserRegister from "../pages/register/userRegister";
 import VendorRegister from "../pages/register/vendorRegister";
 import RedirectIfAuth from "../redirect/redirectIfAuth";
-import File from "../pages/register/Attachfile";
+import VendorAttatch from "../pages/vendor/VendorAttachfile";
 import UploadIdUser from "../pages/register/UploadIdUser";
-import RegisterUserReal from "../pages/register/registerUserReal";
 import UploadIdPeople from "../pages/register/UploadIdPeople";
 import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
-import ResearchStore from "../pages/register/ResearchStore";
+import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
 // import { element } from "prop-types";
 import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
-import UserManagementForm from "../component/admin/UserManagementForm";
-import ApproveUserFrom from "../component/admin/ApproveUserForm";
 import VendorFooter from "../component/footers/VendorFooter";
 import UserFooter from "../component/footers/UserFooter";
 import Calender from "../component/Calender";
@@ -27,21 +25,18 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
-import VendorManagement from "../pages/admin/VendorsManagement"
+import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
-import CategoryPage from "../pages/admin/category";
+// import CategoryPage from "../pages/admin/category";
+import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [
-      { path: "", element: <HomePage /> },
-  
-
-    ],
+    children: [{ path: "", element: <HomePage /> }],
   },
   {
     path: "/login",
@@ -53,13 +48,16 @@ const router = createBrowserRouter([
     children: [
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
-      { path: "/login/line", element: <LinePage /> }
-
+      { path: "/login/line", element: <LinePage /> },
     ],
   },
   {
     path: "/register",
-    element: <Layout />,
+    element: (
+      <RedirectIfAuth>
+        <Layout />
+      </RedirectIfAuth>
+    ),
     children: [
       { path: "/register/user", element: <UserRegister /> },
       { path: "/register/vendor", element: <VendorRegister /> },
@@ -69,8 +67,6 @@ const router = createBrowserRouter([
     path: "/test",
     element: <Layout />,
     children: [
-      { path: "/test", element: <RegisterUserReal /> },
-      { path: "/test/file", element: <File /> },
       { path: "/test/file/iduser", element: <UploadIdUser /> },
       { path: "/test/file/iduser/idpeople", element: <UploadIdPeople /> },
       { path: "/test/file/iduser/idpeople/addstore", element: <AddStore /> },
@@ -78,29 +74,18 @@ const router = createBrowserRouter([
         path: "/test/file/iduser/idpeople/addstore/mapstore",
         element: <MapStore />,
       },
-      {
-        path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore",
-        element: <ResearchStore />,
-      },
+
       {
         path: "/test/vendor/register",
         element: <RegisterVender />,
       },
       {
         path: "/test/user/homepage",
-        element: <HomePage/>
+        element: <HomePage />,
       },
       {
         path: "/test/admin/restaurant-datails",
         element: <RestaurantDetailsForm />,
-      },
-      {
-        path: "/test/user/management",
-        element: <UserManagementForm />,
-      },
-      {
-        path: "/test/user/approve",
-        element: <ApproveUserFrom />,
       },
       {
         path: "/test/vendor/footer",
@@ -117,8 +102,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/line-callback',
-    element: <CallbackPage />
+    path: "/line-callback",
+    element: <CallbackPage />,
   },
   {
     path: "/vendor",
@@ -132,6 +117,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/vendor", element: <VendorLanding /> },
       { path: "/vendor/application", element: <VendorApplication /> },
+      { path: "/vendor/attatch", element: <VendorAttatch /> },
+      {
+        path: "/vendor/VendorApplicationEnd",
+        element: <VendorApplicationEnd />,
+      },
     ],
   },
   {
@@ -139,18 +129,21 @@ const router = createBrowserRouter([
     element: (
       <RedirectIfNotAdmin>
         <AdminContextProvider>
-
           <Layout />
         </AdminContextProvider>
       </RedirectIfNotAdmin>
     ),
     children: [
-      { path: "/admin/vendor", element: < VendorManagement /> },
-      {path: "/admin/pending",element: < ApproveVendor />,},
-      {path: "/admin/category",element:<CategoryPage />},
-    ]
+      { path: "/admin/vendor", element: <VendorManagement /> },
+      { path: "/admin/pending", element: <ApproveVendor /> },
+      // { path: "/admin/category", element: <CategoryPage /> },
+      {
+        path: "/admin/management",
+        element: <AdminManagementVendorForm />,
+      },
+      { path: "/login/admin", element: <AdminLogin /> },
+    ],
   },
-
 ]);
 export default function Router() {
   return <RouterProvider router={router} />;
