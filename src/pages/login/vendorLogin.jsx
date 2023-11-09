@@ -8,32 +8,34 @@ export default function VendorLogin() {
     { id: 2, name: "password" },
   ];
   return (
-    <>
+    <section className="section h-screen flex">
       <form
         key="1"
-        className=" flex flex-col"
+        className="m-auto w-[600px] min-w-[240px] bg-white shadow-md rounded p-8 flex flex-col gap-4"
         onSubmit={(e) => {
           e.preventDefault();
           hdl_vendor_login_submit();
         }}
       >
+        <h6 className="text-lg font-semibold">สำหรับร้านค้า</h6>
+        <h6 className="text-lg font-semibold">Login</h6>
+
         {inputTag.map((el) => {
           return (
             <>
-              <label>{el.name}</label>
-              <input
+              <Input
                 key={el.id}
                 name={el.name}
                 type="text"
-                placeholder="enter here"
+                placeholder={el.name}
                 onChange={hdl_input}
               />
             </>
           );
         })}
 
-        <button>login</button>
+<button className="mt-3 shadow bg-primary-500 hover:bg-primary-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
       </form>
-    </>
+    </section>
   );
 }
