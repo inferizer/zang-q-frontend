@@ -7,13 +7,12 @@ import AdminLogin from "../pages/login/AdminLogin";
 import UserRegister from "../pages/register/userRegister";
 import VendorRegister from "../pages/register/vendorRegister";
 import RedirectIfAuth from "../redirect/redirectIfAuth";
-import File from "../pages/register/Attachfile";
+import VendorAttatch from "../pages/vendor/VendorAttachfile";
 import UploadIdUser from "../pages/register/UploadIdUser";
-import RegisterUserReal from "../pages/register/registerUserReal";
 import UploadIdPeople from "../pages/register/UploadIdPeople";
 import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
-import ResearchStore from "../pages/register/ResearchStore";
+import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
 // import { element } from "prop-types";
 import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
@@ -54,7 +53,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/register",
-    element: <Layout />,
+    element: (
+      <RedirectIfAuth>
+        <Layout />
+      </RedirectIfAuth>
+    ),
     children: [
       { path: "/register/user", element: <UserRegister /> },
       { path: "/register/vendor", element: <VendorRegister /> },
@@ -64,8 +67,6 @@ const router = createBrowserRouter([
     path: "/test",
     element: <Layout />,
     children: [
-      { path: "/test", element: <RegisterUserReal /> },
-      { path: "/test/file", element: <File /> },
       { path: "/test/file/iduser", element: <UploadIdUser /> },
       { path: "/test/file/iduser/idpeople", element: <UploadIdPeople /> },
       { path: "/test/file/iduser/idpeople/addstore", element: <AddStore /> },
@@ -73,10 +74,7 @@ const router = createBrowserRouter([
         path: "/test/file/iduser/idpeople/addstore/mapstore",
         element: <MapStore />,
       },
-      {
-        path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore",
-        element: <ResearchStore />,
-      },
+
       {
         path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore/registervender",
         element: <RegisterVender />,
@@ -119,6 +117,11 @@ const router = createBrowserRouter([
     children: [
       { path: "/vendor", element: <VendorLanding /> },
       { path: "/vendor/application", element: <VendorApplication /> },
+      { path: "/vendor/attatch", element: <VendorAttatch /> },
+      {
+        path: "/vendor/VendorApplicationEnd",
+        element: <VendorApplicationEnd />,
+      },
     ],
   },
   {

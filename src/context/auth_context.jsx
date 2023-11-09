@@ -115,9 +115,80 @@ export default function AuthContextProvider({ children }) {
     setAuthUser(null);
   };
 
+<<<<<<< HEAD
   return (
     <AuthContext.Provider
       value={{
+=======
+
+    const hdl_user_register_submit = async () => {
+        await axios.post('/auth/register', input).then(res => {
+            addAccessToken(res.data.accessToken)
+            setAuthUser(res.data.user)
+        }).catch(console.log).finally( ()=>{
+            setInitLoading(false)
+        })
+    }
+    const hdl_user_login_submit = () => {
+        axios.post('/auth/login', input).then(res => {
+            addAccessToken(res.data.accessToken)
+            setAuthUser(res.data.user)
+            SetInput({})
+        }
+        ).catch(error => {
+            console.log(error.response.data.message)
+        })
+    }
+    const hdl_vendor_login_submit = () => {
+        axios.post('/vendor/login', input).then(res => {
+            setAuthUser(res.data.user)
+            addAccessToken(res.data.accessToken)
+            SetInput({})
+
+        })
+    }
+    const hdl_vendor_register_submit = async () => {
+        await axios.post('/vendor/register', input).then(res => {
+
+            addAccessToken(res.data.accessToken)
+            setAuthUser(res.data.user)
+            SetInput({})
+        }
+        ).catch(error => {
+            console.log(error.response.data.message)
+            throw error
+        })
+
+
+    }
+    const hdl_input = (e) => {
+        SetInput({ ...input, [e.target.name]: e.target.value })
+    }
+
+
+    // dont forget set NGROCK
+    const hdl_logout = () => {
+        if (authUser == null) {
+            window.location.replace('http://localhost:5173')
+        }
+        removeAccessToken()
+        setAuthUser(null)
+
+    }
+
+    const hdl_admin_login_submit = () => {
+        axios.post('/admin/login', input).then(res => {
+            addAccessToken(res.data.accessToken)
+            setAuthUser(res.data.user)
+            SetInput({})
+        }
+        ).catch(error => {
+            console.log(error.response.data.message)
+        })
+    }
+
+    return (<AuthContext.Provider value={{
+>>>>>>> develop
         hdl_user_register_submit,
         hdl_user_login_submit,
         hdl_vendor_register_submit,
@@ -132,9 +203,17 @@ export default function AuthContextProvider({ children }) {
         SuccessGoogle,
         failGoogle,
         setAuthUser,
+<<<<<<< HEAD
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 }
+=======
+        hdl_admin_login_submit 
+    }}>
+        {children}
+    </AuthContext.Provider>)
+}
+>>>>>>> develop
