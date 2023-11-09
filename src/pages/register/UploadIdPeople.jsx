@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function UploadIdPeople() {
+  const navigate = useNavigate()
   return (
     <>
       <div className="mobile: justify-center items-center h-screen flex">
@@ -147,6 +148,7 @@ export default function UploadIdPeople() {
           <button
             type="button"
             className="mobile: mt-[100px] ml-[9px] w-[358px] flex justify-center items-center focus:outline-none text-white bg-[#56CAAE] hover:bg-teal-400 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
+            onClick={navigate('/vendor/application')}
           >
             Continue
           </button>

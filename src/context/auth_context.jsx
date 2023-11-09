@@ -55,7 +55,6 @@ export default function AuthContextProvider({ children }) {
     }
 
 
-
     const hdl_user_register_submit = async () => {
         await axios.post('/auth/register', input).then(res => {
             addAccessToken(res.data.accessToken)
@@ -71,7 +70,6 @@ export default function AuthContextProvider({ children }) {
             SetInput({})
         }
         ).catch(error => {
-
             console.log(error.response.data.message)
         })
     }
@@ -104,12 +102,23 @@ export default function AuthContextProvider({ children }) {
 
     // dont forget set NGROCK
     const hdl_logout = () => {
-        if (authUser.hasOwnProperty('lineId')) {
-            window.location.replace('https://b7c5-125-25-205-80.ngrok-free.app/login/line')
+        if (authUser == null) {
+            window.location.replace('http://localhost:5173')
         }
         removeAccessToken()
         setAuthUser(null)
 
+    }
+
+    const hdl_admin_login_submit = () => {
+        axios.post('/admin/login', input).then(res => {
+            addAccessToken(res.data.accessToken)
+            setAuthUser(res.data.user)
+            SetInput({})
+        }
+        ).catch(error => {
+            console.log(error.response.data.message)
+        })
     }
 
     return (<AuthContext.Provider value={{
@@ -126,7 +135,8 @@ export default function AuthContextProvider({ children }) {
         hdl_vendor_login_submit,
         SuccessGoogle,
         failGoogle,
-        setAuthUser
+        setAuthUser,
+        hdl_admin_login_submit 
     }}>
         {children}
     </AuthContext.Provider>)
