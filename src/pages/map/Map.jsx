@@ -57,7 +57,6 @@ function Map({ viewMode, adminLocation = null, data }) {
         libraries
     });
 
-
     const handleSearchLocation = (input) => {
         setMapClicked(null)
         setSearchLocation(input);
@@ -92,6 +91,7 @@ function Map({ viewMode, adminLocation = null, data }) {
 
         const radius = 3500; // 5 km in meters
         const boundingBox = calculateBoundingBox(currentLocation, radius);
+        
 
         // First, filter markers within the bounding box
         const markersInBoundingBox = data.filter(marker =>

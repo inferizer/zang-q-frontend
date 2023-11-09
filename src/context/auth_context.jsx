@@ -55,7 +55,6 @@ export default function AuthContextProvider({ children }) {
     }
 
 
-
     const hdl_user_register_submit = async () => {
         await axios.post('/auth/register', input).then(res => {
             addAccessToken(res.data.accessToken)
@@ -71,7 +70,6 @@ export default function AuthContextProvider({ children }) {
             SetInput({})
         }
         ).catch(error => {
-
             console.log(error.response.data.message)
         })
     }
@@ -112,6 +110,17 @@ export default function AuthContextProvider({ children }) {
 
     }
 
+    const hdl_admin_login_submit = () => {
+        axios.post('/admin/login', input).then(res => {
+            addAccessToken(res.data.accessToken)
+            setAuthUser(res.data.user)
+            SetInput({})
+        }
+        ).catch(error => {
+            console.log(error.response.data.message)
+        })
+    }
+
     return (<AuthContext.Provider value={{
         hdl_user_register_submit,
         hdl_user_login_submit,
@@ -126,7 +135,8 @@ export default function AuthContextProvider({ children }) {
         hdl_vendor_login_submit,
         SuccessGoogle,
         failGoogle,
-        setAuthUser
+        setAuthUser,
+        hdl_admin_login_submit 
     }}>
         {children}
     </AuthContext.Provider>)
