@@ -1,30 +1,37 @@
-import { useState } from "react";
-import io from "socket.io-client";
-import { useAuth } from "../../hook/useAuthContext";
+import { useState, useEffect } from "react";
 
+import { useAuth } from "../../hook/useAuthContext";
+import socket from "../../utils/socket";
 export default function BookingPage() {
   const [ticketInfo, setTicketInfo] = useState({});
-  const socket = io("http://localhost:3000");
+
   const { authUser } = useAuth();
   // (mocking) fetch shop list isOpen information when login
   const shopData = {
     id: 1,
     name: "Aroi",
   };
+  useEffect(() => {
+    socket.connect();
+  }, []);
 
   // useEffect fetch ticket DB_reservations
+  // ticket ? render ticketInfo : render userPage
 
   const selectShop = () => {
-    socket.emit("join_room", shopData.id + shopData.name);
+    socket.emit("join_room", shopData.id + shopData.name, authUser.id);
   };
 
   // booking infomation send
   const booking = () => {
     //axios.post("/user/booking")
+    // console.log(authUser);
+
     socket.emit("booking", {
       userId: authUser.id,
       name: authUser.username,
       shopName: shopData.id + shopData.name,
+      socket: socket.id,
     });
   };
 
@@ -34,21 +41,23 @@ export default function BookingPage() {
     //axios.post("/user/cancel") DB_reservations delete
     socket.emit("cancel", {
       userId: authUser.id,
-      name: authUser.username,
       shopName: shopData.id + shopData.name,
+      socket: socket.id,
     });
   };
 
-  socket.on("ticket", (data) => {
-    console.log(data);
-    setTicketInfo(data);
+  socket.on("ticket", (bookingConfirm) => {
+    console.log("booking confirm", bookingConfirm);
+    setTicketInfo(bookingConfirm);
   });
 
   return (
     <div>
       <h1 className='text-3xl p-4'>Booking Queue</h1>
 
-      <p className='px-4'>Your current queue number is: {ticketInfo.qNumber}</p>
+      <p className='px-4'>
+        Your current queue number is: {ticketInfo.queueNumber}
+      </p>
       <p className='p-4'>Name: {ticketInfo.name}</p>
 
       {/* can only select DB_shops isOpen : true */}

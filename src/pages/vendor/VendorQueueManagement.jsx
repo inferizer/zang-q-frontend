@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import io from "socket.io-client";
-import { useAuth } from "../../hook/useAuthContext";
-
+import socket from "../../utils/socket";
 export default function VendorQueueManagement() {
-  const { authUser } = useAuth();
   const [bookingList, setBookingList] = useState([]);
-  // console.log(bookingList);
-  const socket = io("http://localhost:3000");
+  const [currentQueue, setCurrentQueue] = useState(1);
+  const [onsiteQueue, setOnsiteQueue] = useState({});
+  console.log(bookingList, currentQueue);
+
+  useEffect(() => {
+    socket.connect();
+  }, []);
+  // const socket = io("http://localhost:3000");
   // (mocking) fetch shop information when login
   const shopData = {
     id: 1,
@@ -23,12 +26,13 @@ export default function VendorQueueManagement() {
   // open shop , axios update DB_shop isOpen: true
   const openShop = () => {
     // axios.patch("/vendor/open",id)
-
-    socket.emit("create-room", shopData.id + shopData.name);
+    socket.emit("join_room", shopData.id + shopData.name);
+    // socket.emit("create_room", shopData.id + shopData.name);
   };
 
   const bookingForCustomer = () => {
-    socket.emit("booking for customer", {
+    socket.emit("booking_for_customer", {
+      socket: socket.id,
       userId: userData.id,
       name: userData.name,
       shopName: shopData.id + shopData.name,
@@ -36,35 +40,99 @@ export default function VendorQueueManagement() {
     });
   };
 
+  useEffect(() => {
+    socket.on("check_queue", (bookingInfo) => {
+      setCurrentQueue((prevQ) => prevQ + 1);
+      bookingInfo.queueNumber = currentQueue;
+      socket.emit("get_queue", bookingInfo);
+
+      setBookingList((prev) => {
+        bookingInfo.queueNumber = currentQueue;
+
+        return [...prev, bookingInfo];
+      });
+    });
+    return () => {
+      socket.off("check_queue");
+    };
+  }, [currentQueue]);
 
   useEffect(() => {
+    //>>>>>>>>>>>>> EDIT
+    // console.log("effecrt");
+    // console.log(bookingList);
+    // const fn = (checkQueueInfo) => {
+    //   // const updateQueue = [...bookingList, checkQueueInfo];
+    //   // console.log(updateQueue.length, updateQueue);
+
+    //   if (bookingList.length > 0) {
+    //     console.log("length > 0");
+    //     // checkQueueInfo.queueNumber = bookingList.length + 1;
+    //     // setBookingList((prev) => [...prev, checkQueueInfo]);
+    //     // socket.emit("confirm_booking", checkQueueInfo);
+    //   } else {
+    //     checkQueueInfo.queueNumber = 1;
+    //     setBookingList((prev) => {
+    //       console.log(prev);
+    //       console.log(prev.length);
+    //       // checkQueueInfo.queueNumber = prev.length + 1;
+    //       if (prev.length > 0) {
+    //         console.log(prev[prev.length]);
+    //         checkQueueInfo.queueNumber = prev[prev.length]?.queueNumber + 1;
+    //       }
+    //       return [...prev, checkQueueInfo];
+    //     });
+    //     socket.emit("confirm_booking", bookingList);
+    //   }
+    // };
+
+    // socket.on("check_queue", fn);
+    // !! >>>>>>>>>>>>> EDIT
+    // socket.on("check_queue", (bookingInfo) => {
+    //   // console.log("check Q", bookingInfo);
+    //   setCurrentQueue((prevQ) => prevQ + 1);
+    //   console.log(currentQueue);
+    //   bookingInfo.queueNumber = currentQueue;
+    //   setBookingList((prev) => {
+    //     socket.emit("confirm_booking", bookingInfo);
+    //     return [...prev, bookingInfo];
+    //   });
+    // });
+
     socket.on("ticket", (data) => {
       setBookingList((prev) => [...prev, data]);
       // setBookingList(...bookingList, { data });
     });
 
-    socket.on("onsite queue", (data) => {
-      setBookingList((prev) => [...prev, data]);
+    //!! edit logic with input form
+    socket.on("onsite_queue", (onsiteData) => {
+      setCurrentQueue((prevQ) => prevQ + 1);
+      setBookingList((prev) => [...prev, onsiteData]);
     });
 
-    //!! update
-    socket.on("cancel queue", (cancelInfo) => {
-      // console.log("cancel id", cancelInfo.userId);
+    socket.on("cancel_queue", (cancelInfo) => {
+      // setCurrentQueue((prevQ) => {
+      //   if (prevQ === 0) {
+      //     return prevQ;
+      //   } else {
+      //     return prevQ - 1;
+      //   }
+      // });
 
       setBookingList((prevList) => {
         const newBookingList = prevList.filter(
-          (el) => el.id !== cancelInfo.userId
-
-          // (el) => console.log("+++", el.id)
+          (el) => el.userId !== cancelInfo.userId
         );
         return newBookingList;
       });
     });
 
     return () => {
-      socket.off("ticket");
-      socket.off("onsite queue");
-      socket.off("cancel queue");
+      // console.log("clean effect");
+      // socket.off("check_queue");
+      // socket.off("ticket");
+      // socket.off("onsite queue");
+      // socket.off("cancel queue");
     };
   }, []);
 
@@ -83,9 +151,9 @@ export default function VendorQueueManagement() {
       <p className='text-2xl p-4'>Queue List</p>
       {bookingList.length > 0
         ? bookingList.map((el, index) => (
-            <li key={index}>{`Name: ${el.name} || Queue:${el.qNumber} || Date:${
-              el.date
-            } || Time:${el.time} || Mobile:${
+            <li key={index}>{`Name: ${el.name} || Queue:${
+              el.queueNumber
+            } || Date:${el.date} || Time:${el.time} || Mobile:${
               el.mobile || "don't have phone number"
             }`}</li>
           ))

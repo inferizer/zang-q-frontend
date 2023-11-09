@@ -39,9 +39,9 @@ const router = createBrowserRouter([
     children: [
       // { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },
-      { path: "test/q", element: <TestQPage /> },
-      // { path: "user", element: <BookingPage /> },
-      // { path: "shop", element: <VendorQueueManagement /> },
+      // { path: "test/q", element: <TestQPage /> },
+      { path: "user", element: <BookingPage /> },
+      { path: "shop", element: <VendorQueueManagement /> },
     ],
   },
   {
