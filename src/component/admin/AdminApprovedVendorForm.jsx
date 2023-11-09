@@ -1,4 +1,5 @@
 import { RiMapPinFill, RiEyeFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 export default function AdminApprovedVendorFrom() {
   return (
@@ -21,7 +22,9 @@ export default function AdminApprovedVendorFrom() {
               </div>
             </div>
             <div className="mobile: flex justify-end gap-6 py-2 px-6">
-              <RiEyeFill className="mobile: text-gray60 w-4 h-4" />
+              <Link to="/admin/approved">
+                <RiEyeFill className="mobile: text-gray60 w-4 h-4" />
+              </Link>
             </div>
           </div>
         </div>

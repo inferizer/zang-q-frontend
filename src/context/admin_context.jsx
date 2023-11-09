@@ -43,6 +43,12 @@ export default function AdminContextProvider({ children }) {
     });
   };
 
+  const hdl_approve_application = (id) => {
+    axios.post(`/admin/pending/${id}`).then((res) => {
+      setPendingVendor(res.data.result);
+    });
+  };
+
   const hdl_new_category = () => {
     axios.post("/admin/category", input).then((res) => {
       setAllCategory(res.data.result);
@@ -70,6 +76,7 @@ export default function AdminContextProvider({ children }) {
       value={{
         pendingVendor,
         hdl_view_pending_detail,
+        hdl_approve_application,
         singlePendingVendor,
         hdl_approved_submit,
         hdl_reject_application,

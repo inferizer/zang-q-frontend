@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAdmin } from "../../hook/useAdmin";
-export default function CategoryPage() {
+export default function CategoryCRUDPage() {
   const {
     allCategory,
     hdl_input,
