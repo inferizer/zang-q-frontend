@@ -2,7 +2,7 @@ import Input from "../../component/input";
 import { useAuth } from "../../hook/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import Joi from "joi";
-import { useState} from "react";
+import { useState } from "react";
 import LineLoginButtton from '../../component/LineLoginButton'
 import liff from "@line/liff";
 import icongoogle from '../../assets/images/icongoogle.svg'
@@ -69,11 +69,7 @@ export default function UserRegister() {
             <h1 className="mobile:mb-[25px]">
               <b className="mobile:text-[25px]">Signup</b>
             </h1>
-            <div className="mobile:border-[#BDBDBD] flex flex-col gap-2 items-start">
-              <label className="mobile" for="username">
-                {" "}
-                username
-              </label>
+            <div className=" flex flex-col border border-gray-400 rounded-md mx-auto">
               <Input
                 onChange={hdl_input}
                 placeholder="username:"
@@ -83,11 +79,6 @@ export default function UserRegister() {
                 error={error.username}
               />
               {error.username && <InputErrorMessage message={error.username} />}
-            </div>
-            <div className="mobile: border-[#BDBDBD] flex flex-col gap-2 items-start">
-              <label className="mobile" for="password">
-                password
-              </label>
               <Input
                 onChange={hdl_input}
                 type="password"
@@ -97,11 +88,6 @@ export default function UserRegister() {
                 error={error.password}
               />
               {error.password && <InputErrorMessage message={error.password} />}
-            </div>
-            <div className="mobile: border-[#BDBDBD] flex flex-col gap-2 items-start ">
-              <label className="mobile" for="confirmPassword">
-                confirmPassword
-              </label>
               <Input
                 onChange={hdl_input}
                 type="password"
@@ -113,11 +99,6 @@ export default function UserRegister() {
               {error.confirmPassword && (
                 <InputErrorMessage message={error.confirmPassword} />
               )}
-            </div>
-            <div className="mobile: border-[#BDBDBD] flex flex-col gap-2 items-start">
-              <label className="mobile" for="emailOrMobile">
-                emailOrMobile
-              </label>
               <Input
                 onChange={hdl_input}
                 placeholder="emailOrMobile:"
@@ -126,14 +107,14 @@ export default function UserRegister() {
                 name="emailOrMobile"
                 error={error.emailOrMobile}
               />
+              {error.emailOrMobile && (
+                <InputErrorMessage message={error.emailOrMobile} />
+              )}
             </div>
-            {error.emailOrMobile && (
-              <InputErrorMessage message={error.emailOrMobile} />
-            )}
             <button
               onClick={hdl_submit}
               type="button"
-              className="mobile: mt-[25px] ml-[9px] w-[350px] flex justify-center items-center focus:outline-none text-white bg-[#56CA76] hover:bg-green-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
+              className="mobile: mt-[25px] ml-[9px] w-[350px] flex justify-center items-center focus:outline-none text-white bg-primary-400 hover:bg-red-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
             >
               Continue
             </button>
@@ -159,15 +140,15 @@ export default function UserRegister() {
                   type="button"
                   render={renderProps => (
                     <button onClick={renderProps.onClick} disabled={renderProps.disabled}
-                    className="mobile: w-[350px]  py-2.5 px-5  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                       <div className="mobile: pr-[73px]">
-                  <img
-                    className="mobile: inline w-[45px] h-[45px] mr-[50px]"
-                    src={icongoogle}
-                    alt=""
-                  />
-                  Continue with Google
-                </div></button>
+                      className="mobile: w-[350px]  py-2.5 px-5  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                      <div className="mobile: pr-[73px]">
+                        <img
+                          className="mobile: inline w-[45px] h-[45px] mr-[50px]"
+                          src={icongoogle}
+                          alt=""
+                        />
+                        Continue with Google
+                      </div></button>
                   )}
                 />
               </div>
@@ -178,7 +159,7 @@ export default function UserRegister() {
             <div className="mobile: text-center">
               <span className="mobile">Don't have an account?</span>
               <span className="mobile: ml-4">
-              <button className="mobile"onClick={() => {navigate('/login/user')}} >Sign in</button>
+                <button className="mobile" onClick={() => { navigate('/login/user') }} >Sign in</button>
 
               </span>
             </div>

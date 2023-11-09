@@ -11,7 +11,7 @@ import UploadIdUser from "../pages/register/UploadIdUser";
 import UploadIdPeople from "../pages/register/UploadIdPeople";
 import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
-import ResearchStore from "../pages/register/ResearchStore";
+import VendorApplicationEnd from  "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
 // import { element } from "prop-types";
 import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
@@ -82,13 +82,14 @@ const router = createBrowserRouter([
         path: "/test/file/iduser/idpeople/addstore/mapstore",
         element: <MapStore />,
       },
-      {
-        path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore",
-        element: <ResearchStore />,
-      },
+
       {
         path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore/registervender",
         element: <RegisterVender />,
+      },
+      {
+        path: "/test/user/homepage",
+        element: <HomePage/>
       },
       {
         path: "/test/admin/restaurant-datails",
@@ -133,6 +134,7 @@ const router = createBrowserRouter([
       { path: "/vendor", element: <VendorLanding /> },
       { path: "/vendor/application", element: <VendorApplication /> },
       { path: "/vendor/attatch", element: <VendorAttatch /> },
+      { path: "/vendor/VendorApplicationEnd", element: <VendorApplicationEnd />}
     ],
   },
   {

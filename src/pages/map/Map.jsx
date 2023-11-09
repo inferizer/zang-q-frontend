@@ -6,7 +6,7 @@ import PlacesAutoComplete from "./PlacesAutoComplete"
 import { useVendor } from '../../hook/useVendor';
 
 
-// admin ไป fetch lat lng มา
+
 function Map({ viewMode, adminLocation = null, data }) {
 
     const bangkokBounds = {
@@ -22,6 +22,7 @@ function Map({ viewMode, adminLocation = null, data }) {
     const [center, setCenter] = useState({ lat: 13.7462, lng: 100.5347 });
     const [selectedInfoWindow, setSelectedInfoWindow] = useState(null);
     const [libraries, setLibraries] = useState(['places', 'geometry']);
+    const [allMarkers, setAllMarkers] = useState();
 
     console.log('clicked', mapClicked)
     console.log('selected', searchLocation)
@@ -88,8 +89,7 @@ function Map({ viewMode, adminLocation = null, data }) {
             return []; // จังหวะ render ครั้งแรก currentLocation ยังมาไม่ทัน
         }
 
-        console.log(isLoaded)
-        const radius = 5000; // 5 km in meters
+        const radius = 3500; // 5 km in meters
         const boundingBox = calculateBoundingBox(currentLocation, radius);
         
 
@@ -112,6 +112,9 @@ function Map({ viewMode, adminLocation = null, data }) {
         });
     }, [currentLocation, data]);
 
+    useEffect(() => {
+        setAllMarkers(markersWithinRadius);
+    }, [markersWithinRadius]);
 
     if (!isLoaded) return <div>Loading...</div>;
     return (
@@ -159,7 +162,7 @@ function Map({ viewMode, adminLocation = null, data }) {
                                 <>
                                     <Circle
                                         center={currentLocation}
-                                        radius={5050}
+                                        radius={3550}
                                         options={{
                                             strokeColor: '#EB544D',
                                             strokeWeight: 2,

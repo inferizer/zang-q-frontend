@@ -55,7 +55,6 @@ export default function AuthContextProvider({ children }) {
     }
 
 
-
     const hdl_user_register_submit = async () => {
         await axios.post('/auth/register', input).then(res => {
             addAccessToken(res.data.accessToken)

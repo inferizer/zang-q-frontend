@@ -1,5 +1,5 @@
-import React from "react";
-const option = [
+  import React from "react";
+  const option = [
   { id: "1", name: "buffet", value: "buffet" },
   { id: "2", name: "thai", value: "thai" },
   { id: "3", name: "japan", value: "japan" },

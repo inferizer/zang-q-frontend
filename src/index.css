@@ -2,14 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-@media only screen and (max-width: 640px) {
-  header {
-    text-align: center;
-  }
-  main {
-    font-size: 1.2em;
-  }
-  footer {
-    text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap');
+
+@layer base {
+  h1, h2, h3, h4, h5, h6, p, span, button,ul, li {
+    font-family: 'IBM Plex Sans Thai', sans-serif;
   }
 }
