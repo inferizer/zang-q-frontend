@@ -1,6 +1,6 @@
 // import { useAuth } from "../hook/useAuthContext"
 import { useEffect } from "react"
-import iconline from "../../public/illus/iconline.svg";
+import iconline from "../assets/images/iconline.svg";
 export default function LineLoginButton() {
 
     useEffect(() => {
@@ -22,7 +22,7 @@ export default function LineLoginButton() {
                 <img
                   className="mobile:inline mr-[50px]"
                   src={iconline}
-                  alt=""
+                  alt=""  
                 />
                 <div>Continue with Line</div>
               </div>
