@@ -9,7 +9,6 @@ import RedirectIfAuth from "../redirect/redirectIfAuth";
 import VendorAttatch from "../pages/vendor/VendorAttachfile";
 import UploadIdUser from "../pages/register/UploadIdUser";
 import UploadIdPeople from "../pages/register/UploadIdPeople";
-import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import VendorApplicationEnd from  "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
@@ -77,7 +76,6 @@ const router = createBrowserRouter([
 
       { path: "/test/file/iduser", element: <UploadIdUser /> },
       { path: "/test/file/iduser/idpeople", element: <UploadIdPeople /> },
-      { path: "/test/file/iduser/idpeople/addstore", element: <AddStore /> },
       {
         path: "/test/file/iduser/idpeople/addstore/mapstore",
         element: <MapStore />,
