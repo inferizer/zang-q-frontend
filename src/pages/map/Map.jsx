@@ -32,7 +32,6 @@ function Map({ viewMode, adminLocation = null, data }) {
         // console.log(currentLocation)
     }, []);
 
-
     const getLocation = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, handleError);
@@ -40,7 +39,6 @@ function Map({ viewMode, adminLocation = null, data }) {
             setError("Geolocation is not supported by this browser.");
         }
     }
-
     const showPosition = (position) => {
         const newLocation = {
             lat: position.coords.latitude,
@@ -119,7 +117,6 @@ function Map({ viewMode, adminLocation = null, data }) {
     }, [markersWithinRadius]);
 
     if (!isLoaded) return <div>Loading...</div>;
-
     return (
         <div>
             <div>
@@ -189,7 +186,6 @@ function Map({ viewMode, adminLocation = null, data }) {
                                     />
                                 ))
                             }
-
                             {selectedInfoWindow && (
                                 <InfoWindow
                                     position={selectedInfoWindow}
@@ -201,7 +197,6 @@ function Map({ viewMode, adminLocation = null, data }) {
                                     </div>
                                 </InfoWindow>
                             )}
-
                         </div>
                     ) : (
                         <div className='w-full'>
@@ -209,12 +204,10 @@ function Map({ viewMode, adminLocation = null, data }) {
                                 handleSearchLocation={handleSearchLocation}
                                 className="absolute top-2 left-2 z-10 w-[300px] p-2 bg-white rounded shadow-md"
                             />
-
                             {/* ถามว่า searchLocation กับ mapClicked มีไหม ถ้ามีตัวในตัวหนึ่ง ให้ set position MarkerF */}
                             {(searchLocation || mapClicked) && <MarkerF position={mapClicked || searchLocation} />}
                         </div>
                     )}
-
                 </GoogleMap>
             </div>
         </div>
