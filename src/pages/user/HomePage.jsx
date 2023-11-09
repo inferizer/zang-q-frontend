@@ -7,7 +7,7 @@ import user from '../../assets/icon/user.svg'
 export default function HomePage() {
 	return (
 		<>
-			<header className="shadow-md z-30 bg-white fixed w-screen px-4 py-2 bottom-0 desktop:bottom-auto top-0">
+			<header className="px-4 shadow-md z-30 bg-white fixed w-screen px-4 py-2 bottom-0 desktop:bottom-auto top-0 top-auto">
 				<div className="max-w-[800px] desktop:max-w-[1024px] m-auto flex justify-between items-center">
 					<img src={logo} alt="logo" />
 					<nav>
