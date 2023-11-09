@@ -11,7 +11,7 @@ import UploadIdUser from "../pages/register/UploadIdUser";
 import UploadIdPeople from "../pages/register/UploadIdPeople";
 import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
-import VendorApplicationEnd from  "../pages/vendor/VendorApplicationEnd";
+import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
 // import { element } from "prop-types";
 import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
@@ -26,7 +26,14 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
-import VendorManagement from "../pages/admin/VendorsManagement"
+import VendorManagement from "../pages/admin/VendorsManagement";
+import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
+import AdminContextProvider from "../context/admin_context";
+import ApproveVendor from "../pages/admin/ApproveVendor";
+import CategoryPage from "../pages/admin/category";
+import BookingPage from "../pages/user/BookingPage";
+import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
+import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
@@ -39,8 +46,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "", element: <HomePage /> },
-
-
+      { path: "Category", element: <CategoryPage /> },
+      // { path: "test/q", element: <TestQPage /> },
+      { path: "user", element: <BookingPage /> },
+      { path: "shop", element: <VendorQueueManagement /> },
     ],
   },
   {
@@ -54,16 +63,16 @@ const router = createBrowserRouter([
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
       { path: "/login/line", element: <LinePage /> },
-      { path: "/login/admin", element: <AdminLogin /> }
-
+      { path: "/login/admin", element: <AdminLogin /> },
     ],
   },
   {
     path: "/register",
-    element: 
-    <RedirectIfAuth>
-    <Layout />
-    </RedirectIfAuth>,
+    element: (
+      <RedirectIfAuth>
+        <Layout />
+      </RedirectIfAuth>
+    ),
     children: [
       { path: "/register/user", element: <UserRegister /> },
       { path: "/register/vendor", element: <VendorRegister /> },
@@ -71,10 +80,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/test",
-    element:
-        <Layout />,
+    element: <Layout />,
     children: [
-
       { path: "/test/file/iduser", element: <UploadIdUser /> },
       { path: "/test/file/iduser/idpeople", element: <UploadIdPeople /> },
       { path: "/test/file/iduser/idpeople/addstore", element: <AddStore /> },
@@ -89,7 +96,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/test/user/homepage",
-        element: <HomePage/>
+        element: <HomePage />,
       },
       {
         path: "/test/admin/restaurant-datails",
@@ -118,8 +125,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/line-callback',
-    element: <CallbackPage />
+    path: "/line-callback",
+    element: <CallbackPage />,
   },
   {
     path: "/vendor",
@@ -134,7 +141,10 @@ const router = createBrowserRouter([
       { path: "/vendor", element: <VendorLanding /> },
       { path: "/vendor/application", element: <VendorApplication /> },
       { path: "/vendor/attatch", element: <VendorAttatch /> },
-      { path: "/vendor/VendorApplicationEnd", element: <VendorApplicationEnd />}
+      {
+        path: "/vendor/VendorApplicationEnd",
+        element: <VendorApplicationEnd />,
+      },
     ],
   },
   {
@@ -147,12 +157,26 @@ const router = createBrowserRouter([
       </RedirectIfNotAdmin>
     ),
     children: [
-      { path: "/admin/vendor", element: < VendorManagement /> },
-      { path: "/admin/pending", element: < ApproveVendor />, },
+      { path: "/admin/vendor", element: <VendorManagement /> },
+      { path: "/admin/pending", element: <ApproveVendor /> },
       { path: "/admin/category", element: <CategoryPage /> },
-    ]
+    ],
   },
-
+  {
+    path: "/admin",
+    element: (
+      <RedirectIfNotAdmin>
+        <AdminContextProvider>
+          <Layout />
+        </AdminContextProvider>
+      </RedirectIfNotAdmin>
+    ),
+    children: [
+      { path: "/admin/vendor", element: <VendorManagement /> },
+      { path: "/admin/pending", element: <ApproveVendor /> },
+      { path: "/admin/category", element: <CategoryPage /> },
+    ],
+  },
 ]);
 export default function Router() {
   return <RouterProvider router={router} />;
