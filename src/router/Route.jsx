@@ -3,6 +3,7 @@ import Layout from "../layout/Layout";
 import HomePage from "../pages/user/HomePage";
 import UserLogin from "../pages/login/userLogin";
 import VendorLogin from "../pages/login/vendorLogin";
+import AdminLogin from "../pages/login/AdminLogin";
 import UserRegister from "../pages/register/userRegister";
 import VendorRegister from "../pages/register/vendorRegister";
 import RedirectIfAuth from "../redirect/redirectIfAuth";
@@ -15,8 +16,6 @@ import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
 // import { element } from "prop-types";
 import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
-import UserManagementForm from "../component/admin/UserManagementForm";
-import ApproveUserFrom from "../component/admin/ApproveUserForm";
 import VendorFooter from "../component/footers/VendorFooter";
 import UserFooter from "../component/footers/UserFooter";
 import Calender from "../component/Calender";
@@ -33,9 +32,10 @@ import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
 import CategoryPage from "../pages/admin/category";
-import AdminLogin from "../pages/login/adminLogin";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
+// import CategoryPage from "../pages/admin/category";
+import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
 
 const router = createBrowserRouter([
   {
@@ -60,7 +60,6 @@ const router = createBrowserRouter([
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
       { path: "/login/line", element: <LinePage /> },
-      { path: "/login/admin", element: <AdminLogin /> },
     ],
   },
   {
@@ -88,7 +87,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/test/file/iduser/idpeople/addstore/mapstore/researchstore/registervender",
+        path: "/test/vendor/register",
         element: <RegisterVender />,
       },
       {
@@ -98,14 +97,6 @@ const router = createBrowserRouter([
       {
         path: "/test/admin/restaurant-datails",
         element: <RestaurantDetailsForm />,
-      },
-      {
-        path: "/test/user/management",
-        element: <UserManagementForm />,
-      },
-      {
-        path: "/test/user/approve",
-        element: <ApproveUserFrom />,
       },
       {
         path: "/test/vendor/footer",
@@ -157,8 +148,14 @@ const router = createBrowserRouter([
       { path: "/admin/vendor", element: <VendorManagement /> },
       { path: "/admin/pending", element: <ApproveVendor /> },
       { path: "/admin/category", element: <CategoryPage /> },
+      {
+        path: "/admin/management",
+        element: <AdminManagementVendorForm />,
+      },
+      { path: "/admin/login", element: <AdminLogin /> },
     ],
   },
+
   {
     path: "/user",
     element: (

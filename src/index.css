@@ -9,3 +9,11 @@
     font-family: 'IBM Plex Sans Thai', sans-serif;
   }
 }
+
+.section {
+    @apply w-screen px-4;
+}
+
+.container {
+    @apply max-w-[800px] mx-auto desktop:max-w-[1024px];
+}
