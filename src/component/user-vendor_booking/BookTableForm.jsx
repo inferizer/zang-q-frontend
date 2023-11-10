@@ -1,10 +1,10 @@
-import { useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import { hdlAddSeat, hdlRmvSeat } from "../utils/seat";
+import { hdlAddSeat, hdlRmvSeat } from "../../utils/seat";
 import TableType from "./TableType";
+import { useQueue } from "../../hook/useQueue";
 export default function UserBookTableForm() {
-  const [seat, setSeat] = useState(0);
-  const [maxSeat, setMaxSeat] = useState(10);
+  const { seat, setSeat, maxSeat, setTableType } = useQueue();
+
   const hdlAddSeat1 = () => {
     hdlAddSeat(seat, setSeat, maxSeat);
   };
@@ -13,8 +13,12 @@ export default function UserBookTableForm() {
     hdlRmvSeat(seat, setSeat);
   };
 
+  const hdlTableType = (selectTableType) => {
+    setTableType(selectTableType);
+  };
+
   return (
-    <div className='self-stretch flex-col justify-start items-start inline-flex'>
+    <form className='self-stretch flex-col justify-start items-start inline-flex'>
       <div className='h-[150px] px-4 py-3 mx-auto flex-col justify-start items-start gap-2 flex'>
         {/* type header */}
         <div className="self-stretch text-black text-base font-medium font-['IBM Plex Sans Thai']">
@@ -22,7 +26,7 @@ export default function UserBookTableForm() {
         </div>
         <div className='self-stretch rounded-2xl justify-center items-start inline-flex'>
           {/* TableType */}
-          <TableType />
+          <TableType onClick={hdlTableType} />
         </div>
       </div>
       {/* seat number section */}
@@ -65,6 +69,6 @@ export default function UserBookTableForm() {
       >
         จอง
       </button>
-    </div>
+    </form>
   );
 }

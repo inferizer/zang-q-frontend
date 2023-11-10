@@ -60,44 +60,6 @@ export default function VendorQueueManagement() {
   useEffect(() => {
     //>>>>>>>>>>>>> EDIT
     // console.log("effecrt");
-    // console.log(bookingList);
-    // const fn = (checkQueueInfo) => {
-    //   // const updateQueue = [...bookingList, checkQueueInfo];
-    //   // console.log(updateQueue.length, updateQueue);
-
-    //   if (bookingList.length > 0) {
-    //     console.log("length > 0");
-    //     // checkQueueInfo.queueNumber = bookingList.length + 1;
-    //     // setBookingList((prev) => [...prev, checkQueueInfo]);
-    //     // socket.emit("confirm_booking", checkQueueInfo);
-    //   } else {
-    //     checkQueueInfo.queueNumber = 1;
-    //     setBookingList((prev) => {
-    //       console.log(prev);
-    //       console.log(prev.length);
-    //       // checkQueueInfo.queueNumber = prev.length + 1;
-    //       if (prev.length > 0) {
-    //         console.log(prev[prev.length]);
-    //         checkQueueInfo.queueNumber = prev[prev.length]?.queueNumber + 1;
-    //       }
-    //       return [...prev, checkQueueInfo];
-    //     });
-    //     socket.emit("confirm_booking", bookingList);
-    //   }
-    // };
-
-    // socket.on("check_queue", fn);
-    // !! >>>>>>>>>>>>> EDIT
-    // socket.on("check_queue", (bookingInfo) => {
-    //   // console.log("check Q", bookingInfo);
-    //   setCurrentQueue((prevQ) => prevQ + 1);
-    //   console.log(currentQueue);
-    //   bookingInfo.queueNumber = currentQueue;
-    //   setBookingList((prev) => {
-    //     socket.emit("confirm_booking", bookingInfo);
-    //     return [...prev, bookingInfo];
-    //   });
-    // });
 
     socket.on("ticket", (data) => {
       setBookingList((prev) => [...prev, data]);
@@ -129,7 +91,6 @@ export default function VendorQueueManagement() {
 
     return () => {
       // console.log("clean effect");
-      // socket.off("check_queue");
       // socket.off("ticket");
       // socket.off("onsite queue");
       // socket.off("cancel queue");

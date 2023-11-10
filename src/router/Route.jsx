@@ -25,10 +25,15 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
+import BookingPage from "../pages/user/BookingPage";
+import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
 import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
+import CategoryPage from "../pages/admin/category";
+import UserBookPage from "../pages/user/UserBookPage";
+import QueueContextProvider from "../context/queue_context";
 // import CategoryPage from "../pages/admin/category";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
 
@@ -36,7 +41,13 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [{ path: "", element: <HomePage /> }],
+    children: [
+      { path: "", element: <HomePage /> },
+      { path: "Category", element: <CategoryPage /> },
+      { path: "test/book", element: <UserBookPage /> },
+      { path: "user", element: <BookingPage /> },
+      { path: "shop", element: <VendorQueueManagement /> },
+    ],
   },
   {
     path: "/login",
@@ -136,13 +147,23 @@ const router = createBrowserRouter([
     children: [
       { path: "/admin/vendor", element: <VendorManagement /> },
       { path: "/admin/pending", element: <ApproveVendor /> },
-      // { path: "/admin/category", element: <CategoryPage /> },
+      { path: "/admin/category", element: <CategoryPage /> },
       {
         path: "/admin/management",
         element: <AdminManagementVendorForm />,
       },
       { path: "/admin/login", element: <AdminLogin /> },
     ],
+  },
+
+  {
+    path: "/user",
+    element: (
+      <QueueContextProvider>
+        <Layout />
+      </QueueContextProvider>
+    ),
+    children: [{ path: "/user/book", element: <UserBookPage /> }],
   },
 ]);
 export default function Router() {
