@@ -17,6 +17,13 @@ import UserLookMap from "../pages/user/UserLookMap";
 import UserProfile from "../pages/user/UserProfile";
 import UserBookPage from "../pages/user/UserBookPage";
 import UserHadQPage from "../pages/user/UserHadQPage";
+import VendorProfile from "../pages/vendor/VendorProfile";
+import VendorOpenStore from "../pages/vendor/VendorOpenStore";
+import VendorCloseStore from "../pages/vendor/VendorCloseStore";
+import VendorUserWalkIn from "../pages/vendor/VendorUserWalkIn";
+import VendorHistoryStory from "../pages/vendor/VendorHistoryStory";
+import VendorUserBookingStatusStore from "../pages/vendor/VendorUserBookingStatusStore";
+import TestVUBSSV from "../pages/vendor/TestVUBSSV";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +63,25 @@ const router = createBrowserRouter([
       { path: "/user/map", element: <UserLookMap /> },
       { path: "/user/book", element: <UserBookPage /> },
       { path: "/user/q", element: <UserHadQPage /> },
+    ],
+  },
+  {
+    path: "/vendor",
+    element: <Layout />,
+    children: [
+      { path: "/vendor/profile", element: <VendorProfile /> },
+      { path: "/vendor/openStore", element: <VendorOpenStore /> },
+      { path: "/vendor/closeStore", element: <VendorCloseStore /> },
+      { path: "/vendor/userWalkIn", element: <VendorUserWalkIn /> },
+      { path: "/vendor/historyStore", element: <VendorHistoryStory /> },
+      {
+        path: "/vendor/userBookingStatusStoreVendor",
+        element: <VendorUserBookingStatusStore />,
+      },
+      {
+        path: "/vendor/TestVUBSSV",
+        element: <TestVUBSSV />,
+      },
     ],
   },
   {

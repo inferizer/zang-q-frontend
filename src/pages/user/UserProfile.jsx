@@ -15,7 +15,7 @@ export default function UserProfile() {
           </div>
           <div className="mobile:grow shrink basis-0 flex-col justify-start items-start gap-2 inline-flex">
             <div className="mobile:self-stretch justify-start items-center gap-2.5 inline-flex">
-              <div className="mobile:grow shrink basis-0 text-black text-base font-bold font-['Nunito Sans']">
+              <div className="mobile: mr-[20px] grow shrink basis-0 text-black text-base font-bold font-['Nunito Sans']">
                 nune
               </div>
             </div>
