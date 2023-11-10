@@ -116,8 +116,8 @@ export default function VendorApplication() {
         })}
 
         <h1>google map api</h1>
-        <Map viewMode={false} />
-        {authUser.role === "vendor" ? (
+        {/* <Map viewMode={false} /> */}
+        {authUser.role === "user" ? (
           <Map
             viewMode={true}
             location={{ lat: 13.7462, lng: 100.5347 }}

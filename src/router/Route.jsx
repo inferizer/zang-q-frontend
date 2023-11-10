@@ -37,7 +37,6 @@ import UserContextProvider from "../context/user_context";
 import ShopList from "../pages/user/ShopList";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
-// import CategoryPage from "../pages/admin/category";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
 
 const router = createBrowserRouter([

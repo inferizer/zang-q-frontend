@@ -1,7 +1,9 @@
+import PacmanLoader from "react-spinners/PacmanLoader";
+
 export default function Loading() {
   return (
-    <div className="">
-      <div className="w-16 h-16 border-4 border-primary-500 border-double rounded-full animate-spin"></div>
+    <div className="w-screen h-screen flex justify-center items-center">
+      <PacmanLoader size={80} color="#DD0F95" className="-ml-28"/>
     </div>
   );
 }
