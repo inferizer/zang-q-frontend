@@ -9,7 +9,7 @@ if(getAccessToken()){
     if( role == USER) return children
 }
 
-return < Navigate  to="/"/>
+return < Navigate  to="/login/user"/>
     
 
 }

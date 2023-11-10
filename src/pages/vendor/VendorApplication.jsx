@@ -72,7 +72,7 @@ export default function VendorApplication() {
         </div>
         <div>
           {idCardFile ? <img src={URL.createObjectURL(idCardFile)} /> : null}
-          <label>shop picture file</label>
+          <label>ID card file</label>
           <input
             type="file"
             onChange={(e) => {
