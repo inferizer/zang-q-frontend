@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { element } from "prop-types";
 import Layout from "../layout/Layout";
 import HomePage from "../pages/user/HomePage";
 import UserLogin from "../pages/login/userLogin";
@@ -14,11 +15,9 @@ import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
-// import { element } from "prop-types";
 import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
 import VendorFooter from "../component/footers/VendorFooter";
 import UserFooter from "../component/footers/UserFooter";
-import Calender from "../component/Calender";
 import LinePage from "../pages/login/lineLogin";
 import CallbackPage from "../pages/user/CallbackPage";
 import VendorApplication from "../pages/vendor/VendorApplication";
@@ -29,9 +28,8 @@ import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
-// import CategoryPage from "../pages/admin/category";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
-
+import AdminLogin from "../pages/login/AdminLogin";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +47,7 @@ const router = createBrowserRouter([
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
       { path: "/login/line", element: <LinePage /> },
+      { path: "/login/admin", element: <adminLogin /> },
     ],
   },
   {
