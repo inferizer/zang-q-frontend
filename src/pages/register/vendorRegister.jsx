@@ -24,24 +24,31 @@ export default function VendorRegistor() {
   };
 
   return (
-    <>
-      <form className=" flex flex-col" onSubmit={hdl_submit}>
-        {inputTag.map((el, id) => {
-          return (
-            <>
-              <label>{el.name}</label>
+    <section className="section h-screen flex">
+      <form
+        className="m-auto w-[600px] min-w-[240px] bg-white shadow-md rounded p-8 flex flex-col gap-4"
+        onSubmit={hdl_submit}
+      >
+        <h6 className="text-lg font-semibold">สำหรับร้านค้า</h6>
+        <h6 className="text-lg font-semibold">Register</h6>
+
+        <div className="flex flex-col gap-2 max-w-[600px]">
+          {inputTag.map((el, id) => {
+            return (
               <Input
                 id={id}
                 name={el.name}
                 type="text"
-                placeholder="enter here"
+                placeholder={el.name}
                 onChange={hdl_input}
               />
-            </>
-          );
-        })}
-        <button>submit</button>
+            );
+          })}
+        </div>
+
+        <button className="mt-3 shadow bg-primary-500 hover:bg-primary-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
+
       </form>
-    </>
+    </section>
   );
 }
