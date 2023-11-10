@@ -4,10 +4,12 @@ import { useState, useMemo, useEffect } from 'react'
 import { GoogleMap, useLoadScript, MarkerF, Marker, Circle, InfoWindow } from '@react-google-maps/api'
 import PlacesAutoComplete from "./PlacesAutoComplete"
 import { useVendor } from '../../hook/useVendor';
+import { useAuth } from '../../hook/useAuthContext';
 
 
 
 function Map({ viewMode, adminLocation = null, data }) {
+    const {initLoading} = useAuth()
 
     const bangkokBounds = {
         north: 14.0000,
@@ -46,16 +48,20 @@ function Map({ viewMode, adminLocation = null, data }) {
         };
         setCurrentLocation(newLocation);
         setCenter(newLocation); // ทำการ set ค่า center ใหม่ที่นี่
+    (false)
     };
 
     const handleError = (error) => {
         setError("Error fetching location: " + error.message);
+    
     };
 
     const { isLoaded } = useLoadScript({
-        googleMapsApiKey: 'AIzaSyCC_tCic6ScwrR9HlXYj7ryLj7uvTLQRpk',
-        libraries
+        googleMapsApiKey:'AIzaSyCC_tCic6ScwrR9HlXYj7ryLj7uvTLQRpk',
+        libraries:["places","geometry"]
     });
+    
+    
 
     const handleSearchLocation = (input) => {
         setMapClicked(null)
@@ -82,11 +88,8 @@ function Map({ viewMode, adminLocation = null, data }) {
     };
 
     const markersWithinRadius = useMemo(() => {
-        if (!viewMode) {
-            return [];
-        }
-        if (!currentLocation) {
-            return []; // จังหวะ render ครั้งแรก currentLocation ยังมาไม่ทัน
+        if(!isLoaded || !currentLocation || !data){
+            return []
         }
 
         const radius = 3500; // 5 km in meters
@@ -110,13 +113,14 @@ function Map({ viewMode, adminLocation = null, data }) {
             console.log(`Distance from ${marker.title}:`, distance);
             return distance <= radius;
         });
-    }, [currentLocation, data]);
+    }, [currentLocation, data,isLoaded]);
+    
 
     useEffect(() => {
         setAllMarkers(markersWithinRadius);
     }, [markersWithinRadius]);
 
-    if (!isLoaded) return <div>Loading...</div>;
+    
     return (
         <div>
             <div>

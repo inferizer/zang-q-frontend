@@ -60,8 +60,10 @@ export default function VendorApplication() {
     hdl_application_submit();
   };
   return (
-    <>
-      <form key="1" className=" flex flex-col" onSubmit={hdl_submit}>
+    
+      <div className=" w-screen bg-gray-50 px-4">
+        <div className=" max-w-[800px] m-auto desktop:max-w-[1024px]  " >
+        <form key="1" className=" flex flex-col mt-8 desktop:mt-20" onSubmit={hdl_submit} >
         {inputTag.map((el) => {
           return (
             <div key={el.id} className=" flex  gap-4">
@@ -92,7 +94,7 @@ export default function VendorApplication() {
         </div>
         <div>
           {idCardFile ? <img src={URL.createObjectURL(idCardFile)} /> : null}
-          <label>shop picture file</label>
+          <label>ID card file</label>
           <input
             type="file"
             onChange={(e) => {
@@ -114,7 +116,7 @@ export default function VendorApplication() {
         })}
 
         <h1>google map api</h1>
-        {/* <Map viewMode={false} /> */}
+        <Map viewMode={false} />
         {authUser.role === "vendor" ? (
           <Map
             viewMode={true}
@@ -127,6 +129,10 @@ export default function VendorApplication() {
 
         <button>submit</button>
       </form>
-    </>
+
+        </div>
+      </div>
+     
+    
   );
 }
