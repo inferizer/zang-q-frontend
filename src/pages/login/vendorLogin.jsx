@@ -34,7 +34,7 @@ export default function VendorLogin() {
           );
         })}
 
-<button className="mt-3 shadow bg-primary-500 hover:bg-primary-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
+<button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
       </form>
     </section>
   );
