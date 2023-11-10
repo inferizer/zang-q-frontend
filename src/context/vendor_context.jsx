@@ -36,12 +36,15 @@ export default function VendorContextProvider({ children }) {
     formData.append("idCard", idCardFile);
     formData.append("shopLat", mapClicked?.lat || searchLocation?.lat);
     formData.append("shopLan", mapClicked?.lng || searchLocation?.lng);
-
     
-    axios.post('/vendor/category',checkInput)
+    
     axios
       .post("/vendor/application", formData)
-      .then()
+      .then(res=>{
+
+        axios.post(`/vendor/category/${res.data.result.id}`,checkInput)
+        alert(res.data.message)
+      })
       .catch((error) => {
         alert(error.response.data.message);
       });
@@ -52,7 +55,7 @@ export default function VendorContextProvider({ children }) {
     let existData = checkInput.findIndex( el => el.id === e.target.value)
     if(existData < 0){
       setCheckInput( prev=>{
-        let data = {typeId:e.target.value}
+        let data = {categoriesId:e.target.value}
           let oldArr = [...prev]
           let newArr = [...oldArr,data]
         return newArr
@@ -61,7 +64,7 @@ export default function VendorContextProvider({ children }) {
     if(existData >= 0){
       setCheckInput((prev) => {
         let oldArr = [...prev];
-        let newArr = oldArr.filter((el) => el.typeId != e.target.value);
+        let newArr = oldArr.filter((el) => el.categoriesId != e.target.value);
         return newArr;
       });
     }

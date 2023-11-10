@@ -10,6 +10,7 @@ import ghostIcon from '../../assets/image/ghost.png';
 
 
 function Map({ viewMode, adminLocation = null, data }) {
+    const {initLoading} = useAuth()
 
     const bangkokBounds = {
         north: 14.0000,
