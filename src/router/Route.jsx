@@ -24,22 +24,30 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
+import BookingPage from "../pages/user/BookingPage";
+import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
 import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
 import CategoryPage from "../pages/admin/categoryCRUD";
-// import BookingPage from "../pages/user/BookingPage";
-// import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
-import VendorHome from "../pages/vendor/VendorHome";
-// import CategoryPage from "../pages/admin/category";
+import UserBookPage from "../pages/user/UserBookPage";
+import QueueContextProvider from "../context/queue_context";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
+import VendorHome from "../pages/vendor/VendorHome";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [{ path: "", element: <HomePage /> }],
+    children: [
+      { path: "", element: <HomePage /> },
+      { path: "Category", element: <CategoryPage /> },
+      { path: "test/book", element: <UserBookPage /> },
+      { path: "user", element: <BookingPage /> },
+      { path: "shop", element: <VendorQueueManagement /> },
+
+    ],
   },
   {
     path: "/login",
@@ -52,6 +60,7 @@ const router = createBrowserRouter([
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
       { path: "/login/line", element: <LinePage /> },
+      { path: "/login/admin", element: <AdminLogin /> },
     ],
   },
   {
@@ -144,8 +153,17 @@ const router = createBrowserRouter([
         path: "/admin/management",
         element: <AdminManagementVendorForm />,
       },
-      { path: "/admin/login", element: <AdminLogin /> },
     ],
+  },
+
+  {
+    path: "/user",
+    element: (
+      <QueueContextProvider>
+        <Layout />
+      </QueueContextProvider>
+    ),
+    children: [{ path: "/user/book", element: <UserBookPage /> }],
   },
 ]);
 export default function Router() {
