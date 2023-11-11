@@ -51,7 +51,7 @@ export default function RestaurantDetails() {
             </label>
           </div>
           <label>
-          <span className="text-gray-700">ประเภทร้าน</span>
+            <span className="text-gray-700">ประเภทร้าน</span>
             <select>
               <option value="1">One</option>
               <option value="2">Two</option>
