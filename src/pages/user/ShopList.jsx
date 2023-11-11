@@ -19,9 +19,9 @@ export default function ShopList() {
   return (
     <div className=" w-screen bg-gray-50 px-4">
       <div className=" max-w-[800px] m-auto desktop:max-w-[1024px]">
-        <div className="mobile: flex flex-col items-center ">
-          <div className="mobile: self-stretch h-28 px-2.5 py-5 w-[350px] bg-gradient-to-b from-rose-50 to-rose-50 flex-col justify-center items-center gap-2.5 inline-flex m-auto">
-            <div className="mobile: justify-start items-center gap-[38px] inline-flex">
+        <div className="mobile:flex flex-col items-center ">
+          <div className="mobile:self-stretch h-28 px-2.5 py-5 w-[350px] bg-gradient-to-b from-rose-50 to-rose-50 flex-col justify-center items-center gap-2.5 inline-flex m-auto">
+            <div className="mobile:justify-start items-center gap-[38px] inline-flex">
               <img
                 className="mobile: w-[85px] h-[85px]"
                 src="https://via.placeholder.com/85x85"

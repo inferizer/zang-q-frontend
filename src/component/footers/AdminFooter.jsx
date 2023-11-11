@@ -13,19 +13,19 @@ export default function AdminFooter() {
           <div className="flex flex-col items-center">
             <RiCalendarTodoLine className="text-primaryWhite w-6 h-6" />
             <span className="text-primaryWhite text-md font-semibold">
-              ตรวจสอบ
+              home
             </span>
           </div>
           <div className="flex flex-col items-center">
             <RiRestaurantFill className="text-primaryWhite w-6 h-6" />
             <span className="text-primaryWhite text-md font-semibold">
-              ร้านในระบบ
+              near
             </span>
           </div>
           <div className="flex flex-col items-center">
             <RiUserFill className="text-primaryWhite w-6 h-6" />
             <span className="text-primaryWhite text-md font-semibold">
-              Logout
+             user
             </span>
           </div>
         </div>
