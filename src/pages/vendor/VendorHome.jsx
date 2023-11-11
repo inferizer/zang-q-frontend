@@ -42,7 +42,7 @@ export default function VendorHome() {
             />
             <div >
               {data?.map((product, index) => (
-                <div key={index} >
+                <div key={index} className=" gap-">
                   <VendorCard
                     username={product.user.username}
                     src={product.user.profileImage}
