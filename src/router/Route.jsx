@@ -56,6 +56,7 @@ const router = createBrowserRouter([
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
       { path: "/login/line", element: <LinePage /> },
+      { path: "/login/admin", element: <AdminLogin /> },
     ],
   },
   {
@@ -110,7 +111,6 @@ const router = createBrowserRouter([
         path: "/admin/management",
         element: <AdminManagementVendorForm />,
       },
-      { path: "/admin/login", element: <AdminLogin /> },
     ],
   },
   {
