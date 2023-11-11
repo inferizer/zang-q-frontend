@@ -24,7 +24,6 @@ export default function VendorHome() {
         .then(res => {
           setShop(res.data.result)
           // console.log(res.data.result)
-
         })
         .catch(err => {
           console.log(err)

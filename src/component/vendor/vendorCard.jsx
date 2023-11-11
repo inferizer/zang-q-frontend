@@ -1,6 +1,6 @@
 export default function VendorCard({ src, type, username, queueNumber }) {
     return (
-        <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex '>
+        <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex'>
             <div className='h-[133px] px-3.5 py-2.5 flex-col justify-start items-start gap-2.5 flex'>
                 <div className='w-[363px] px-6 py-3 bg-white rounded-xl justify-start items-center gap-[30px] inline-flex'>
                     <div className='w-[89px] h-[89px] bg-white rounded-xl border-2 justify-start items-start gap-2.5 flex'>

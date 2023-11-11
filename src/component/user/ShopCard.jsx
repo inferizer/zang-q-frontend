@@ -3,8 +3,8 @@ import {MdLocationOn, MdOutlineAccessTime} from "react-icons/md"
 export default function ShopCard({ storeName, location, q, img, id }) {
     return (
       <div>
-        <div className="mobile:  justify-center items-center flex">
-          <div className="mobile:  bg-white flex-col justify-start items-start inline-flex">
+        <div className="mobile:justify-center items-center flex">
+          <div className="mobile: bg-white flex-col justify-start items-start inline-flex">
             <div className="mobile:self-stretch  px-4 flex-col justify-start items-start inline-flex">
               <div className="mobile:self-stretch py-2.5 flex-col justify-start items-center gap-2.5 flex">
                 <div className="mobile:self-stretch  px-16 py-3  bg-white rounded-xl shadow justify-start items-center gap-[30px] inline-flex">
