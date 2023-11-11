@@ -8,14 +8,15 @@ export default function AuthContextProvider({ children }) {
     const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
 
     useEffect(() => {
-        const token = getAccessToken()
+
+        const token = getAccessToken();
         const initClient = () => {
-            gapi.client.init({  
+            gapi.client.init({
                 clientId: clientId,
-                scope: ""
-            })
-        }
-        gapi.load("client:auth2", initClient)
+                scope: "",
+            });
+        };
+        gapi.load("client:auth2", initClient);
 
         if (token) {
             axios.get('/auth').then(res => {
@@ -59,7 +60,7 @@ export default function AuthContextProvider({ children }) {
         await axios.post('/auth/register', input).then(res => {
             addAccessToken(res.data.accessToken)
             setAuthUser(res.data.user)
-        }).catch(console.log).finally( ()=>{
+        }).catch(console.log).finally(() => {
             setInitLoading(false)
         })
     }
