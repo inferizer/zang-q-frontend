@@ -33,9 +33,9 @@ export default function VendorHome() {
   }, [])
 
   return (
-    <section className='w-screen px-4'>
-      <header className='max-w-[800px] m-auto desktop:max-w-[1024px]'>
-        <div className='justify-center items-center h-screen flex'>
+    <section className='w-screen bg-gray-50 px-4'>
+      <div className='max-w-[800px] m-auto desktop:max-w-[1024px]'>
+        <div className='mobile:justify-center items-center h-screen flex'>
           <div >
             <ShopBanner
               name={shop && shop[0]?.shop?.shopName}
@@ -45,7 +45,7 @@ export default function VendorHome() {
                 <div key={index} >
                   <VendorCard
                     username={product.user.username}
-                    img={product.user.profileImage}
+                    src={product.user.profileImage}
                     queueNumber={product.queueNumber}
                     type={product.type}
                   />
@@ -55,7 +55,7 @@ export default function VendorHome() {
             </div>
           </div>
         </div>
-      </header>
+      </div>
     </section>
   )
 }
