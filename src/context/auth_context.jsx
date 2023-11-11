@@ -13,6 +13,7 @@ export default function AuthContextProvider({ children }) {
     "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com";
 
   useEffect(() => {
+    
     const token = getAccessToken();
     const initClient = () => {
       gapi.client.init({

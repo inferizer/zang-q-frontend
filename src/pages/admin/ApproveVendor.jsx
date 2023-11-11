@@ -36,10 +36,8 @@ export default function ApproveVendor(){
     </Modal>
     return(
         <div >
-            <h1 onClick={()=>{
-                hdl_approved_submit()
-            }}>test</h1>
-            {pendingVendor ? pendingVendor.map( el=>{
+            
+            {pendingVendor? pendingVendor.map( el=>{
                 return(
                     <div key={el.id} className="flex gap-32 bg-green-200 justify-center py-8">
                         <div>

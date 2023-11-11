@@ -1,6 +1,9 @@
 import { useAuth } from "../../hook/useAuthContext";
 import { GoogleLogin } from "react-google-login";
+import { useNavigate } from "react-router-dom";
 import Input from "../../component/input";
+
+// import Input from "../../component/input";
 
 import LineLoginButton from "../../component/LineLoginButton";
 import liff from "@line/liff";
@@ -8,7 +11,6 @@ import icongoogle from "../../assets/images/icongoogle.svg";
 import Joi from "joi";
 import { useState } from "react";
 import InputErrorMessage from "../../pages/register/InputErrorMessage";
-import { useNavigate } from "react-router-dom";
 
 export default function UserLogin() {
   const [error, setError] = useState({});
@@ -52,22 +54,22 @@ export default function UserLogin() {
   };
   return (
     <>
-      <section className='w-screen px-4'>
-        <header className='max-w-[800px] m-auto desktop:max-w-[1024px]'>
-          <div className='justify-center items-center h-screen flex'>
-            <form className='mobile' onSubmit={hdl_login_submit}>
-              <h1 className='mobile:mb-[25px]'>
-                <b className='mobile:text-[25px]'>Login</b>
+      <section className="w-screen px-4">
+        <header className="max-w-[800px] m-auto desktop:max-w-[1024px]">
+          <div className="justify-center items-center h-screen flex">
+            <form className="mobile:lg" onSubmit={hdl_login_submit}>
+              <h1 className="mobile:mb-[25px] text-center">
+                <b className="mobile:text-[25px]">Login</b>
               </h1>
               <div>
-                <div className='mobile:border-[#BDBDBD] flex flex-col gap-2 items-start'>
-                  <div className=' flex flex-col border border-gray-400 rounded-md mx-auto'>
+                <div className="mobile: border-[#BDBDBD] flex flex-col gap-2">
+                  <div className="mobile: flex flex-col gap-2 rounded-md mx-auto">
                     <Input
                       onChange={hdl_input}
-                      placeholder='Email or Mobile:'
-                      type='text'
-                      id='emailOrMobile'
-                      name='emailOrMobile'
+                      placeholder="Email or Mobile:"
+                      type="text"
+                      id="emailOrMobile"
+                      name="emailOrMobile"
                       value={input.emailOrMobile}
                       error={error.emailOrMobile}
                     />
@@ -77,9 +79,9 @@ export default function UserLogin() {
 
                     <Input
                       onChange={hdl_input}
-                      type='password'
-                      placeholder='password:'
-                      name='password'
+                      type="password"
+                      placeholder="password:"
+                      name="password"
                       required
                       value={input.password}
                       error={error.password}
@@ -91,15 +93,15 @@ export default function UserLogin() {
                 </div>
               </div>
               <button
-                className='mobile:mt-[25px] ml-[9px] w-[358px] flex justify-center 
+                className="mobile:mt-[25px] ml-[9px] w-[358px] flex justify-center 
                 items-center focus:outline-none text-white bg-primary-400 hover:bg-red-500
-                font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2'
+                font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
               >
                 Continue
               </button>
-              <div className='mobile:inline-flex items-center justify-center w-full'>
-                <hr className='mobile:w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-600' />
-                <span className='mobile:absolute px-3 font-medium text-gray-600-translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-500'>
+              <div className="mobile:inline-flex items-center justify-center w-full">
+                <hr className="mobile:w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-600" />
+                <span className="mobile:absolute px-3 font-medium text-gray-600-translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-500">
                   or
                 </span>
               </div>
@@ -108,27 +110,27 @@ export default function UserLogin() {
                 <LineLoginButton />
               </div>
 
-              <div className='mobile: pl-[10px]'>
+              <div className="mobile: pl-[10px]">
                 <div>
                   <GoogleLogin
                     clientId={clientId}
-                    buttonText='Continue with Google'
+                    buttonText="Continue with Google"
                     onSuccess={SuccessGoogle}
                     onFailure={failGoogle}
-                    cookiePolicy='single_host_origin'
+                    cookiePolicy="single_host_origin"
                     isSignedIn={false}
-                    type='button'
+                    type="button"
                     render={(renderProps) => (
                       <button
                         onClick={renderProps.onClick}
                         disabled={renderProps.disabled}
-                        className='mobile:w-[350px]  py-2.5 px-5  text-sm font-medium  text-gray60 focus:outline-none bg-primaryWhite rounded-lg border border-gray20 hover:bg-gray10 hover:text-blue60 focus:z-10 focus:ring-4 focus:ring-gray20 dark:focus:ring-gray60 dark:bg-gray60 dark:text-gray40 dark:border-gray50 dark:hover:text-primaryWhite dark:hover:bg-gray60'
+                        className="mobile:w-[350px]  py-2.5 px-5  text-sm font-medium  text-gray60 focus:outline-none bg-primaryWhite rounded-lg border border-gray20 hover:bg-gray10 hover:text-blue60 focus:z-10 focus:ring-4 focus:ring-gray20 dark:focus:ring-gray60 dark:bg-gray60 dark:text-gray40 dark:border-gray50 dark:hover:text-primaryWhite dark:hover:bg-gray60"
                       >
-                        <div className='mobile: pr-[73px]'>
+                        <div className="mobile: pr-[73px]">
                           <img
-                            className='mobile: inline w-[45px] h-[45px] mr-[50px]'
+                            className="mobile: inline w-[45px] h-[45px] mr-[50px]"
                             src={icongoogle}
-                            alt=''
+                            alt=""
                           />
                           Continue with Google
                         </div>
@@ -137,14 +139,14 @@ export default function UserLogin() {
                   />
                 </div>
 
-                <br className='mobile' />
-                <br className='mobile' />
+                <br className="mobile" />
+                <br className="mobile" />
               </div>
-              <div className='mobile:text-center'>
-                <span className='mobile'>Don't have an account?</span>
-                <span className='mobile:ml-4'>
+              <div className="mobile:text-center">
+                <span className="mobile">Don't have an account?</span>
+                <span className="mobile:ml-4">
                   <button
-                    className='mobile'
+                    className="mobile"
                     onClick={() => {
                       navaigate("/register/user");
                     }}

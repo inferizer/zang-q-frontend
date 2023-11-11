@@ -31,6 +31,10 @@ import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
+import CategoryPage from "../pages/admin/categoryCRUD";
+import RedirectIfNotUser from "../redirect/redirectIfNotUser";
+import UserContextProvider from "../context/user_context";
+import ShopList from "../pages/user/ShopList";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
@@ -39,12 +43,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [
-      { path: "", element: <HomePage /> },
-      { path: "test/book", element: <UserBookPage /> },
-      { path: "user", element: <BookingPage /> },
-      { path: "shop", element: <VendorQueueManagement /> },
-    ],
+    children: [{ path: "", element: <HomePage /> }],
   },
   {
     path: "/login",
@@ -69,36 +68,6 @@ const router = createBrowserRouter([
     children: [
       { path: "/register/user", element: <UserRegister /> },
       { path: "/register/vendor", element: <VendorRegister /> },
-    ],
-  },
-  {
-    path: "/test",
-    element: <Layout />,
-    children: [
-      { path: "/test/file/iduser", element: <UploadIdUser /> },
-      { path: "/test/file/iduser/idpeople", element: <UploadIdPeople /> },
-      { path: "/test/file/iduser/idpeople/addstore", element: <AddStore /> },
-      {
-        path: "/test/file/iduser/idpeople/addstore/mapstore",
-        element: <MapStore />,
-      },
-
-      {
-        path: "/test/vendor/register",
-        element: <RegisterVender />,
-      },
-      {
-        path: "/test/user/homepage",
-        element: <HomePage />,
-      },
-      {
-        path: "/test/admin/restaurant-datails",
-        element: <RestaurantDetailsForm />,
-      },
-      {
-        path: "/test/user/calender",
-        element: <Calender />,
-      },
     ],
   },
   {
@@ -136,6 +105,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/admin/vendor", element: <VendorManagement /> },
       { path: "/admin/pending", element: <ApproveVendor /> },
+      { path: "/admin/category", element: <CategoryPage /> },
       {
         path: "/admin/management",
         element: <AdminManagementVendorForm />,
@@ -143,15 +113,21 @@ const router = createBrowserRouter([
       { path: "/admin/login", element: <AdminLogin /> },
     ],
   },
-
   {
     path: "/user",
     element: (
-      <QueueContextProvider>
-        <Layout />
-      </QueueContextProvider>
+      <RedirectIfNotUser>
+        <QueueContextProvider>
+          <UserContextProvider>
+            <Layout />
+          </UserContextProvider>
+        </QueueContextProvider>
+      </RedirectIfNotUser>
     ),
-    children: [{ path: "/user/book", element: <UserBookPage /> }],
+    children: [
+      { path: "/user/shopList", element: <ShopList /> },
+      { path: "/user/book", element: <UserBookPage /> },
+    ],
   },
 ]);
 export default function Router() {
