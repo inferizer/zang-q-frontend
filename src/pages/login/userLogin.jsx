@@ -1,6 +1,9 @@
 import { useAuth } from "../../hook/useAuthContext";
-import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "react-google-login"
+import { useNavigate } from "react-router-dom";
 import Input from "../../component/input";
+
+// import Input from "../../component/input";
 
 import LineLoginButton from "../../component/LineLoginButton";
 import liff from "@line/liff";
@@ -8,7 +11,7 @@ import icongoogle from "../../assets/images/icongoogle.svg";
 import Joi from "joi";
 import { useState } from "react";
 import InputErrorMessage from "../../pages/register/InputErrorMessage";
-import { useNavigate } from "react-router-dom";
+
 
 export default function UserLogin() {
   const [error, setError] = useState({});
