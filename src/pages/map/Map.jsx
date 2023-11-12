@@ -10,7 +10,7 @@ import ghostIcon from '../../assets/image/ghost.png';
 
 
 function Map({ viewMode, adminLocation = null, data }) {
-    const {initLoading} = useAuth()
+    const { initLoading } = useAuth()
 
     const bangkokBounds = {
         north: 14.0000,
@@ -136,8 +136,10 @@ function Map({ viewMode, adminLocation = null, data }) {
                     center={searchLocation || center}
                     mapContainerStyle={{
                         display: 'flex',
+                        justifyContent: 'center',
                         height: "500px",
-                        width: "800px"
+                        width: "100%",
+                        position: "relative",
                     }}
                     zoom={14}
                     options={{
@@ -204,10 +206,9 @@ function Map({ viewMode, adminLocation = null, data }) {
                             )}
                         </div>
                     ) : (
-                        <div className='w-full'>
+                        <div className='absolute z-50 top-4 left-4 right-4'>
                             <PlacesAutoComplete
                                 handleSearchLocation={handleSearchLocation}
-                                className="absolute top-2 left-2 z-10 w-[300px] p-2 bg-white rounded shadow-md"
                             />
                             {/* ถามว่า searchLocation กับ mapClicked มีไหม ถ้ามีตัวในตัวหนึ่ง ให้ set position MarkerF */}
                             {(searchLocation || mapClicked) && <MarkerF position={mapClicked || searchLocation} />}
@@ -222,17 +223,6 @@ function Map({ viewMode, adminLocation = null, data }) {
                     className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
                     track location
                 </button>
-
-                <p id="demo">
-                    {currentLocation && (
-                        <>
-                            Latitude: {currentLocation.lat}
-                            <br />
-                            Longitude: {currentLocation.lng}
-                        </>
-                    )}
-                    {error && <div>{error}</div>}
-                </p>
             </div>
         </div>
     )
