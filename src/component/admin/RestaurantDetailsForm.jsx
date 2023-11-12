@@ -1,107 +1,60 @@
-export default function RestaurantDetails() {
+import React from "react";
+import { Link } from "react-router-dom";
+import TimePicker from "../TimePicker";
+
+export default function RestaurantDetails({
+  name,
+  shopMobile,
+  ShopsCategories,
+  picture,
+  address,
+  openingTimes,
+  closingTimes,
+}) {
   return (
-    <div className=" mobile: flex flex-col justify-center min-h-screen overflow-hidden ">
-      <div className=" mobile: w-full p-6 m-auto bg-white ring-2 ring-primary-500 lg:max-w-xl">
-        <h1 className=" mobile: text-3xl font-semibold text-center text-gray-500 underline uppercase ">
-          Restaurant Detail
-        </h1>
-        <form className=" mobile: mt-6 flex items-center justify-center">
-          <div className=" mobile: mb-2 flex items-center justify-center">
-            <label>
-              <span className="text-gray-700">ชื่อร้าน</span>
-              <input
-                type="text"
-                name="name"
-                className=" mobile:
-                w-full
-                block px-16 py-2 mt-2
-                border-gray-300
-                rounded-md
-                shadow-sm
-                focus:border-indigo-300
-                focus:ring
-                focus:ring-indigo-200
-                focus:ring-opacity-50
-              "
-                placeholder="ชื่อร้าน..."
-              />
-            </label>
+    <>
+      <div className=" mobile mt-20 bg-gray-200">
+        <div className=" mobile container mx-auto ">
+          <div className="mobile items-center justify-center mx-auto">
+            <section className="bg-white rounded-lg shadow-md">
+              <div className="mobile flex flex-wrap">
+                <div className=" mobile w-full mx-auto flex flex-col">
+                  <div className="mobile items-center justify-center">
+                    <img src={picture} alt={name} />
+                  </div>
+                </div>
+                <div className="mobile w-full flex flex-col p-6 items-center justify-center">
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                    {name}
+                  </h2>
+                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                    {shopMobile}
+                  </h2>
+                  <p className="text-md font-semibold text-gray-800 mb-2 leading-loose">
+                    {ShopsCategories.join(", ")}
+                  </p>
+                  <p className="text-gray-600 text-md mb-2 leading-loose">
+                    {address}
+                  </p>
+                  <div className="mt-4 text-gray-600">
+                    <strong>Opening Times:</strong>
+                    <TimePicker selectedTime={openingTimes} />
+                  </div>
+                  <div className="mt-4 text-gray-600">
+                    <strong>Closing Times:</strong>
+                    <TimePicker selectedTime={closingTimes} />
+                  </div>
+                  <div>
+                    <button className="mobile: mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded ">
+                      confirm edited
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-          <div className="mb-2">
-            <label>
-              <span className="text-gray-700">เบอร์โทรร้าน</span>
-              <input
-                name="mobile"
-                type="text"
-                className=" mobile:
-                block
-                w-full
-                mt-2 px-16 py-2
-                border-gray-300
-                rounded-md
-                shadow-sm
-                focus:border-indigo-300
-                focus:ring
-                focus:ring-indigo-200
-                focus:ring-opacity-50
-              "
-                placeholder="เบอร์โทร..."
-                required
-              />
-            </label>
-          </div>
-          <label>
-            <span className="text-gray-700">ประเภทร้าน</span>
-            <select>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </label>
-
-          <div className="mb-2">
-            <label>
-              <span class="text-gray-700">Message</span>
-              <textarea
-                name="message"
-                className="
-                block
-                w-full
-                mt-2 px-16 py-8
-                border-gray-300
-                rounded-md
-                shadow-sm
-                focus:border-indigo-300
-                focus:ring
-                focus:ring-indigo-200
-                focus:ring-opacity-50
-              "
-                rows="5"
-              ></textarea>
-            </label>
-          </div>
-
-          <div class="mb-6">
-            <button
-              type="submit"
-              className="
-                h-10
-                px-5
-                text-indigo-100
-                bg-indigo-700
-                rounded-lg
-                transition-colors
-                duration-150
-                focus:shadow-outline
-                hover:bg-indigo-800
-              "
-            >
-              Confirm edited
-            </button>
-          </div>
-          <div></div>
-        </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

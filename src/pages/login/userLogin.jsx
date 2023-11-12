@@ -9,6 +9,7 @@ import LineLoginButton from "../../component/LineLoginButton";
 import liff from "@line/liff";
 import icongoogle from "../../assets/images/icongoogle.svg";
 import Joi from "joi";
+import { toast } from "react-toastify";
 import { useState } from "react";
 import InputErrorMessage from "../../pages/register/InputErrorMessage";
 
@@ -27,6 +28,7 @@ export default function UserLogin() {
   const validateLogin = (input) => {
     const { error } = UserLoginSchema.validate(input, { abortEarly: false });
     console.log(error);
+    toast.error("username or password was wrong!", error);
     if (error) {
       const result = error.details.reduce((acc, el) => {
         const { message, path } = el;
@@ -50,6 +52,7 @@ export default function UserLogin() {
     setError({});
     await hdl_user_login_submit().catch((err) => {
       console.log(err);
+      toast.error("username or password was wrong!", error);
     });
   };
   return (
