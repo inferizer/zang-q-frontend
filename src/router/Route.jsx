@@ -49,7 +49,6 @@ const router = createBrowserRouter([
       { path: "test/book", element: <UserBookPage /> },
       { path: "user", element: <BookingPage /> },
       { path: "shop", element: <VendorQueueManagement /> },
-
     ],
   },
   {
@@ -99,7 +98,7 @@ const router = createBrowserRouter([
         path: "/vendor/VendorApplicationEnd",
         element: <VendorApplicationEnd />,
       },
-      {path: "/vendor/home",element: <VendorHome/>}
+      { path: "/vendor/home", element: <VendorHome /> },
     ],
   },
   {
