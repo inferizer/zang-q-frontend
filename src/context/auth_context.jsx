@@ -64,7 +64,9 @@ export default function AuthContextProvider({ children }) {
         addAccessToken(res.data.accessToken);
         setAuthUser(res.data.user);
       })
-      .catch(console.log)
+      .catch(err=>{
+        throw(err)
+      })
       .finally(() => {
         setInitLoading(false);
       });
