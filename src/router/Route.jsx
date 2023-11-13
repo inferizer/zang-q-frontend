@@ -87,9 +87,11 @@ const router = createBrowserRouter([
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
-        <VendorContextProvider>
-          <Layout />
-        </VendorContextProvider>
+        <QueueContextProvider>
+          <VendorContextProvider>
+            <Layout />
+          </VendorContextProvider>
+        </QueueContextProvider>
       </RedirectIfNotVendor>
     ),
     children: [

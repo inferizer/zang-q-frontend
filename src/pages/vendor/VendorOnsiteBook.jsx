@@ -49,6 +49,7 @@ export default function VendorOnsiteBook() {
                 onClick={() => {
                   setAddQueue(true);
                 }}
+                setAddQueue={setAddQueue}
                 addQueue={addQueue}
               />
               <div className='max-w-[363px] mx-auto flex justify-between px-10'>
