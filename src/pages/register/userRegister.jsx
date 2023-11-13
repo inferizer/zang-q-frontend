@@ -3,11 +3,11 @@ import { useAuth } from "../../hook/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { useState } from "react";
-import LineLoginButtton from '../../component/LineLoginButton'
+import LineLoginButtton from "../../component/LineLoginButton";
 import liff from "@line/liff";
-import icongoogle from '../../assets/images/icongoogle.svg'
+import icongoogle from "../../assets/images/icongoogle.svg";
 import InputErrorMessage from "./InputErrorMessage";
-import { GoogleLogin } from "react-google-login"
+import { GoogleLogin } from "react-google-login";
 
 export default function UserRegister() {
   const registerSchema = Joi.object({
@@ -36,13 +36,19 @@ export default function UserRegister() {
     }
   };
 
-  liff.init({ liffId: '2001390459-y9GRwgp7' })
-  const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
+  liff.init({ liffId: "2001390459-y9GRwgp7" });
+  const clientId =
+    "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com";
 
   const [error, setError] = useState({});
-  const { hdl_input, hdl_user_register_submit, input, SuccessGoogle, failGoogle } = useAuth();
+  const {
+    hdl_input,
+    hdl_user_register_submit,
+    input,
+    SuccessGoogle,
+    failGoogle,
+  } = useAuth();
   const navigate = useNavigate();
-
 
   const hdl_submit = async (e) => {
     e.preventDefault();
@@ -66,13 +72,13 @@ export default function UserRegister() {
       <header className="mobile">
         <div className="mobile:justify-center items-center h-screen flex flex-col">
           <form className="mobile" onSubmit={hdl_submit}>
-            <h1 className="mobile:mb-[25px]">
-              <b className="mobile:text-[25px]">Signup</b>
+            <h1 className="mobile:mb-[25px] text-center">
+              <b className="mobile:text-[25px]">Sign up</b>
             </h1>
-            <div className=" flex flex-col border border-gray-400 rounded-md mx-auto">
+            <div className=" flex flex-col rounded-md mx-auto gap-2">
               <Input
                 onChange={hdl_input}
-                placeholder="username:"
+                placeholder="Username:"
                 type="text"
                 id="username"
                 name="username"
@@ -82,7 +88,7 @@ export default function UserRegister() {
               <Input
                 onChange={hdl_input}
                 type="password"
-                placeholder="password:"
+                placeholder="Password:"
                 name="password"
                 required
                 error={error.password}
@@ -91,7 +97,7 @@ export default function UserRegister() {
               <Input
                 onChange={hdl_input}
                 type="password"
-                placeholder="confirmPassword"
+                placeholder="Confirm Password:"
                 name="confirmPassword"
                 required
                 error={error.confirmPassword}
@@ -101,7 +107,7 @@ export default function UserRegister() {
               )}
               <Input
                 onChange={hdl_input}
-                placeholder="emailOrMobile:"
+                placeholder="Email Or Mobile number:"
                 type="text"
                 id="emailOrMobile"
                 name="emailOrMobile"
@@ -130,7 +136,7 @@ export default function UserRegister() {
             <div>
               <LineLoginButtton />
             </div>
-            <div className="mobile: pl-[10px]" >
+            <div className="mobile: pl-[10px]">
               <div>
                 <GoogleLogin
                   clientId={clientId}
@@ -140,9 +146,12 @@ export default function UserRegister() {
                   cookiePolicy="single_host_origin"
                   isSignedIn={false}
                   type="button"
-                  render={renderProps => (
-                    <button onClick={renderProps.onClick} disabled={renderProps.disabled}
-                      className="mobile: w-[350px]  py-2.5 px-5  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                  render={(renderProps) => (
+                    <button
+                      onClick={renderProps.onClick}
+                      disabled={renderProps.disabled}
+                      className="mobile: w-[350px]  py-2.5 px-5  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    >
                       <div className="mobile: pr-[73px]">
                         <img
                           className="mobile: inline w-[45px] h-[45px] mr-[50px]"
@@ -150,7 +159,8 @@ export default function UserRegister() {
                           alt=""
                         />
                         Continue with Google
-                      </div></button>
+                      </div>
+                    </button>
                   )}
                 />
               </div>
@@ -161,8 +171,14 @@ export default function UserRegister() {
             <div className="mobile: text-center">
               <span className="mobile">Don't have an account?</span>
               <span className="mobile: ml-4">
-                <button className="mobile" onClick={() => { navigate('/login/user') }} >Sign in</button>
-
+                <button
+                  className="mobile"
+                  onClick={() => {
+                    navigate("/login/user");
+                  }}
+                >
+                  Sign in
+                </button>
               </span>
             </div>
           
@@ -172,4 +188,3 @@ export default function UserRegister() {
     </div>
   );
 }
-

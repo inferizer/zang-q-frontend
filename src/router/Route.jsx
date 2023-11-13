@@ -36,7 +36,7 @@ import UserContextProvider from "../context/user_context";
 import ShopList from "../pages/user/ShopList";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
-import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
+import AdminManagement from "../pages/admin/AdminManagement";
 import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
@@ -122,7 +122,7 @@ const router = createBrowserRouter([
       { path: "/admin/category", element: <CategoryPage /> },
       {
         path: "/admin/management",
-        element: <AdminManagementVendorForm />,
+        element: <AdminManagement />,
       },
     ],
   },
