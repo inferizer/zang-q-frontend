@@ -15,7 +15,6 @@ export default function ApprovedModal({ children, open, onClose }) {
       toast.error("Error approving application:", error);
     }
   };
-
   return (
     <>
       {open && (

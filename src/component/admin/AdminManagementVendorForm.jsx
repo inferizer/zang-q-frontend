@@ -50,22 +50,22 @@ export default function AdminManagementVendorForm(
               </div>
               <div className="mobile: flex-col grid grid-cols-6 gap-8 justify-center shadow-lg py-6 px-6">
                 <div className="mobile: col-start-2 col-span-4 bg-primaryWhite shadow-lg shadow-gray20 rounded-lg py-2 px-6">
-                  <div className="mobile: text-primaryRed font-semibold py-2">
+                  <div className="mobile: text-gray-700 font-semibold py-2">
                     {vendor.shopName}
                   </div>
                   <div className="mobile: gap-2 flex justify-start">
-                    <RiMapPinFill className=" mobile: text-gray60 w-4 h-4" />
-                    <div className="mobile: font-bold text-xs text-gray50">
+                    <RiMapPinFill className=" mobile: text-primary-600 w-4 h-4" />
+                    <div className="mobile: font-bold text-xs text-gray-700">
                       {vendor.address}
                     </div>
                   </div>
                   <div className="mobile: flex justify-end gap-6 py-2 px-6">
                     <Link to="admin/restaurant/detail">
-                      <RiEyeFill className="mobile: text-gray60 w-4 h-4" />
+                      <RiEyeFill className="mobile: text-primary-600 w-4 h-4" />
                     </Link>
 
                     <RiCloseCircleFill
-                      className="mobile:text-greenLight w-4 h-4 cursor-pointer"
+                      className="mobile: text-primary-600 w-4 h-4 cursor-pointer"
                       onClick={() => {
                         hdl_reject_application();
                         handleRejectModalOpen();
@@ -73,7 +73,7 @@ export default function AdminManagementVendorForm(
                     ></RiCloseCircleFill>
 
                     <RiCheckboxCircleFill
-                      className="mobile: text-greenLight w-4 h-4 cursor-pointer"
+                      className="mobile: text-primary-600 w-4 h-4 cursor-pointer"
                       onClick={() => {
                         hdl_approved_submit();
                         handleApproveModalOpen();
