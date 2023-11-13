@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import ShopBanner from "../../component/user-vendor_booking/ShopBanner";
+import VendorShopBanner from "../../component/user-vendor_booking/VendorShopBanner";
 import axios from "../../config/axios";
 import React, { useState } from "react";
 import VendorBookingCard from "../../component/vendor/vendorBookingCard";
@@ -44,7 +44,7 @@ export default function VendorOnsiteBook() {
         <section className='w-screen bg-gray-50 px-4'>
           <div className='max-w-[800px] mx-auto desktop:max-w-[1024px]'>
             <div className='mobile:justify-center items-center text-center '>
-              <ShopBanner
+              <VendorShopBanner
                 name={shop && shop[0]?.shopName}
                 onClick={() => {
                   setAddQueue(true);
