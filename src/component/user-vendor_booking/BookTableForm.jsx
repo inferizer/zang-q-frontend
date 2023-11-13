@@ -29,7 +29,6 @@ export default function UserBookTableForm() {
     socket: "",
     type: "one",
   });
-  console.log(ticketInfo);
 
   useEffect(() => {
     socket.connect();

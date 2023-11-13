@@ -39,6 +39,7 @@ import QueueContextProvider from "../context/queue_context";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
 import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
+import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +101,7 @@ const router = createBrowserRouter([
         element: <VendorApplicationEnd />,
       },
       { path: "/vendor/home", element: <VendorHome /> },
+      { path: "/vendor/book", element: <VendorOnsiteBook /> },
     ],
   },
   {
