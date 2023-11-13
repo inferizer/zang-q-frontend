@@ -1,5 +1,7 @@
-export default function ShopBanner({src, name ,markMap}) {
-  
+import AddQueueButton from "../buttons/AddQueueButton";
+
+export default function ShopBanner({ src, name, onClick,AddQueue,setAddQueue, markMap }) {
+
   return (
     <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex'>
       <div className='h-[133px] px-3.5 py-2.5 flex-col justify-start items-start gap-2.5 flex'>
@@ -19,10 +21,18 @@ export default function ShopBanner({src, name ,markMap}) {
               </div>
             </div>
             <div className='self-stretch justify-start items-center gap-2 inline-flex'>
-              <div className='w-[21px] h-5 px-[5px] py-0.5 justify-start items-start gap-2.5 flex'></div>
               {/* google map marker */}
               <div className="grow shrink basis-0 text-neutral-400 text-xs font-bold font-['Nunito Sans']">
-                {markMap}
+                <div>
+                  {markMap}ss
+                </div>
+                <div>
+                  {AddQueue? null : <div>
+                    <AddQueueButton text="ปิดรับคิว" />
+                    <AddQueueButton text="เพิ่มคิว" onClick={onClick} />
+                    <button onClick={onClick}>test</button>
+                  </div>}
+                </div>
               </div>
             </div>
           </div>

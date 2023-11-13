@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-  h1, h2, h3, h4, h5, h6, p, span, button,ul, li {
+  h1, h2, h3, h4, h5, h6, p, span, button,ul, li, label {
     font-family: 'IBM Plex Sans Thai', sans-serif;
   }
 }
@@ -12,4 +12,15 @@
 }
 .container {
     @apply max-w-[800px] mx-auto desktop:max-w-[1024px];
+}
+
+.map-container {
+  /* width: 60vw; */
+  height: 60vh;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+  z-index: 1 !important;
 }

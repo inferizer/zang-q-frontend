@@ -5,6 +5,7 @@ export const VendorContext = createContext();
 export default function VendorContextProvider({ children }) {
   const [shopPictureFile, setShopPictureFile] = useState(null);
   const [idCardFile, setIdCardFile] = useState(null);
+  const [juristicFile,setJuristicFile] = useState(null);
   const [appInput, setAppInput] = useState({});
   const [allCategory, setAllCtegory] = useState([]);
   // map
@@ -100,6 +101,8 @@ export default function VendorContextProvider({ children }) {
         setIdCardFile,
         shopPictureFile,
         idCardFile,
+        juristicFile
+        ,setJuristicFile,
         searchLocation,
         setSearchLocation,
         mapClicked,

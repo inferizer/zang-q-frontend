@@ -1,5 +1,6 @@
 // npm i use-places-autocomplete
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import Input from '../../component/input';
 
 function PlacesAutoComplete({ handleSearchLocation }) {
 
@@ -27,17 +28,17 @@ function PlacesAutoComplete({ handleSearchLocation }) {
     if (!ready) return null;
 
     return (
-        <div className='relative top-3 w-80' >
-            <input
-                className='z-10 w-full p-2 bg-white rounded shadow-md border-2 border-cyan-500'
+        <div >
+            <Input
                 value={value}
                 disabled={!ready}
                 onChange={(e) => setValue(e.target.value)}
             />
-            <div className='bg-white'>
+            <div className='absolute bg-white w-full mt-1 shadow-lg'>
                 {status === 'OK' && data.map(({ place_id, description }) => {
                     return (
-                        <div key={place_id} className='item'
+                        <div key={place_id}
+                            className=' overflow-auto'
                             onClick={() => handleSelectLocation(description)}
                         >
                             {description}

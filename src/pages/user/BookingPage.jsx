@@ -30,7 +30,7 @@ export default function BookingPage() {
     socket.emit("booking", {
       userId: authUser.id,
       name: authUser.username,
-      shopName: shopData.id + shopData.name,
+      shopId: shopData.id,
       socket: socket.id,
     });
   };
@@ -41,7 +41,7 @@ export default function BookingPage() {
     //axios.post("/user/cancel") DB_reservations delete
     socket.emit("cancel", {
       userId: authUser.id,
-      shopName: shopData.id + shopData.name,
+      shopId: shopData.id,
       socket: socket.id,
     });
   };
