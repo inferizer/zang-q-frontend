@@ -1,6 +1,6 @@
 import { useQueue } from "../../hook/useQueue";
 import TableIconCard from "./TableIconCard";
-export default function TableType({ onClick }) {
+export default function TableTypeVendor({ onClick }) {
   const { setSelectChoice, setMaxSeat, seat, setSeat, setMinSeat } = useQueue();
 
   const hdlTableTypeClick = (tableType, selectChoice, maxSeat, minSeat) => {

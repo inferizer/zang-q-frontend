@@ -1,53 +1,59 @@
 import { useEffect, useState } from "react";
 import socket from "../../utils/socket";
+import { useQueue } from "../../hook/useQueue";
 export default function VendorQueueManagement() {
+  // const { currentQueue, setCurrentQueue } = useQueue();
   const [bookingList, setBookingList] = useState([]);
-  const [currentQueue, setCurrentQueue] = useState(1);
+  const [queue, setQueue] = useState(1);
   const [onsiteQueue, setOnsiteQueue] = useState({});
-  console.log(bookingList, currentQueue);
-
+  const [onsiteInfo, setOnsiteInfo] = useState({
+    data: "onsite booking",
+    // onsite input
+    name: "Mary",
+    // fecth shop data
+    shopId: 1,
+    socket: "",
+    type: "one",
+  });
+  // console.log(onsiteInfo);
+  // console.log(bookingList);
   useEffect(() => {
     socket.connect();
+    socket.on("connect", () => {
+      setOnsiteInfo({ ...onsiteInfo, socket: socket.id });
+    });
   }, []);
-  // const socket = io("http://localhost:3000");
-  // (mocking) fetch shop information when login
-  const shopData = {
-    id: 1,
-    name: "Aroi",
-  };
-
-  // (mocking) input onsite user information
-  const userData = {
-    id: 4,
-    name: "Mary",
-    mobile: "0815561233",
-  };
+  //! fetch shop data
 
   // open shop , axios update DB_shop isOpen: true
   const openShop = () => {
     // axios.patch("/vendor/open",id)
-    socket.emit("join_room", shopData.id + shopData.name);
+    socket.emit("join_room", "1");
     // socket.emit("create_room", shopData.id + shopData.name);
   };
 
+  // const bookingForCustomer = () => {
+  //   socket.emit("booking_for_customer", {
+  //     name: userData.name,
+  //     shopId: shopData.id,
+  //     type: "two",
+  //   });
+  // };
+
   const bookingForCustomer = () => {
-    socket.emit("booking_for_customer", {
-      socket: socket.id,
-      userId: userData.id,
-      name: userData.name,
-      shopName: shopData.id + shopData.name,
-      mobile: userData.mobile,
-    });
+    socket.emit("booking_for_customer", onsiteInfo, 1);
   };
 
   useEffect(() => {
     socket.on("check_queue", (bookingInfo) => {
-      setCurrentQueue((prevQ) => prevQ + 1);
-      bookingInfo.queueNumber = currentQueue;
-      socket.emit("get_queue", bookingInfo);
+      console.log(bookingInfo);
+      console.log("check", bookingInfo);
+      setQueue((prevQ) => prevQ + 1);
+      bookingInfo.queueNumber = queue;
+      socket.emit("confirm_booking", bookingInfo);
 
       setBookingList((prev) => {
-        bookingInfo.queueNumber = currentQueue;
+        bookingInfo.queueNumber = queue;
 
         return [...prev, bookingInfo];
       });
@@ -55,7 +61,7 @@ export default function VendorQueueManagement() {
     return () => {
       socket.off("check_queue");
     };
-  }, [currentQueue]);
+  }, [queue]);
 
   useEffect(() => {
     //>>>>>>>>>>>>> EDIT
@@ -66,21 +72,14 @@ export default function VendorQueueManagement() {
       // setBookingList(...bookingList, { data });
     });
 
-    //!! edit logic with input form
-    socket.on("onsite_queue", (onsiteData) => {
-      setCurrentQueue((prevQ) => prevQ + 1);
-      setBookingList((prev) => [...prev, onsiteData]);
-    });
+    // //!! edit logic with input form
+    // socket.on("onsite_queue", (onsiteData) => {
+    //   console.log(onsiteData);
+    //   setQueue((prevQ) => prevQ + 1);
+    //   setBookingList((prev) => [...prev, onsiteData]);
+    // });
 
     socket.on("cancel_queue", (cancelInfo) => {
-      // setCurrentQueue((prevQ) => {
-      //   if (prevQ === 0) {
-      //     return prevQ;
-      //   } else {
-      //     return prevQ - 1;
-      //   }
-      // });
-
       setBookingList((prevList) => {
         const newBookingList = prevList.filter(
           (el) => el.userId !== cancelInfo.userId
@@ -105,6 +104,8 @@ export default function VendorQueueManagement() {
         Open Shop
       </button>
 
+      {/* <input name="name" type='text' placeholder='Name' onChange={}/>
+      <input name="seat"type='text' placeholder='Seat' onChange={}/> */}
       <button onClick={bookingForCustomer} className='border  p-2 '>
         Booking for customer
       </button>
@@ -112,11 +113,9 @@ export default function VendorQueueManagement() {
       <p className='text-2xl p-4'>Queue List</p>
       {bookingList.length > 0
         ? bookingList.map((el, index) => (
-            <li key={index}>{`Name: ${el.name} || Queue:${
-              el.queueNumber
-            } || Date:${el.date} || Time:${el.time} || Mobile:${
-              el.mobile || "don't have phone number"
-            }`}</li>
+            <li
+              key={index}
+            >{`Name: ${el.type} || Queue: ${el.queueNumber} `}</li>
           ))
         : null}
     </div>
