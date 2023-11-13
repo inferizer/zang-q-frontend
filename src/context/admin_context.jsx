@@ -71,6 +71,7 @@ export default function AdminContextProvider({ children }) {
       setInput({});
     });
   };
+
   return (
     <AdminContext.Provider
       value={{
