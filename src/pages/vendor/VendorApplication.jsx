@@ -162,8 +162,8 @@ export default function VendorApplication() {
 				{allCategory.map((el) => {
 					return (
 						<div>
-							<label className="font-medium">{el.name}</label>
 							<input type="checkbox" value={el.id} onChange={hdl_checkBox} />
+							<label className="font-medium">{el.name}</label>
 						</div>
 					);
 				})}

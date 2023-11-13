@@ -34,6 +34,7 @@ export default function AuthContextProvider({ children }) {
     const [initLoading, setInitLoading] = useState(true)
     const [authUser, setAuthUser] = useState(null)
     const [input, SetInput] = useState({})
+    const [userDetailOpen,setUserDetailOpen] = useState(false)
     const hdl_google_login = (profileObj) => {
         const data = {}
         data.username = profileObj.givenName
@@ -125,6 +126,11 @@ export default function AuthContextProvider({ children }) {
         })
     }
 
+    const hdl_user_edit = (id) =>{
+        axios.post(`/auth/edit/${id}`)
+
+    }
+
     return (<AuthContext.Provider value={{
         hdl_user_register_submit,
         hdl_user_login_submit,
@@ -140,7 +146,10 @@ export default function AuthContextProvider({ children }) {
         SuccessGoogle,
         failGoogle,
         setAuthUser,
-        hdl_admin_login_submit
+        hdl_admin_login_submit,
+        hdl_user_edit,
+        userDetailOpen,
+        setUserDetailOpen,
     }}>
         {children}
     </AuthContext.Provider>)
