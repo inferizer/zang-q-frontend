@@ -3,7 +3,7 @@ import ShopBanner from "../../component/user-vendor_booking/ShopBanner";
 import axios from "../../config/axios";
 import React, { useState } from "react";
 import VendorBookingCard from "../../component/vendor/vendorBookingCard";
-import UserBookingPage from "../user/UserBookPage";
+import VendorBookingPage from "./VendorBookPage";
 
 export default function VendorOnsiteBook() {
   const [loading, setLoading] = useState(true)
@@ -36,7 +36,7 @@ export default function VendorOnsiteBook() {
   }, [])
   return (
     <>
-    {addQueue? <UserBookingPage/>:<section className='w-screen bg-gray-50 px-4'>
+    {addQueue? <VendorBookingPage/>:<section className='w-screen bg-gray-50 px-4'>
       <div className='max-w-[800px] mx-auto desktop:max-w-[1024px]'>
         <div className='mobile:justify-center items-center text-center '>
           <ShopBanner
