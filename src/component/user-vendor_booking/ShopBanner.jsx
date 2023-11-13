@@ -27,7 +27,7 @@ export default function ShopBanner({ src, name, onClick,AddQueue,setAddQueue, ma
                   {markMap}ss
                 </div>
                 <div>
-                  {AddQueue? null : <div>
+                  {AddQueue? null:<div>
                     <AddQueueButton text="ปิดรับคิว" />
                     <AddQueueButton text="เพิ่มคิว" onClick={onClick} />
                     <button onClick={onClick}>test</button>

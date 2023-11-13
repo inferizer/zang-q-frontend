@@ -27,7 +27,7 @@ export default function UserDetail({name,picture,setEditFormOpen}){
                 </div>
               </div>
               <button className="mobile" onClick={()=>setEditFormOpen(true)}>
-                <div className="mobile: bg-black w-[160px] h-[30px] text-white rounded-[40px] mt-[16px] hover:text-white border border-gray-800 hover:bg-gray-700 ">
+                <div className="mobile: bg-black w-[160px] h-[30px] text-white rounded-[40px] hover:text-white border border-gray-800 hover:bg-gray-700 ">
                   แก้ไขข้อมูลส่วนตัว
                   <LiaGreaterThanSolid className="mobile: inline ml-[10px]" />
                 </div>

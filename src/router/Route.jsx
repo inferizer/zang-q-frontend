@@ -40,6 +40,7 @@ import AdminManagementVendorForm from "../component/admin/AdminManagementVendorF
 import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
+import VendorHistory from "../pages/vendor/VendorHistory";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,7 +103,8 @@ const router = createBrowserRouter([
         element: <VendorApplicationEnd />,
       },
       { path: "/vendor/home", element: <VendorHome /> },
-      { path: "/vendor/booking", element: <VendorOnsiteBook /> }
+      { path: "/vendor/booking", element: <VendorOnsiteBook /> },
+      { path: "/vendor/history", element: <VendorHistory/> }
     ],
   },
   {

@@ -12,7 +12,7 @@ export default function VendorContextProvider({ children }) {
   const [searchLocation, setSearchLocation] = useState(null);
   const [mapClicked, setMapClicked] = useState(null);
   const [checkInput, setCheckInput] = useState([]);
-  const [cancek, setCancel] = useState([])
+  const [cancel, setCancel] = useState([])
 
   useEffect(() => {
     axios.get("/vendor/category").then((res) => {
