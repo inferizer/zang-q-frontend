@@ -14,7 +14,6 @@ export default function ApprovedModal({ onClose }) {
       console.error("Error approving application:", error);
     }
   };
-
   return (
     <div className=" mobile: mx-auto backdrop-opacity-30 max-h-screen">
       <div className="w-full max-w-lg p-5 relative mx-auto my-auto rounded-xl shadow-lg bg-blueLight">

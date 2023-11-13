@@ -64,7 +64,7 @@ export default function UserRegister() {
   return (
     <div className="mobile ">
       <header className="mobile">
-        <div className="mobile:justify-center items-center h-screen flex">
+        <div className="mobile:justify-center items-center h-screen flex flex-col">
           <form className="mobile" onSubmit={hdl_submit}>
             <h1 className="mobile:mb-[25px]">
               <b className="mobile:text-[25px]">Signup</b>
@@ -113,18 +113,20 @@ export default function UserRegister() {
             </div>
             <button
               onClick={hdl_submit}
-              type="button"
+              
               className="mobile: mt-[25px] ml-[9px] w-[350px] flex justify-center items-center focus:outline-none text-white bg-primary-400 hover:bg-red-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
             >
               Continue
             </button>
+            </form>
+
+            <div className="mobile:justify-center items-center flex flex-col">
             <div className="mobile: inline-flex items-center justify-center w-full">
               <hr className="mobile: w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-700" />
               <span className="mobile: absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
                 or
               </span>
             </div>
-
             <div>
               <LineLoginButtton />
             </div>
@@ -163,7 +165,8 @@ export default function UserRegister() {
 
               </span>
             </div>
-          </form>
+          
+        </div>
         </div>
       </header>
     </div>
