@@ -6,10 +6,25 @@ import {
   RiMapPinFill,
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "../../config/axios";
+import { useParams } from "react-router-dom";
+import Loading from "../components/Loading";
+import { useAdmin } from "../../hook/useAdmin";
 import RejectModal from "../modals/RejectModal";
 import ApprovedModal from "../modals/ApprovedModal";
 
 export default function AdminManagementVendorForm() {
+  const { id } = useParams();
+
+  const [shops, setShops] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { authUser, getUser } = useAuth();
+
+  if (!authUser) {
+    getUser();
+  }
+
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
   const [isApproveModalOpen, setIsApproveModalOpen] = useState(false);
 
@@ -28,6 +43,21 @@ export default function AdminManagementVendorForm() {
   const handleApproveModalClose = () => {
     setIsApproveModalOpen(false);
   };
+
+  useEffect(() => {
+    async function fetchShops() {
+      const response = await axios.get("/shops/" + id); // shops/2
+      if (!response.status === 200) {
+        throw new Error("Network response was not 200");
+      }
+
+      const data = response.data;
+      setLoading(false);
+      setShops(data.shops);
+    }
+
+    fetchShops();
+  }, [id]);
 
   return (
     <>
