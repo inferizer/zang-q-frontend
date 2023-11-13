@@ -5,8 +5,8 @@ export const hdlAddSeat = (seat, setSeat, maxSeat) => {
   setSeat(seat + 1);
 };
 
-export const hdlRmvSeat = (seat, setSeat) => {
-  if (seat === 0) {
+export const hdlRmvSeat = (seat, setSeat, minSeat) => {
+  if (seat === minSeat) {
     return seat;
   }
   setSeat(seat - 1);
