@@ -31,11 +31,11 @@ import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
-import CategoryPage from "../pages/admin/category";
+import CategoryPage from "../pages/admin/categoryCRUD";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
-// import CategoryPage from "../pages/admin/category";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
+import UserTicketPage from "../pages/user/UserTicketPage";
 
 const router = createBrowserRouter([
   {
@@ -163,7 +163,10 @@ const router = createBrowserRouter([
         <Layout />
       </QueueContextProvider>
     ),
-    children: [{ path: "/user/book", element: <UserBookPage /> }],
+    children: [
+      { path: "/user/book", element: <UserBookPage /> },
+      { path: "/user/ticket", element: <UserTicketPage /> },
+    ],
   },
 ]);
 export default function Router() {
