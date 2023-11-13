@@ -4,8 +4,8 @@ export default function VendorLogin() {
   const { hdl_input, hdl_vendor_login_submit } = useAuth();
 
   const inputTag = [
-    { id: 4, name: "email" },
-    { id: 2, name: "password" },
+    { id: 4, name: "email",type: 'text' },
+    { id: 2, name: "password",type: 'Password' },
   ];
   return (
     <section className="section h-screen flex">
@@ -26,15 +26,16 @@ export default function VendorLogin() {
               <Input
                 key={el.id}
                 name={el.name}
-                type="text"
+                type={el.type}
                 placeholder={el.name}
                 onChange={hdl_input}
+                
               />
             </>
           );
         })}
 
-<button className="mt-3 shadow bg-primary-500 hover:bg-primary-600 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
+<button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
       </form>
     </section>
   );

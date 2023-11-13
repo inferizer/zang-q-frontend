@@ -8,9 +8,9 @@ export default function Header() {
 	const [selectedItem, setSelectedItem] = useState(null);
 
 	if (getAccessToken()) {
-		if (authUser.role == "vendor") {
+		if (authUser.role == "user") {
 			return (
-				<header className="section shadow-md z-30 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
+				<header className="section shadow-md z-50 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
 					<div className="container flex justify-between items-center">
 						<img src={logo} alt="logo" />
 						<nav>
@@ -42,7 +42,7 @@ export default function Header() {
 
 		if (authUser.role == "admin") {
 			return (
-				<header className="section shadow-md z-30 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
+				<header className="section shadow-md z-50 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
 					<div className="container flex justify-between items-center">
 						<img src={logo} alt="logo" />
 						<nav>
@@ -71,9 +71,9 @@ export default function Header() {
 			);
 
 		}
-		if (authUser.role == "user") {
+		if (authUser.role == "vendor") {
 			return (
-				<header className="section shadow-md z-30 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
+				<header className="section shadow-md z-50 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
 					<div className="container flex justify-between items-center">
 						<img src={logo} alt="logo" />
 						<nav>
@@ -105,7 +105,7 @@ export default function Header() {
 
 	}
 	return (
-		<header className="section shadow-md z-30 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
+		<header className="section shadow-md z-50 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
 			<div className="container flex justify-center items-center">
 				<img src={logo} alt="logo" />
 			</div>

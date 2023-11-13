@@ -10,7 +10,6 @@ import RedirectIfAuth from "../redirect/redirectIfAuth";
 import VendorAttatch from "../pages/vendor/VendorAttachfile";
 import UploadIdUser from "../pages/register/UploadIdUser";
 import UploadIdPeople from "../pages/register/UploadIdPeople";
-import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
@@ -32,9 +31,13 @@ import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
 import CategoryPage from "../pages/admin/categoryCRUD";
+import RedirectIfNotUser from "../redirect/redirectIfNotUser";
+import UserContextProvider from "../context/user_context";
+import ShopList from "../pages/user/ShopList";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
+import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 
 const router = createBrowserRouter([
@@ -60,6 +63,7 @@ const router = createBrowserRouter([
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
       { path: "/login/line", element: <LinePage /> },
+      { path: "/login/admin", element: <AdminLogin /> },
     ],
   },
   {
@@ -72,44 +76,6 @@ const router = createBrowserRouter([
     children: [
       { path: "/register/user", element: <UserRegister /> },
       { path: "/register/vendor", element: <VendorRegister /> },
-    ],
-  },
-  {
-    path: "/test",
-    element: <Layout />,
-    children: [
-      { path: "/test/file/iduser", element: <UploadIdUser /> },
-      { path: "/test/file/iduser/idpeople", element: <UploadIdPeople /> },
-      { path: "/test/file/iduser/idpeople/addstore", element: <AddStore /> },
-      {
-        path: "/test/file/iduser/idpeople/addstore/mapstore",
-        element: <MapStore />,
-      },
-
-      {
-        path: "/test/vendor/register",
-        element: <RegisterVender />,
-      },
-      {
-        path: "/test/user/homepage",
-        element: <HomePage />,
-      },
-      {
-        path: "/test/admin/restaurant-datails",
-        element: <RestaurantDetailsForm />,
-      },
-      {
-        path: "/test/vendor/footer",
-        element: <VendorFooter />,
-      },
-      {
-        path: "/test/user/footer",
-        element: <UserFooter />,
-      },
-      {
-        path: "/test/user/calender",
-        element: <Calender />,
-      },
     ],
   },
   {
@@ -133,6 +99,7 @@ const router = createBrowserRouter([
         path: "/vendor/VendorApplicationEnd",
         element: <VendorApplicationEnd />,
       },
+      { path: "/vendor/home", element: <VendorHome /> },
     ],
   },
   {
@@ -152,18 +119,21 @@ const router = createBrowserRouter([
         path: "/admin/management",
         element: <AdminManagementVendorForm />,
       },
-      { path: "/admin/login", element: <AdminLogin /> },
     ],
   },
-
   {
     path: "/user",
     element: (
-      <QueueContextProvider>
-        <Layout />
-      </QueueContextProvider>
+      <RedirectIfNotUser>
+        <QueueContextProvider>
+          <UserContextProvider>
+            <Layout />
+          </UserContextProvider>
+        </QueueContextProvider>
+      </RedirectIfNotUser>
     ),
     children: [
+      { path: "/user/shopList", element: <ShopList /> },
       { path: "/user/book", element: <UserBookPage /> },
       { path: "/user/ticket", element: <UserTicketPage /> },
     ],

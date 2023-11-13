@@ -4,10 +4,13 @@ import { useState, useMemo, useEffect } from 'react'
 import { GoogleMap, useLoadScript, MarkerF, Marker, Circle, InfoWindow } from '@react-google-maps/api'
 import PlacesAutoComplete from "./PlacesAutoComplete"
 import { useVendor } from '../../hook/useVendor';
-
+import { useAuth } from '../../hook/useAuthContext';
+import Loading from '../../component/loading';
+import ghostIcon from '../../assets/image/ghost.png';
 
 
 function Map({ viewMode, adminLocation = null, data }) {
+    const { initLoading } = useAuth()
 
     const bangkokBounds = {
         north: 14.0000,
@@ -16,13 +19,15 @@ function Map({ viewMode, adminLocation = null, data }) {
         west: 100.4000,
     };
 
-    const {mapClicked, setMapClicked, searchLocation, setSearchLocation} = useVendor();
+    const { mapClicked, setMapClicked, searchLocation, setSearchLocation } = useVendor();
     const [currentLocation, setCurrentLocation] = useState(null);
     const [error, setError] = useState(null);
     const [center, setCenter] = useState({ lat: 13.7462, lng: 100.5347 });
     const [selectedInfoWindow, setSelectedInfoWindow] = useState(null);
     const [libraries, setLibraries] = useState(['places', 'geometry']);
     const [allMarkers, setAllMarkers] = useState();
+
+    const [loadingLocation, setLoadingLocation] = useState(true);
 
     console.log('clicked', mapClicked)
     console.log('selected', searchLocation)
@@ -33,12 +38,15 @@ function Map({ viewMode, adminLocation = null, data }) {
     }, []);
 
     const getLocation = () => {
+        setLoadingLocation(true)
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, handleError);
         } else {
             setError("Geolocation is not supported by this browser.");
+            setLoadingLocation(false)
         }
     }
+
     const showPosition = (position) => {
         const newLocation = {
             lat: position.coords.latitude,
@@ -46,16 +54,22 @@ function Map({ viewMode, adminLocation = null, data }) {
         };
         setCurrentLocation(newLocation);
         setCenter(newLocation); // ทำการ set ค่า center ใหม่ที่นี่
+        setLoadingLocation(false)
     };
 
     const handleError = (error) => {
+        if (error.code == error.PERMISSION_DENIED) {
+            alert('please allow loaction')
+        }
         setError("Error fetching location: " + error.message);
+        setLoadingLocation(false)
     };
 
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: 'AIzaSyCC_tCic6ScwrR9HlXYj7ryLj7uvTLQRpk',
-        libraries
+        libraries,
     });
+
 
     const handleSearchLocation = (input) => {
         setMapClicked(null)
@@ -82,16 +96,12 @@ function Map({ viewMode, adminLocation = null, data }) {
     };
 
     const markersWithinRadius = useMemo(() => {
-        if (!viewMode) {
-            return [];
-        }
-        if (!currentLocation) {
+        if (!isLoaded || !currentLocation || !data) {
             return []; // จังหวะ render ครั้งแรก currentLocation ยังมาไม่ทัน
         }
 
         const radius = 3500; // 5 km in meters
         const boundingBox = calculateBoundingBox(currentLocation, radius);
-        
 
         // First, filter markers within the bounding box
         const markersInBoundingBox = data.filter(marker =>
@@ -110,36 +120,26 @@ function Map({ viewMode, adminLocation = null, data }) {
             console.log(`Distance from ${marker.title}:`, distance);
             return distance <= radius;
         });
-    }, [currentLocation, data]);
+    }, [isLoaded, currentLocation, data]);
 
     useEffect(() => {
         setAllMarkers(markersWithinRadius);
     }, [markersWithinRadius]);
 
-    if (!isLoaded) return <div>Loading...</div>;
-    return (
-        <div>
-            <div>
-                <button onClick={getLocation}>Fetch</button>
-                <p id="demo">
-                    {currentLocation && (
-                        <>
-                            Latitude: {currentLocation.lat}
-                            <br />
-                            Longitude: {currentLocation.lng}
-                        </>
-                    )}
-                    {error && <div>{error}</div>}
-                </p>
-            </div>
+    // if (!isLoaded) return <div>Loading...</div>;
+    if (!isLoaded || loadingLocation) return <Loading />;
 
+    return (
+        <div className='flex flex-col py-8'>
             <div>
                 <GoogleMap
                     center={searchLocation || center}
                     mapContainerStyle={{
                         display: 'flex',
+                        justifyContent: 'center',
                         height: "500px",
-                        width: "800px"
+                        width: "100%",
+                        position: "relative",
                     }}
                     zoom={14}
                     options={{
@@ -155,7 +155,6 @@ function Map({ viewMode, adminLocation = null, data }) {
                     onClick={handleClickLocation}
                 >
 
-
                     {viewMode ? (
                         <div>
                             {currentLocation && (
@@ -164,13 +163,21 @@ function Map({ viewMode, adminLocation = null, data }) {
                                         center={currentLocation}
                                         radius={3550}
                                         options={{
-                                            strokeColor: '#EB544D',
+                                            strokeColor: '#DD0F95',
                                             strokeWeight: 2,
-                                            fillColor: '#FFCDCB',
+                                            fillColor: '#FF84D4',
                                             fillOpacity: 0.1
                                         }}
                                     />
-                                    <Marker position={currentLocation} />
+                                    <Marker
+                                        position={currentLocation}
+                                        icon={{
+                                            url: ghostIcon,
+                                            scaledSize: new window.google.maps.Size(44, 44)
+                                        }}
+                                        options={{ zIndex: 11 }}
+
+                                    />
                                 </>
                             )}
 
@@ -181,7 +188,7 @@ function Map({ viewMode, adminLocation = null, data }) {
                                         position={geo}
                                         title={geo.title}
                                         label={geo.title}
-                                        options={{ zIndex: 999 }}
+                                        options={{ zIndex: 10 }}
                                         onClick={() => setSelectedInfoWindow(geo)}
                                     />
                                 ))
@@ -199,16 +206,23 @@ function Map({ viewMode, adminLocation = null, data }) {
                             )}
                         </div>
                     ) : (
-                        <div className='w-full'>
+                        <div className='absolute z-50 top-4 left-4 right-4'>
                             <PlacesAutoComplete
                                 handleSearchLocation={handleSearchLocation}
-                                className="absolute top-2 left-2 z-10 w-[300px] p-2 bg-white rounded shadow-md"
                             />
                             {/* ถามว่า searchLocation กับ mapClicked มีไหม ถ้ามีตัวในตัวหนึ่ง ให้ set position MarkerF */}
                             {(searchLocation || mapClicked) && <MarkerF position={mapClicked || searchLocation} />}
                         </div>
                     )}
                 </GoogleMap>
+            </div>
+
+            <div>
+                <button
+                    onClick={getLocation}
+                    className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+                    track location
+                </button>
             </div>
         </div>
     )

@@ -3,26 +3,27 @@ import { LiaGreaterThanSolid } from "react-icons/lia";
 import { useNavigate } from "react-router-dom";
 import VendorAttach from '../../assets/logo/VendorAttach.png'
 import VendorLanding from "./VendorLanding";
+import { ChevronRightIcon } from "../../assets/icon/Icon";
 
-export default function   VendorAttachfile() {
+export default function VendorAttachfile() {
   const navigate = useNavigate()
+
   return (
-    <>
-      <div className="mobile:flex justify-center items-center h-screen bg-back">
-        <div className="mobile">
-          <img src={VendorAttach} className=" w-[300px] h-[300px]"/>
-          <h5 className="mobile:text-center mt-[44px]">กรุณากรอกข้อมูล</h5>  
-          <div className="mobile:flex flex-col items-center gap-[16px]">
-            <button className="mobile" >
-              <div className="mobile:bg-black w-[200px] h-[30px] text-white rounded-[40px] mt-[16px] hover:text-white border border-gray-800 hover:bg-gray-500 ">
-                document
-                <LiaGreaterThanSolid className="mobile: inline ml-[10px]" />
-              </div>
-            </button>
-            <VendorLanding/>
+    <section className="section h-screen flex items-center">
+      <div className="container flex flex-col items-center justify-center gap-4">
+        <img src={VendorAttach} className=" max-w-[300px] h-[300px]" />
+        <h5 className="text-lg font-semibold">กรุณาแนบเอกสารข้อมูล</h5>
+        <button className="mobile" >
+          <div
+            className="bg-black rounded-3xl text-white px-4 py-2 flex items-center justify-between gap-2 hover:opacity-60"
+            onClick={() => navigate('/vendor/application')}
+          >
+            แนบเอกสาร
+            <ChevronRightIcon />
           </div>
-        </div>
+        </button>
+        <VendorLanding />
       </div>
-    </>
+    </section>
   );
 }

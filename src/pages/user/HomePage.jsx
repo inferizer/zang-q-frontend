@@ -1,7 +1,5 @@
 import maps from '../../assets/image/maps.png'
-import logo from '../../assets/logo/logo.svg'
-import {FoodIcon, UserIcon, MapIcon} from '../../assets/icon/Icon.jsx'
-import { useState } from 'react'
+
 
 export default function HomePage() {
 
