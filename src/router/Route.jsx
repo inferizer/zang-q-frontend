@@ -39,7 +39,7 @@ import QueueContextProvider from "../context/queue_context";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
 import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
-
+import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -86,9 +86,11 @@ const router = createBrowserRouter([
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
-        <VendorContextProvider>
-          <Layout />
-        </VendorContextProvider>
+        <QueueContextProvider>
+          <VendorContextProvider>
+            <Layout />
+          </VendorContextProvider>
+        </QueueContextProvider>
       </RedirectIfNotVendor>
     ),
     children: [
@@ -100,6 +102,7 @@ const router = createBrowserRouter([
         element: <VendorApplicationEnd />,
       },
       { path: "/vendor/home", element: <VendorHome /> },
+      { path: "/vendor/booking", element: <VendorOnsiteBook /> }
     ],
   },
   {
