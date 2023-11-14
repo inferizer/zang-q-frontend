@@ -1,4 +1,8 @@
+import Loading from "../loading";
 export default function RestaurantDetailsForm({ shop }) {
+  if (!shop) {
+    return <Loading />;
+  }
   const {
     shopName,
     shopMobile,

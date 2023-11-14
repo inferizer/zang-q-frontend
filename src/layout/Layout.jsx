@@ -3,12 +3,12 @@ import Header from "./Header";
 import UserDetailModal from "../component/modals/userDetailModal";
 import { useAuth } from "../hook/useAuthContext";
 export default function Layout() {
-  const {userDetailOpen}  = useAuth()
+  const { userDetailOpen } = useAuth();
   return (
     <div className=" relative">
       <Header />
       <Outlet />
-      {userDetailOpen &&<UserDetailModal/>}
+      {userDetailOpen && <UserDetailModal />}
     </div>
   );
 }

@@ -15,6 +15,8 @@ import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
 // import { element } from "prop-types";
 import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
+import AdminManagementVendorForm from "../component/admin/AdminManagementMain";
+import AdminApprovedVendorFrom from "../component/admin/AdminApprovedVendorForm";
 import VendorFooter from "../component/footers/VendorFooter";
 import UserFooter from "../component/footers/UserFooter";
 import Calender from "../component/Calender";
@@ -36,10 +38,10 @@ import UserContextProvider from "../context/user_context";
 import ShopList from "../pages/user/ShopList";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
-import AdminManagement from "../pages/admin/AdminManagement";
 import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
+import AdminManagement from "../pages/admin/AdminManagement";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -122,6 +124,7 @@ const router = createBrowserRouter([
         path: "/admin/management",
         element: <AdminManagement />,
       },
+      { path: "/admin/restaurant/details", element: <RestaurantDetailsForm /> },
     ],
   },
   {

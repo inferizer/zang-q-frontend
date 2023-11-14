@@ -1,3 +1,5 @@
+import AdminApprovedVendorForm from "../../component/admin/AdminApprovedVendorForm";
+
 export default function VendorsManagement() {
-  return <div>VendorsManagement</div>;
+  return <AdminApprovedVendorForm />;
 }

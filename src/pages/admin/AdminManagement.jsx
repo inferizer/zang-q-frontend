@@ -1,4 +1,4 @@
-import AdminManagementVendorForm from "../../component/admin/AdminManagementVendorForm";
+import AdminManagementMain from "../../component/admin/AdminManagementMain";
 export default function AdminManagement() {
-  return <AdminManagementVendorForm />;
+  return <AdminManagementMain />;
 }
