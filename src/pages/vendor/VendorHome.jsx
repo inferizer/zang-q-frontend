@@ -44,7 +44,7 @@ export default function VendorHome() {
               {data?.map((product, index) => (
                 <div key={index} >
                   <VendorCard
-                    username={product.username}
+                    username={product?.user?.username}
                     src={product.profileImage}
                     queueNumber={product.queueNumber}
                     type={product.type}

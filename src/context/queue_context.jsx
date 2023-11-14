@@ -13,6 +13,7 @@ export default function QueueContextProvider({ children }) {
   const [ticketInfo, setTicketInfo] = useState({});
   const [bookingConfirm, setBookingConfirm] = useState(false);
   const [currentQueue, setCurrentQueue] = useState(0);
+  const [historyBooking,setHistoryBooking] = useState([])
 
   const selectShop = () => {
     socket.emit("join_room", shopData.id + shopData.name, authUser.id);
@@ -44,6 +45,8 @@ export default function QueueContextProvider({ children }) {
         setBookingConfirm,
         currentQueue,
         setCurrentQueue,
+        historyBooking,
+        setHistoryBooking
       }}
     >
       {children}

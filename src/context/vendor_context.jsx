@@ -13,6 +13,7 @@ export default function VendorContextProvider({ children }) {
   const [mapClicked, setMapClicked] = useState(null);
   const [checkInput, setCheckInput] = useState([]);
   const [cancel, setCancel] = useState([])
+  const [value, setValue] = useState(new Date());
 
   useEffect(() => {
     axios.get("/vendor/category").then((res) => {
@@ -112,6 +113,8 @@ export default function VendorContextProvider({ children }) {
         allCategory,
         hdl_cancel_queue,
         hdl_accept_queue,
+        value,
+        setValue
       }}
     >
       {children}
