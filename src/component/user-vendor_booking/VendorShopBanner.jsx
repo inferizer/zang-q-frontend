@@ -1,12 +1,5 @@
 import AddQueueButton from "../buttons/AddQueueButton";
-export default function ShopBanner({
-  src,
-  name,
-  onClick,
-  AddQueue,
-  setAddQueue,
-  markMap,
-}) {
+export default function ShopBanner({ src, name, onClick, AddQueue, markMap }) {
   return (
     <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex'>
       <div className='h-[133px] px-3.5 py-2.5 flex-col justify-start items-start gap-2.5 flex'>
@@ -28,9 +21,9 @@ export default function ShopBanner({
                 <div>{markMap}</div>
                 <div>
                   {AddQueue ? null : (
-                    <div>
-                      <AddQueueButton text='ปิดรับคิว' />
-                      <AddQueueButton text='เพิ่มคิว' onClick={onClick} />
+                    <div className='flex'>
+                      <AddQueueButton text='Close Queue' />
+                      <AddQueueButton text='Add Queue' onClick={onClick} />
                     </div>
                   )}
                 </div>

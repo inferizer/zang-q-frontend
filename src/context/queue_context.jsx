@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 import socket from "../utils/socket";
+import axios from "axios";
 
 export const QueueContext = createContext();
 
@@ -14,8 +15,15 @@ export default function QueueContextProvider({ children }) {
   const [bookingConfirm, setBookingConfirm] = useState(false);
   const [currentQueue, setCurrentQueue] = useState(0);
 
+  const [shopId, setShopId] = useState();
+
   const selectShop = () => {
     socket.emit("join_room", shopData.id + shopData.name, authUser.id);
+  };
+
+  const openShop = async () => {
+    socket.emit("join_room", "1");
+    // await axios.patch("/vendor/open");
   };
 
   const bookingQueue = (bookingInfo, seat) => {
@@ -44,6 +52,9 @@ export default function QueueContextProvider({ children }) {
         setBookingConfirm,
         currentQueue,
         setCurrentQueue,
+        openShop,
+        shopId,
+        setShopId,
       }}
     >
       {children}

@@ -24,7 +24,6 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
-import BookingPage from "../pages/user/BookingPage";
 import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
 import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
@@ -49,7 +48,6 @@ const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },
       { path: "test/book", element: <UserBookPage /> },
-      { path: "user", element: <BookingPage /> },
       { path: "shop", element: <VendorQueueManagement /> },
     ],
   },
@@ -87,11 +85,11 @@ const router = createBrowserRouter([
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
-        <QueueContextProvider>
-          <VendorContextProvider>
+        <VendorContextProvider>
+          <QueueContextProvider>
             <Layout />
-          </VendorContextProvider>
-        </QueueContextProvider>
+          </QueueContextProvider>
+        </VendorContextProvider>
       </RedirectIfNotVendor>
     ),
     children: [

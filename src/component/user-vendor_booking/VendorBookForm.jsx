@@ -1,14 +1,11 @@
-import { useState, useEffect } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useQueue } from "../../hook/useQueue";
-import { useAuth } from "../../hook/useAuthContext";
 import { hdlAddSeat, hdlRmvSeat } from "../../utils/seat";
 import socket from "../../utils/socket";
 import TableType from "./TableType";
 import UserTicketPage from "../../pages/user/UserTicketPage";
-import axios from "axios";
 
-export default function UserBookTableForm() {
+export default function VendorBookForm() {
   const {
     seat,
     setSeat,
@@ -19,34 +16,7 @@ export default function UserBookTableForm() {
     ticketInfo,
     setTicketInfo,
   } = useQueue();
-  const { authUser } = useAuth();
-  const [bookingInfo, setBookingInfo] = useState({
-    userId: authUser.id,
-    name: authUser.username,
-    // mocking shopname
-    shopId: 1,
-    socket: "",
-    type: "one",
-  });
 
-  console.log(bookingInfo);
-  useEffect(() => {
-    socket.connect();
-    socket.on("connect", () => {
-      setBookingInfo({ ...bookingInfo, socket: socket.id });
-    });
-  }, []);
-
-  // fecth ticket
-  useEffect(() => {
-    console.log("fetch ticket");
-    axios
-      .post("/user/ticket", bookingInfo)
-      .then((res) => {
-        setTicketInfo(res.data.result);
-      })
-      .catch((error) => console.log(error));
-  }, []);
   const hdlAddSeat1 = () => {
     hdlAddSeat(seat, setSeat, maxSeat);
   };
@@ -66,17 +36,13 @@ export default function UserBookTableForm() {
   };
 
   socket.on("ticket", (bookingConfirm) => {
+    console.log("booking_confirm", bookingConfirm);
     setTicketInfo(bookingConfirm);
-  });
-
-  socket.on("cancel_ticket", () => {
-    console.log("cancel ticket");
-    setTicketInfo({});
   });
 
   return (
     <>
-      {ticketInfo?.hasOwnProperty("queueNumber") ? (
+      {ticketInfo.hasOwnProperty("queueNumber") ? (
         <UserTicketPage />
       ) : (
         <form
