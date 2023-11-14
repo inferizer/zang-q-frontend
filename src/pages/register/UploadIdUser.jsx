@@ -2,7 +2,7 @@ import React from "react";
 
 export default function UploadIdUser() {
   return (
-    <>
+    <div>
       <div className="mobile: justify-center items-center h-screen flex">
         <div className="mobile: w-[390px] h-[662px] py-8 flex-col justify-start items-center gap-11 inline-flex">
           <div className="mobile: w-[280px] justify-center items-center gap-8 inline-flex">
@@ -111,6 +111,6 @@ export default function UploadIdUser() {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

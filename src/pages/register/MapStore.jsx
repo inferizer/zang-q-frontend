@@ -1,5 +1,5 @@
-  import React from "react";
-  const option = [
+import React from "react";
+const option = [
   { id: "1", name: "buffet", value: "buffet" },
   { id: "2", name: "thai", value: "thai" },
   { id: "3", name: "japan", value: "japan" },
@@ -8,7 +8,7 @@
 ];
 export default function MapStore() {
   return (
-    <>
+    <div>
       <div className="mobile: flex justify-center items-center h-screen mt-[500px]">
         <form className="mobile">
           <div className="mobile: w-[390px] py-8 flex-col justify-start items-center gap-11 inline-flex">
@@ -68,7 +68,7 @@ export default function MapStore() {
                 </div>
               </div>
               <form className="mobile">
-                <label className="mobile" for="fname"></label>
+                <label className="mobile" for="fname" />
                 <br className="mobile" />
                 <input
                   className="mobile: w-[358px] h-[42px] p-2.5 rounded-lg border border-neutral-400 justify-center items-center gap-2.5 inline-flex"
@@ -238,6 +238,6 @@ export default function MapStore() {
           </button>
         </form>
       </div>
-    </>
+    </div>
   );
 }

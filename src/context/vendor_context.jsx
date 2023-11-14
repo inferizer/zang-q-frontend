@@ -5,14 +5,14 @@ export const VendorContext = createContext();
 export default function VendorContextProvider({ children }) {
   const [shopPictureFile, setShopPictureFile] = useState(null);
   const [idCardFile, setIdCardFile] = useState(null);
-  const [juristicFile,setJuristicFile] = useState(null);
+  const [juristicFile, setJuristicFile] = useState(null);
   const [appInput, setAppInput] = useState({});
   const [allCategory, setAllCtegory] = useState([]);
   // map
   const [searchLocation, setSearchLocation] = useState(null);
   const [mapClicked, setMapClicked] = useState(null);
   const [checkInput, setCheckInput] = useState([]);
-  const [cancek, setCancel] = useState([])
+  const [cancek, setCancel] = useState([]);
 
   useEffect(() => {
     axios.get("/vendor/category").then((res) => {
@@ -32,7 +32,6 @@ export default function VendorContextProvider({ children }) {
     setAppInput({ ...appInput, [e.target.name]: e.target.value });
   };
 
-
   const hdl_application_submit = () => {
     const formData = hdl_formdata(appInput, searchLocation);
     formData.append("shopPicture", shopPictureFile);
@@ -40,29 +39,26 @@ export default function VendorContextProvider({ children }) {
     formData.append("shopLat", mapClicked?.lat || searchLocation?.lat);
     formData.append("shopLan", mapClicked?.lng || searchLocation?.lng);
 
-
     axios
       .post("/vendor/application", formData)
-      .then(res => {
-
-        axios.post(`/vendor/category/${res.data.result.id}`, checkInput)
-        alert(res.data.message)
+      .then((res) => {
+        axios.post(`/vendor/category/${res.data.result.id}`, checkInput);
+        alert(res.data.message);
       })
       .catch((error) => {
         alert(error.response.data.message);
       });
-
   };
 
   const hdl_checkBox = (e) => {
-    let existData = checkInput.findIndex(el => el.id === e.target.value)
+    let existData = checkInput.findIndex((el) => el.id === e.target.value);
     if (existData < 0) {
-      setCheckInput(prev => {
-        let data = { categoriesId: e.target.value }
-        let oldArr = [...prev]
-        let newArr = [...oldArr, data]
-        return newArr
-      })
+      setCheckInput((prev) => {
+        let data = { categoriesId: e.target.value };
+        let oldArr = [...prev];
+        let newArr = [...oldArr, data];
+        return newArr;
+      });
     }
     if (existData >= 0) {
       setCheckInput((prev) => {
@@ -71,26 +67,19 @@ export default function VendorContextProvider({ children }) {
         return newArr;
       });
     }
-
-
-
   };
   const hdl_cancel_queue = () => {
-    axios.patch('/vendor/canceled')
-      .then((res) => {
-        setCancel(res.data.result);
-      })
-  }
+    axios.patch("/vendor/canceled").then((res) => {
+      setCancel(res.data.result);
+    });
+  };
 
   const hdl_accept_queue = () => {
-    axios.patch('/vendor/accept')
-      .then((res) => {
-        console.log(res.data.result)
-        setCancel(res.data.result);
-      })
-  }
-
-
+    axios.patch("/vendor/accept").then((res) => {
+      console.log(res.data.result);
+      setCancel(res.data.result);
+    });
+  };
 
   return (
     <VendorContext.Provider
@@ -101,8 +90,8 @@ export default function VendorContextProvider({ children }) {
         setIdCardFile,
         shopPictureFile,
         idCardFile,
-        juristicFile
-        ,setJuristicFile,
+        juristicFile,
+        setJuristicFile,
         searchLocation,
         setSearchLocation,
         mapClicked,
