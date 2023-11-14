@@ -12,6 +12,7 @@ export default function VendorContextProvider({ children }) {
   const [searchLocation, setSearchLocation] = useState(null);
   const [mapClicked, setMapClicked] = useState(null);
   const [checkInput, setCheckInput] = useState([]);
+  const [cancek, setCancel] = useState([]);
 
   useEffect(() => {
     axios.get("/vendor/category").then((res) => {
@@ -67,6 +68,18 @@ export default function VendorContextProvider({ children }) {
       });
     }
   };
+  const hdl_cancel_queue = () => {
+    axios.patch("/vendor/canceled").then((res) => {
+      setCancel(res.data.result);
+    });
+  };
+
+  const hdl_accept_queue = () => {
+    axios.patch("/vendor/accept").then((res) => {
+      console.log(res.data.result);
+      setCancel(res.data.result);
+    });
+  };
 
   return (
     <VendorContext.Provider
@@ -86,6 +99,8 @@ export default function VendorContextProvider({ children }) {
         appInput,
         hdl_checkBox,
         allCategory,
+        hdl_cancel_queue,
+        hdl_accept_queue,
       }}
     >
       {children}

@@ -253,6 +253,15 @@ export default function VendorApplication() {
             </div>
           );
         })}
+        <h1>select your category</h1>
+        {allCategory.map((el) => {
+          return (
+            <div>
+              <input type="checkbox" value={el.id} onChange={hdl_checkBox} />
+              <label className="font-medium">{el.name}</label>
+            </div>
+          );
+        })}
 
         <h1>google map api</h1>
         {/* <Map viewMode={false} /> */}
