@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
-export default function ShopBanner({ src, name, markMap }) {
+import AddQueueButton from "../buttons/AddQueueButton";
+export default function ShopBanner({ src, name, onClick, AddQueue, markMap }) {
   return (
     <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex'>
       <div className='h-[133px] px-3.5 py-2.5 flex-col justify-start items-start gap-2.5 flex'>
@@ -18,20 +18,15 @@ export default function ShopBanner({ src, name, markMap }) {
             <div className='self-stretch justify-start items-center gap-2 inline-flex'>
               {/* google map marker */}
               <div className="grow shrink basis-0 text-neutral-400 text-xs font-bold font-['Nunito Sans']">
-<<<<<<< HEAD
-                <div>
-                  {markMap}ss
-                </div>
-                <div>
-                  {AddQueue? null:<div>
-                    <AddQueueButton text="ปิดรับคิว" />
-                    <AddQueueButton text="เพิ่มคิว" onClick={onClick} />
-                    <button onClick={onClick}>test</button>
-                  </div>}
-                </div>
-=======
                 <div>{markMap}</div>
->>>>>>> a9409ccf17c962509a8b47cba0f0a4a1661f03d3
+                <div>
+                  {AddQueue ? null : (
+                    <div className='flex'>
+                      <AddQueueButton text='Close Queue' />
+                      <AddQueueButton text='Add Queue' onClick={onClick} />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
