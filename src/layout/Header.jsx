@@ -3,7 +3,7 @@ import { FoodIcon, HomeIcon, MapIcon, PendingIcon, QueueIcon, UserIcon } from ".
 import logo from '../assets/logo/logo.svg'
 import { useAuth } from "../hook/useAuthContext";
 import { getAccessToken } from "../utils/localStorage";
-import UserDetailModal from "../component/modals/userDetailModal"
+
 export default function Header() {
 	const { authUser,setUserDetailOpen,userDetailOpen } = useAuth();
 	const [selectedItem, setSelectedItem] = useState(null);

@@ -2,24 +2,42 @@ import { useAuth } from "../../hook/useAuthContext";
 import { getAccessToken } from "../../utils/localStorage";
 import { ADMIN, USER, VENDOR } from "../../constant/role";
 import UserDetail from "../user/userDetail";
-import { useState } from "react";
 import UserEditForm from "./userEditForm";
 export default function UserDetailModal() {
   if (getAccessToken()) {
     const {
       authUser: { role },
       authUser,
+      userEditOpen,
     } = useAuth();
 
-    return (
-      <div>
+    if(role == "admin" || role == "user"){
+      return(
 
-        <div className=" px-4 absolute inset-0 top-24 bg-white opacity-30 "></div>
-        <div>
-          <div className=" absolute  inset-0 top-24 max-w-[800px] m-auto desktop:max-w-[1024px]">
-            {role == ADMIN && <UserDetail name={authUser.username} />}
-            {role == USER && <UserDetail name={authUser.username} />}
-            {role == VENDOR && <UserDetail />}
+        <div >
+        <div className=" px-4 absolute inset-0 h-screen  bg-black opacity-50 "></div>
+        <div className="">
+          <div className=" bg-white   absolute inset-0 mt-20 desktop:mt-4 desktop:h-[15rem] desktop:top-20 w-fit m-auto border border-solid desktop:max-w-[1024px]">
+          {
+            userEditOpen?<UserEditForm/>:
+            <UserDetail name={authUser.username} />
+            }
+          </div>
+        </div>
+      </div>
+            ) 
+
+    }
+
+    return (
+      <div >
+        <div className=" px-4 absolute inset-0 h-screen bg-black opacity-50 "></div>
+        <div className="">
+          <div className=" bg-white   absolute inset-0 mt-20 desktop:mt-4 desktop:h-[15rem] desktop:top-20 w-fit m-auto border border-solid desktop:max-w-[1024px]">
+          {
+            userEditOpen?<UserEditForm/>:
+            <UserDetail  />
+            }
           </div>
         </div>
       </div>

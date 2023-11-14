@@ -35,6 +35,9 @@ export default function AuthContextProvider({ children }) {
     const [authUser, setAuthUser] = useState(null)
     const [input, SetInput] = useState({})
     const [userDetailOpen,setUserDetailOpen] = useState(false)
+    const [userEditOpen,setUserEditOpen] = useState(false)
+    const [profileImage,setProfileImage] = useState(null)
+
     const hdl_google_login = (profileObj) => {
         const data = {}
         data.username = profileObj.givenName
@@ -126,10 +129,25 @@ export default function AuthContextProvider({ children }) {
         })
     }
 
-    const hdl_user_edit = (id) =>{
-        axios.post(`/auth/edit/${id}`)
+    
+    const hdl_formdata = () => {
+        const formData = new FormData();
+        for (let k in input) {
+          formData.append(k, input[k]);
+        }
+        return formData;
+      };
 
+
+    const hdl_user_edit = (id) =>{
+        const formData = hdl_formdata(input)
+        axios.put(`/auth/edit/${id}`,formData)
     }
+
+    const hdl_user_edit_picture = e =>{
+        if(e.target.files[[0]]) setProfileImage(e.target.files[[0]])
+    }
+
 
     return (<AuthContext.Provider value={{
         hdl_user_register_submit,
@@ -150,6 +168,12 @@ export default function AuthContextProvider({ children }) {
         hdl_user_edit,
         userDetailOpen,
         setUserDetailOpen,
+        userEditOpen,
+        setUserEditOpen,
+        hdl_user_edit_picture,
+        profileImage,
+        SetInput,
+        setProfileImage,
     }}>
         {children}
     </AuthContext.Provider>)

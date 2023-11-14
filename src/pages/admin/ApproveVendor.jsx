@@ -39,7 +39,7 @@ export default function ApproveVendor(){
             
             {pendingVendor? pendingVendor.map( el=>{
                 return(
-                    <div key={el.id} className="flex gap-32 bg-green-200 justify-center py-8">
+                    <div key={el.id} className="flex gap-32 bg-green-200 justify-center py-8 mt-20">
                         <div>
                             {el.shopName}
                             <h4>Shop location</h4>
