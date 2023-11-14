@@ -5,11 +5,9 @@ export default function RestaurantDetailsForm(
   shopMobile,
   ShopsCategories,
   openingTimes,
-  closingTimes
+  closingTimes,
+  picture
 ) {
-  if (!shop) {
-    return <Loading />;
-  }
   return (
     <>
       <div className="mobile mt-20 bg-gray-200">

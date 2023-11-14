@@ -7,14 +7,13 @@ import {
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useAdmin } from "../../hook/useAdmin";
-import { useEffect } from "react";
 import RejectModal from "../modals/RejectModal";
 import ApprovedModal from "../modals/ApprovedModal";
 
 export default function AdminManagementMain() {
   const {
-    hdl_view_pending_detail,
     hdl_approved_submit,
+    hdl_view_pending_detail,
     hdl_reject_application,
     pendingVendor,
   } = useAdmin();
@@ -40,7 +39,7 @@ export default function AdminManagementMain() {
 
   return (
     <>
-      {pendingVendor.map((el) => {
+      {pendingVendor.map((el) => (
         <div key={el.id} className="mobile: mx-auto container bg-white flex">
           <div className="mobile: container mx-auto flex-col gap-4 rounded-lg ">
             <div className="mobile: py-2 mx-96 items-center bg-primary-400 gap-4 rounded-2xl">
@@ -54,13 +53,13 @@ export default function AdminManagementMain() {
                   {el.shopName}
                 </div>
                 <div className="mobile: gap-2 flex justify-start">
-                  <RiMapPinFill className=" mobile: text-primary-600 w-4 h-4" />
+                  <RiMapPinFill className="mobile: text-primary-600 w-4 h-4" />
                   <div className="mobile: font-bold text-xs text-gray-700">
                     {el.address}
                   </div>
                 </div>
                 <div className="mobile: flex justify-end gap-6 py-2 px-6">
-                  <Link to="admin/restaurant/details">
+                  <Link to="admin/restaurant/details/id">
                     <RiEyeFill
                       className="mobile: text-primary-600 w-4 h-4"
                       onClick={() => {
@@ -88,8 +87,8 @@ export default function AdminManagementMain() {
               </div>
             </div>
           </div>
-        </div>;
-      })}
+        </div>
+      ))}
       {isRejectModalOpen && <RejectModal onClose={handleRejectModalClose} />}
       {isApproveModalOpen && (
         <ApprovedModal onClose={handleApproveModalClose} />
