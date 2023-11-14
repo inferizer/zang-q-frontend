@@ -11,9 +11,9 @@ export default function UserContextProvider({ children }) {
     axios.get("/user/shop").then((res) => {
       setAllShop(res.data.result);
     });
-    axios.get("/user/category").then((res) => {
-      setAllCategory(res.data.result);
-    });
+    // axios.get("/user/category").then((res) => {
+    //   setAllCategory(res.data.result);
+    // });
   }, []);
   const hdl_filter_search = (id) => {
     const [ShopCategories] = allCategory.filter((el) => el.id == id);
@@ -21,7 +21,7 @@ export default function UserContextProvider({ children }) {
   };
 
   const hdl_searchBar = (e) => {
-    setFilter(null)
+    setFilter(null);
     let result = [];
     for (let i of allShop) {
       let input = e.target.value.trim().toUpperCase();
