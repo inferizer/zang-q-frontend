@@ -15,7 +15,8 @@ export default function VendorContextProvider({ children }) {
   const [searchLocation, setSearchLocation] = useState(null);
   const [mapClicked, setMapClicked] = useState(null);
   const [checkInput, setCheckInput] = useState([]);
-  const [cancel, setCancel] = useState([]);
+  const [cancel, setCancel] = useState([])
+  const [value, setValue] = useState(new Date());
 
   useEffect(() => {
     axios
@@ -120,6 +121,8 @@ export default function VendorContextProvider({ children }) {
         allCategory,
         hdl_cancel_queue,
         hdl_accept_queue,
+        value,
+        setValue,
         shopInfo,
         setShopInfo,
       }}
