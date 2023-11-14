@@ -7,15 +7,19 @@ import {
 } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useAdmin } from "../../hook/useAdmin";
+import { useEffect } from "react";
 import RejectModal from "../modals/RejectModal";
 import ApprovedModal from "../modals/ApprovedModal";
 
-export default function AdminManagementMain({ shop }) {
+export default function AdminManagementMain(shopName, address) {
   const {
     hdl_view_pending_detail,
     hdl_approved_submit,
     hdl_reject_application,
   } = useAdmin();
+
+  useEffect(() => {}, []);
+
   const [isRejectModalOpen, setIsRejectModalOpen] = useState(false);
   const [isApproveModalOpen, setIsApproveModalOpen] = useState(false);
 
@@ -37,7 +41,7 @@ export default function AdminManagementMain({ shop }) {
 
   return (
     <>
-      <div key={index} className="mobile: mx-auto container bg-white flex">
+      <div key={shop} className="mobile: mx-auto container bg-white flex">
         <div className="mobile: container mx-auto flex-col gap-4 rounded-lg ">
           <div className="mobile: py-2 mx-96 items-center bg-primary-400 gap-4 rounded-2xl">
             <div className="mobile: text-white text-sm text-center">
@@ -47,7 +51,7 @@ export default function AdminManagementMain({ shop }) {
           <div className="mobile: flex-col grid grid-cols-6 gap-8 justify-center shadow-lg py-6 px-6">
             <div className="mobile: col-start-2 col-span-4 bg-primaryWhite shadow-lg shadow-gray20 rounded-lg py-2 px-6">
               <div className="mobile: text-gray-700 font-semibold py-2">
-                {name}
+                {shopName}
               </div>
               <div className="mobile: gap-2 flex justify-start">
                 <RiMapPinFill className=" mobile: text-primary-600 w-4 h-4" />

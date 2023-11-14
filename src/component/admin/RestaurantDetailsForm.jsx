@@ -1,17 +1,15 @@
 import Loading from "../loading";
-export default function RestaurantDetailsForm({ shop }) {
+export default function RestaurantDetailsForm(
+  shopName,
+  address,
+  shopMobile,
+  ShopsCategories,
+  openingTimes,
+  closingTimes
+) {
   if (!shop) {
     return <Loading />;
   }
-  const {
-    shopName,
-    shopMobile,
-    ShopsCategories,
-    picture,
-    address,
-    openingTimes,
-    closingTimes,
-  } = shop;
   return (
     <>
       <div className="mobile mt-20 bg-gray-200">

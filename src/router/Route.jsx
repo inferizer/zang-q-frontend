@@ -117,14 +117,9 @@ const router = createBrowserRouter([
       </RedirectIfNotAdmin>
     ),
     children: [
-      { path: "/admin/vendor", element: <VendorManagement /> },
+      { path: "/admin/vendor", element: <AdminManagement /> },
       { path: "/admin/pending", element: <ApproveVendor /> },
       { path: "/admin/category", element: <CategoryPage /> },
-      {
-        path: "/admin/management",
-        element: <AdminManagement />,
-      },
-      { path: "/admin/restaurant/details", element: <RestaurantDetailsForm /> },
     ],
   },
   {

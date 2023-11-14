@@ -2,11 +2,10 @@ import { RiMapPinFill, RiEyeFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import Loading from "../loading";
 
-export default function AdminApprovedVendorFrom({ shop }) {
+export default function AdminApprovedVendorFrom({ shopName, address }) {
   if (!shop) {
     return <Loading />;
   }
-  const { name, address } = shop;
   return (
     <div className="mobile: mx-auto container bg-white flex">
       <div className="mobile: container mx-auto flex-col gap-4 rounded-lg ">
@@ -18,7 +17,7 @@ export default function AdminApprovedVendorFrom({ shop }) {
         <div className="mobile: flex-col grid grid-cols-6 gap-8 justify-center shadow-lg py-6 px-6">
           <div className="mobile: col-start-2 col-span-4 bg-primaryWhite shadow-lg shadow-gray20 rounded-lg py-2 px-6">
             <div className="mobile: text-primaryRed font-semibold py-2">
-              {name}
+              {shopName}
             </div>
             <div className="mobile: gap-2 flex justify-start">
               <RiMapPinFill className=" mobile: text-gray60 w-4 h-4" />
