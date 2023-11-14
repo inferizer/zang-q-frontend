@@ -39,12 +39,13 @@ export default function VendorHome() {
           <div >
             <ShopBanner
               name={shop && shop[0]?.shopName}
+              src={shop && shop[0]?.shopPicture}
             />
             <div >
               {data?.map((product, index) => (
                 <div key={index} >
                   <VendorCard
-                    username={product?.user?.username}
+                    username={product.user?.username}
                     src={product.profileImage}
                     queueNumber={product.queueNumber}
                     type={product.type}
@@ -54,7 +55,7 @@ export default function VendorHome() {
               }
             </div>
           </div>
-        </div>
+        </div> 
       </div>
     </section>
   )

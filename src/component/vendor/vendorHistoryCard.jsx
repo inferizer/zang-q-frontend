@@ -1,4 +1,3 @@
-import CalendorIcon from '../../assets/icon/CalendorIcon.png'
 export default function VendorHistoryCard({ src, date, username, status, queue, time }) {
     return (
         <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex shadow-md'>

@@ -6,7 +6,9 @@ export default function ShopBanner({ src, name, markMap }) {
         <div className='w-[363px] px-6 py-3 bg-white rounded-xl justify-start items-center gap-[30px] inline-flex'>
           <div className='w-[89px] h-[89px] bg-white rounded-xl border-2 border-zinc-100 justify-start items-start gap-2.5 flex'>
             {/* shop picture */}
-            <img className='grow shrink rounded-xl' src={src} />
+            <img className='grow shrink rounded-xl' 
+            
+            src={src} />
           </div>
           <div className='grow shrink basis-0 flex-col justify-start items-start gap-2 inline-flex'>
             <div className='self-stretch justify-start items-center gap-2.5 inline-flex'>
@@ -18,20 +20,7 @@ export default function ShopBanner({ src, name, markMap }) {
             <div className='self-stretch justify-start items-center gap-2 inline-flex'>
               {/* google map marker */}
               <div className="grow shrink basis-0 text-neutral-400 text-xs font-bold font-['Nunito Sans']">
-<<<<<<< HEAD
-                <div>
-                  {markMap}ss
-                </div>
-                <div>
-                  {AddQueue? null:<div>
-                    <AddQueueButton text="ปิดรับคิว" />
-                    <AddQueueButton text="เพิ่มคิว" onClick={onClick} />
-                    <button onClick={onClick}>test</button>
-                  </div>}
-                </div>
-=======
                 <div>{markMap}</div>
->>>>>>> a9409ccf17c962509a8b47cba0f0a4a1661f03d3
               </div>
             </div>
           </div>
