@@ -13,7 +13,7 @@ export default function QueueContextProvider({ children }) {
   const [ticketInfo, setTicketInfo] = useState({});
   const [bookingConfirm, setBookingConfirm] = useState(false);
   const [currentQueue, setCurrentQueue] = useState(0);
-  const [historyBooking,setHistoryBooking] = useState([])
+  const [historyBooking, setHistoryBooking] = useState([]);
 
   const [shopInfo, setShopInfo] = useState();
 
@@ -29,6 +29,11 @@ export default function QueueContextProvider({ children }) {
   const bookingQueue = (bookingInfo, seat) => {
     console.log(bookingInfo, seat);
     socket.emit("booking", { bookingInfo }, seat);
+  };
+
+  const onsiteBooking = (bookingInfo, seat, name) => {
+    console.log(bookingInfo, seat, name);
+    socket.emit("booking_for_customer", { bookingInfo }, seat, name);
   };
 
   return (
@@ -57,6 +62,7 @@ export default function QueueContextProvider({ children }) {
         openShop,
         shopInfo,
         setShopInfo,
+        onsiteBooking,
       }}
     >
       {children}

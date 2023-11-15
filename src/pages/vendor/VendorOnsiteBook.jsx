@@ -6,33 +6,22 @@ import React, { useState } from "react";
 import VendorBookingCard from "../../component/vendor/vendorBookingCard";
 import { useQueue } from "../../hook/useQueue";
 import VendorBookingPage from "./VendorBookPage";
+import { getCurrentQueue } from "../../utils/localStorage";
 
 export default function VendorOnsiteBook() {
   const { openShop, shopInfo, setShopInfo } = useQueue();
-  const [queue, setQueue] = useState(1);
   const [bookingList, setBookingList] = useState([]);
   const [addQueue, setAddQueue] = useState(false);
-  const [onsiteInfo, setOnsiteInfo] = useState({
-    data: "onsite booking",
-    // onsite input
-    name: "Mary",
-    // fecth shop data
-    shopId: "",
-    socket: "",
-    type: "one",
-  });
-
-  // console.log(shopInfo);
 
   useEffect(() => {
     socket.on("check_queue", (bookingInfo) => {
       console.log("check", bookingInfo);
-      const currentQueue = localStorage.getItem("currentQueue");
+      const currentQueue = getCurrentQueue();
       bookingInfo.queueNumber = +currentQueue;
       socket.emit("confirm_booking", bookingInfo);
 
       setBookingList((prev) => {
-        const currentQueue = localStorage.getItem("currentQueue");
+        const currentQueue = getCurrentQueue();
         bookingInfo.queueNumber = +currentQueue;
         const updateQueue = +currentQueue + 1;
         localStorage.setItem("currentQueue", updateQueue);
@@ -43,24 +32,7 @@ export default function VendorOnsiteBook() {
     return () => {
       socket.off("check_queue");
     };
-  }, [queue]);
-  // useEffect(() => {
-  //   socket.on("check_queue", (bookingInfo) => {
-  //     console.log("check", bookingInfo);
-  //     setQueue((prevQ) => prevQ + 1);
-  //     bookingInfo.queueNumber = queue;
-  //     socket.emit("confirm_booking", bookingInfo);
-
-  //     setBookingList((prev) => {
-  //       bookingInfo.queueNumber = queue;
-  //       // window.location.reload();
-  //       return [...prev, bookingInfo];
-  //     });
-  //   });
-  //   return () => {
-  //     socket.off("check_queue");
-  //   };
-  // }, [queue]);
+  }, []);
 
   useEffect(() => {
     socket.connect();
