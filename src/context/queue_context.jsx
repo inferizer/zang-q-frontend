@@ -15,8 +15,8 @@ export default function QueueContextProvider({ children }) {
   const [bookingConfirm, setBookingConfirm] = useState(false);
   const [currentQueue, setCurrentQueue] = useState(0);
   const [historyBooking,setHistoryBooking] = useState([])
+  const [shopInfo,setShopInfo] = useState()
 
-  const [shopId, setShopId] = useState();
 
   const selectShop = () => {
     socket.emit("join_room", shopData.id + shopData.name, authUser.id);
@@ -24,7 +24,6 @@ export default function QueueContextProvider({ children }) {
 
   const openShop = async () => {
     socket.emit("join_room", "1");
-    // await axios.patch("/vendor/open");
   };
 
   const bookingQueue = (bookingInfo, seat) => {
@@ -56,8 +55,8 @@ export default function QueueContextProvider({ children }) {
         historyBooking,
         setHistoryBooking,
         openShop,
-        shopId,
-        setShopId,
+        shopInfo,
+        setShopInfo
       }}
     >
       {children}

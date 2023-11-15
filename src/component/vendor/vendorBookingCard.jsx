@@ -46,7 +46,7 @@ export default function VendorBookingCard({ id, queueNumber, type, socket }) {
                     }}
                     id={id}
                   />
-                </div>
+                </div>  
                 <div>
                   <AcceptButton
                     onClick={(e) => {

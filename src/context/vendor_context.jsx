@@ -96,7 +96,6 @@ export default function VendorContextProvider({ children }) {
   const hdl_accept_queue = async (id, socket) => {
     await axios.patch("/vendor/accept", { id }).then((res) => {
       setCancel(res.data.result);
-      socket.to(socket).emit("vendor_cancel");
       window.location.reload();
     });
   };

@@ -6,11 +6,12 @@ import React, { useState } from "react";
 import VendorBookingCard from "../../component/vendor/vendorBookingCard";
 import UserBookingPage from "../user/UserBookPage";
 import { useQueue } from "../../hook/useQueue";
-import { useVendor } from "../../hook/useVendor";
+import HistoryButton from "../../component/buttons/HistoryButton";
+import { Link } from "react-router-dom";
+
 
 export default function VendorOnsiteBook() {
-  const { openShop, shopId, setShopId } = useQueue();
-  const { setShopInfo, shopInfo } = useVendor();
+  const { openShop, shopInfo, setShopInfo } = useQueue();
   const [queue, setQueue] = useState(1);
   const [bookingList, setBookingList] = useState([]);
   const [addQueue, setAddQueue] = useState(false);
@@ -49,8 +50,9 @@ export default function VendorOnsiteBook() {
     socket.on("connect", () => {
       setOnsiteInfo({ ...onsiteInfo, socket: socket.id });
     });
+    axios.patch("/vendor/open");
     axios.get("/vendor/getMyShop").then((res) => {
-      setShopId(res.data.result[0].id);
+      setShopInfo(res.data.result[0]);
     });
   }, []);
 
@@ -93,11 +95,16 @@ export default function VendorOnsiteBook() {
             <div className='mobile:justify-center items-center text-center '>
               <VendorShopBanner
                 name={shopInfo && shopInfo?.shopName}
+                src={shopInfo && shopInfo?.shopPicture}
+
                 onClick={() => {
                   setAddQueue(true);
+                  
                 }}
                 setAddQueue={setAddQueue}
                 addQueue={addQueue}
+                
+               
               />
               <div className='max-w-[363px] mx-auto flex justify-between px-8'>
                 <div className='font-semibold'>Table Type</div>
@@ -119,6 +126,12 @@ export default function VendorOnsiteBook() {
           </div>
         </section>
       )}
+      <div className=" justify-center flex p-10">
+        <Link to={'/vendor/history'}>
+          <HistoryButton
+          text='check Queue Button'
+        /></Link>
+      </div>
     </>
   );
 }
