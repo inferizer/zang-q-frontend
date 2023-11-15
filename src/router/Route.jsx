@@ -39,7 +39,7 @@ import AdminManagement from "../pages/admin/AdminManagement";
 import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
-
+import VendorHistory from "../pages/vendor/VendorHistory";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,6 +102,7 @@ const router = createBrowserRouter([
       },
       { path: "/vendor/home", element: <VendorHome /> },
       { path: "/vendor/book", element: <VendorOnsiteBook /> },
+      { path: "/vendor/history", element: <VendorHistory/> }
     ],
   },
   {

@@ -19,14 +19,14 @@ export default function ApprovedModal({ children, open, onClose }) {
     <>
       {open && (
         <>
-          <div className=" mobile: fixed inset-0 mx-auto backdrop-opacity-30 max-h-screen">
-            <div className=" mobile: fixed inset-0 w-full max-w-lg p-5 mx-auto my-auto rounded-xl shadow-lg bg-white">
+          <div className=" mobile:fixed inset-0 mx-auto backdrop-opacity-30 max-h-screen">
+            <div className=" mobile:fixed inset-0 w-full max-w-lg p-5 mx-auto my-auto rounded-xl shadow-lg bg-white">
               <div className="">
                 <div>
                   <RiDeleteBin5Fill className=" text-primary-600 items-center" />
                 </div>
-                <div className=" mobile: text-center p-5 flex-auto justify-center">
-                  <h2 className=" mobile: text-xl text-gray-600 font-bold py-4">
+                <div className=" mobile:text-center p-5 flex-auto justify-center">
+                  <h2 className=" mobile:text-xl text-gray-600 font-bold py-4">
                     Are you sure?
                   </h2>
                   <p className=" mobile: text-sm text-gray-700 px-8">

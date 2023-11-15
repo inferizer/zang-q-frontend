@@ -37,6 +37,7 @@ export default function AuthContextProvider({ children }) {
   const [initLoading, setInitLoading] = useState(true);
   const [authUser, setAuthUser] = useState(null);
   const [input, SetInput] = useState({});
+  const [userDetailOpen ,setUserDetailOpen] = useState(false)
   const hdl_google_login = (profileObj) => {
     const data = {};
     data.username = profileObj.givenName;
@@ -120,7 +121,6 @@ export default function AuthContextProvider({ children }) {
         addAccessToken(res.data.accessToken);
         setAuthUser(res.data.user);
         SetInput({});
-        window.location.reload();
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -145,6 +145,8 @@ export default function AuthContextProvider({ children }) {
         failGoogle,
         setAuthUser,
         hdl_admin_login_submit,
+        userDetailOpen,
+        setUserDetailOpen
       }}
     >
       {children}
