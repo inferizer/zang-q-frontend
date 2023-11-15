@@ -3,7 +3,7 @@ import socket from "../../utils/socket";
 
 export default function UserTicketPage() {
   const { ticketInfo, setTicketInfo } = useQueue();
-
+  console.log(ticketInfo);
   const cancelQueue = () => {
     setTicketInfo({});
     //axios.post("/user/cancel") DB_reservations delete
@@ -25,7 +25,7 @@ export default function UserTicketPage() {
         <p>Date: {ticketInfo.date}</p>
         <p>Time: {ticketInfo.time}</p>
       </div>
-      <button onClick={cancelQueue} className='border  p-2 '>
+      <button onClick={cancelQueue} className='border p-2 '>
         Cancel Queue
       </button>
     </div>

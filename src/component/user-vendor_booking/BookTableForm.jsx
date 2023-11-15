@@ -6,6 +6,7 @@ import { hdlAddSeat, hdlRmvSeat } from "../../utils/seat";
 import socket from "../../utils/socket";
 import TableType from "./TableType";
 import UserTicketPage from "../../pages/user/UserTicketPage";
+import axios from "axios";
 
 export default function UserBookTableForm() {
   const {
@@ -13,9 +14,7 @@ export default function UserBookTableForm() {
     setSeat,
     minSeat,
     maxSeat,
-    tableType,
     setTableType,
-    selectShop,
     bookingQueue,
     ticketInfo,
     setTicketInfo,
@@ -29,8 +28,8 @@ export default function UserBookTableForm() {
     socket: "",
     type: "one",
   });
-  console.log(ticketInfo);
 
+  console.log(bookingInfo);
   useEffect(() => {
     socket.connect();
     socket.on("connect", () => {
@@ -38,6 +37,16 @@ export default function UserBookTableForm() {
     });
   }, []);
 
+  // fecth ticket
+  useEffect(() => {
+    console.log("fetch ticket");
+    axios
+      .post("/user/ticket", bookingInfo)
+      .then((res) => {
+        setTicketInfo(res.data.result);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   const hdlAddSeat1 = () => {
     hdlAddSeat(seat, setSeat, maxSeat);
   };
@@ -57,13 +66,17 @@ export default function UserBookTableForm() {
   };
 
   socket.on("ticket", (bookingConfirm) => {
-    console.log("booking_confirm", bookingConfirm);
     setTicketInfo(bookingConfirm);
+  });
+
+  socket.on("cancel_ticket", () => {
+    console.log("cancel ticket");
+    setTicketInfo({});
   });
 
   return (
     <>
-      {ticketInfo.hasOwnProperty("queueNumber") ? (
+      {ticketInfo?.hasOwnProperty("queueNumber") ? (
         <UserTicketPage />
       ) : (
         <form
@@ -73,7 +86,7 @@ export default function UserBookTableForm() {
           <div className='h-[150px] px-4 py-3 mx-auto flex-col justify-start items-start gap-2 flex'>
             {/* type header */}
             <div className="self-stretch text-black text-base font-medium font-['IBM Plex Sans Thai']">
-              ประเภท
+              Table Type
             </div>
             <div className='self-stretch rounded-2xl justify-center items-start inline-flex'>
               {/* TableType */}
@@ -83,7 +96,7 @@ export default function UserBookTableForm() {
           {/* seat number section */}
           <div className='h-[137px] w-full px-6 py-3 mx-auto flex-col justify-start items-start gap-2 flex'>
             <div className="self-stretch text-black text-base font-medium font-['IBM Plex Sans Thai']">
-              จำนวนที่นั่ง
+              Amount of Peoples
             </div>
             <div className='self-stretch rounded-2xl justify-center items-center gap-4 inline-flex'>
               {/* - icon */}
@@ -115,7 +128,7 @@ export default function UserBookTableForm() {
 
           {/* booking btn */}
           <button className='mobile:  w-[350px] mx-auto flex justify-center items-center focus:outline-none text-white bg-primary-400 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 '>
-            จอง
+            Booking
           </button>
         </form>
       )}
