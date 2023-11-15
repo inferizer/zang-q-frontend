@@ -37,6 +37,8 @@ import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 import VendorHistory from "../pages/vendor/VendorHistory";
+import AdminManagementMain from "../component/admin/AdminManagementMain";
+import AdminApprovedVendorForm from "../component/admin/AdminApprovedVendorForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -112,7 +114,7 @@ const router = createBrowserRouter([
       </RedirectIfNotAdmin>
     ),
     children: [
-      { path: "/admin/vendor", element: <AdminManagement /> },
+      { path: "/admin/vendor", element: <AdminManagementMain /> },
       { path: "/admin/approved", element: <AdminApprovedVendorForm /> },
       { path: "/admin/pending", element: <ApproveVendor /> },
       { path: "/admin/category", element: <CategoryPage /> },
