@@ -71,7 +71,9 @@ export default function AuthContextProvider({ children }) {
         addAccessToken(res.data.accessToken);
         setAuthUser(res.data.user);
       })
-      .catch(console.log)
+      .catch(error=>{
+        throw(error)
+      })
       .finally(() => {
         setInitLoading(false);
       });
@@ -86,6 +88,8 @@ export default function AuthContextProvider({ children }) {
       })
       .catch((error) => {
         console.log(error.response.data.message);
+      toast.error("username or password was wrong!", error.response.data.message);
+        throw error
       });
   };
   const hdl_vendor_login_submit = () => {
@@ -123,10 +127,11 @@ export default function AuthContextProvider({ children }) {
 
     const hdl_admin_login_submit = () => {
         axios.post('/admin/login', input).then(res => {
+            
             addAccessToken(res.data.accessToken)
             setAuthUser(res.data.user)
             SetInput({})
-            window.location.reload()
+    
         }
         ).catch(error => {
             console.log(error.response.data.message)
@@ -145,7 +150,17 @@ export default function AuthContextProvider({ children }) {
 
     const hdl_user_edit = (id) =>{
         const formData = hdl_formdata(input)
-        axios.put(`/auth/edit/${id}`,formData)
+        if(profileImage) formData.append("profileImage",profileImage)
+      setInitLoading(true)
+        axios.put(`/auth/edit/${id}`,formData).then(res=>{
+          setAuthUser(res.data.result)
+          setUserEditOpen(false)
+          
+        }).catch(err=>{
+          console.log(err.response.data.message)
+        }).finally(
+          setInitLoading(false)
+        )
     }
 
     const hdl_user_edit_picture = e =>{
