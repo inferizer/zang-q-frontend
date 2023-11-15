@@ -10,6 +10,7 @@ import { RiCheckFill } from "react-icons/ri";
 const Calendar = () => {
   const [value, setValue] = useState(new Date());
   const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
+  console.log(value)
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <StaticDatePicker
@@ -18,7 +19,8 @@ const Calendar = () => {
         orientation="portrait"
         value={value}
         disableFuture
-        onChange={(newValue) => setValue(newValue)}
+        onChange={(newValue) => 
+          setValue(newValue)}
         renderInput={(params) => {
           <TextField {...params} />;
         }}

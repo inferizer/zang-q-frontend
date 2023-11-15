@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TimePicker from "react-time-picker";
 
-function App() {
+function TimePicker() {
   const [time, setTime] = useState("10:00");
 
   const onChange = (value) => {
@@ -21,4 +21,4 @@ function App() {
   );
 }
 
-export default App;
+export default TimePicker;

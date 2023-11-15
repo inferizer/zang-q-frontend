@@ -23,7 +23,6 @@ import VendorApplication from "../pages/vendor/VendorApplication";
 import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
-import BookingPage from "../pages/user/BookingPage";
 import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
@@ -37,8 +36,7 @@ import QueueContextProvider from "../context/queue_context";
 import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
-import AdminManagement from "../pages/admin/AdminManagement";
-import AdminApprovedVendorForm from "../component/admin/AdminApprovedVendorForm";
+import VendorHistory from "../pages/vendor/VendorHistory";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -47,7 +45,6 @@ const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },
       { path: "test/book", element: <UserBookPage /> },
-      { path: "user", element: <BookingPage /> },
       { path: "shop", element: <VendorQueueManagement /> },
     ],
   },
@@ -85,11 +82,11 @@ const router = createBrowserRouter([
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
-        <QueueContextProvider>
-          <VendorContextProvider>
+        <VendorContextProvider>
+          <QueueContextProvider>
             <Layout />
-          </VendorContextProvider>
-        </QueueContextProvider>
+          </QueueContextProvider>
+        </VendorContextProvider>
       </RedirectIfNotVendor>
     ),
     children: [
@@ -101,7 +98,8 @@ const router = createBrowserRouter([
         element: <VendorApplicationEnd />,
       },
       { path: "/vendor/home", element: <VendorHome /> },
-      { path: "/vendor/booking", element: <VendorOnsiteBook /> },
+      { path: "/vendor/book", element: <VendorOnsiteBook /> },
+      { path: "/vendor/history", element: <VendorHistory /> },
     ],
   },
   {
