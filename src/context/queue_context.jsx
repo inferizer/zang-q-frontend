@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { createContext } from "react";
 import socket from "../utils/socket";
-import axios from "axios";
 
 export const QueueContext = createContext();
 
@@ -56,7 +55,7 @@ export default function QueueContextProvider({ children }) {
         setHistoryBooking,
         openShop,
         shopInfo,
-        setShopInfo
+        setShopInfo,
       }}
     >
       {children}

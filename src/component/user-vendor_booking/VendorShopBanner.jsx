@@ -4,6 +4,7 @@ import axios from "../../config/axios";
 export default function ShopBanner({ src, name, onClick, AddQueue, markMap }) {
   const handleCloseQueue = () => {
     axios.patch('/vendor/close')
+    localStorage.setItem('currentQueue',1)
   }
   return (
     <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex'>

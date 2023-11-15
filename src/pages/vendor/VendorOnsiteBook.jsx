@@ -4,11 +4,12 @@ import VendorShopBanner from "../../component/user-vendor_booking/VendorShopBann
 import axios from "../../config/axios";
 import React, { useState } from "react";
 import VendorBookingCard from "../../component/vendor/vendorBookingCard";
-import UserBookingPage from "../user/UserBookPage";
 import { useQueue } from "../../hook/useQueue";
 import HistoryButton from "../../component/buttons/HistoryButton";
 import { Link } from "react-router-dom";
 
+import VendorBookingPage from "./VendorBookPage";
+import { getCurrentQueue } from "../../utils/localStorage";
 
 export default function VendorOnsiteBook() {
   const { openShop, shopInfo, setShopInfo } = useQueue();
@@ -25,16 +26,20 @@ export default function VendorOnsiteBook() {
     type: "one",
   });
 
+  // console.log(shopInfo);
+
   useEffect(() => {
     socket.on("check_queue", (bookingInfo) => {
-      console.log(bookingInfo);
       console.log("check", bookingInfo);
-      setQueue((prevQ) => prevQ + 1);
-      bookingInfo.queueNumber = queue;
+      const currentQueue = getCurrentQueue();
+      bookingInfo.queueNumber = +currentQueue;
       socket.emit("confirm_booking", bookingInfo);
 
       setBookingList((prev) => {
-        bookingInfo.queueNumber = queue;
+        const currentQueue = getCurrentQueue()
+        bookingInfo.queueNumber = +currentQueue;
+        const updateQueue = +currentQueue + 1;
+        localStorage.setItem("currentQueue", updateQueue);
         window.location.reload();
         return [...prev, bookingInfo];
       });
@@ -43,6 +48,23 @@ export default function VendorOnsiteBook() {
       socket.off("check_queue");
     };
   }, [queue]);
+  // useEffect(() => {
+  //   socket.on("check_queue", (bookingInfo) => {
+  //     console.log("check", bookingInfo);
+  //     setQueue((prevQ) => prevQ + 1);
+  //     bookingInfo.queueNumber = queue;
+  //     socket.emit("confirm_booking", bookingInfo);
+
+  //     setBookingList((prev) => {
+  //       bookingInfo.queueNumber = queue;
+  //       // window.location.reload();
+  //       return [...prev, bookingInfo];
+  //     });
+  //   });
+  //   return () => {
+  //     socket.off("check_queue");
+  //   };
+  // }, [queue]);
 
   useEffect(() => {
     socket.connect();
@@ -56,20 +78,11 @@ export default function VendorOnsiteBook() {
     });
   }, []);
 
-  // useEffect(() => {
-  //   setOnsiteInfo({
-  //     ...onsiteInfo,
-  //     shopId: shopInfo?.id,
-  //   });
-  // }, []);
-
   useEffect(() => {
-    console.log("reservations");
     axios
       .get("/vendor/findallshop")
       .then((res) => {
         setBookingList(res.data.result);
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -88,9 +101,9 @@ export default function VendorOnsiteBook() {
   return (
     <>
       {addQueue ? (
-        <UserBookingPage />
+        <VendorBookingPage />
       ) : (
-        <section className='w-screen bg-gray-50 px-4'>
+        <section className='w-screen bg-gray-50 px-4 desktop:mt-[5rem]'>
           <div className='max-w-[800px] mx-auto desktop:max-w-[1024px]'>
             <div className='mobile:justify-center items-center text-center '>
               <VendorShopBanner
