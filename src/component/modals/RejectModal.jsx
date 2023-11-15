@@ -23,17 +23,17 @@ export default function RejectModal({ children, open, onClose }) {
     <>
       {open && (
         <>
-          <div className=" mobile: mx-auto fixed inset-0 backdrop-opacity-30 max-h-screen">
+          <div className=" mobile: mx-auto fixed inset-0 z-20 backdrop-opacity-30 max-h-screen">
             <div className=" mobile: w-full fixed inset-0 max-w-lg p-5 mx-auto my-auto rounded-xl shadow-lg bg-white">
               <div className="">
                 <div className=" mobile: flex items-center justify-center">
-                  <RiDeleteBin5Fill className=" mobile: flex text-primary500 " />
+                  <RiDeleteBin5Fill className=" mobile: flex text-primary-500 " />
                 </div>
                 <div className="mobile: text-center p-5 flex-auto justify-center">
-                  <h2 className="mobile: text-xl font-bold py-4">
+                  <h2 className="mobile: text-xl text-gray-700 font-bold py-4">
                     Are you sure?
                   </h2>
-                  <p className="mobile: text-sm text-gray60 px-8">
+                  <p className="mobile: text-sm text-gray-700 px-8">
                     Do you really want to reject this shop's application? This
                     process cannot be undone.
                   </p>
@@ -48,7 +48,7 @@ export default function RejectModal({ children, open, onClose }) {
                   <button
                     onClick={handleReject}
                     disabled={isRejected}
-                    className={`mobile: mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-primary-600 rounded-full hover:shadow-lg hover: bg-primary-200 ${
+                    className={`mobile: mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-primary-500 rounded-full hover:shadow-lg hover: bg-primary-200 ${
                       isRejected && "opacity-50 cursor-not-allowed"
                     }`}
                   >

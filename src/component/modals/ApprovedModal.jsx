@@ -19,14 +19,14 @@ export default function ApprovedModal({ children, open, onClose }) {
     <>
       {open && (
         <>
-          <div className=" mobile: fixed inset-0 mx-auto backdrop-opacity-30 max-h-screen">
+          <div className=" mobile: fixed inset-0 z-20 mx-auto backdrop-opacity-30 max-h-screen">
             <div className=" mobile: fixed inset-0 w-full max-w-lg p-5 mx-auto my-auto rounded-xl shadow-lg bg-white">
               <div className="">
                 <div>
                   <RiDeleteBin5Fill className=" text-primary-600 items-center" />
                 </div>
                 <div className=" mobile: text-center p-5 flex-auto justify-center">
-                  <h2 className=" mobile: text-xl text-gray-600 font-bold py-4">
+                  <h2 className=" mobile: text-xl text-gray-700 font-bold py-4">
                     Are you sure?
                   </h2>
                   <p className=" mobile: text-sm text-gray-700 px-8">
@@ -36,7 +36,7 @@ export default function ApprovedModal({ children, open, onClose }) {
                 <div className=" mobile: p-3 mt-2 text-center space-x-4 md:block">
                   <button
                     onClick={onClose}
-                    className=" mobile: mb-2 md:mb-0 bg-primary-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-white rounded-full hover:shadow-lg hover: bg-primary-200"
+                    className=" mobile: mb-2 md:mb-0 bg-primary-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-white rounded-full hover:shadow-lg hover: bg-primary-200 cursor-pointer"
                   >
                     Cancel
                   </button>

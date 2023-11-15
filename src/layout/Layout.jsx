@@ -10,7 +10,7 @@ export default function Layout() {
     <div className=" relative">
       <Header />
       <Outlet />
-      <AdminManagement />
+
       {userDetailOpen && <UserDetailModal />}
     </div>
   );

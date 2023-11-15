@@ -14,9 +14,6 @@ import MapStore from "../pages/register/MapStore";
 import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
 // import { element } from "prop-types";
-import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
-import AdminManagementVendorForm from "../component/admin/AdminManagementMain";
-import AdminApprovedVendorFrom from "../component/admin/AdminApprovedVendorForm";
 import VendorFooter from "../component/footers/VendorFooter";
 import UserFooter from "../component/footers/UserFooter";
 import Calender from "../component/Calender";
@@ -28,7 +25,6 @@ import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
 import BookingPage from "../pages/user/BookingPage";
 import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
-import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
 import ApproveVendor from "../pages/admin/ApproveVendor";
@@ -42,6 +38,7 @@ import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 import AdminManagement from "../pages/admin/AdminManagement";
+import AdminApprovedVendorForm from "../component/admin/AdminApprovedVendorForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -118,6 +115,7 @@ const router = createBrowserRouter([
     ),
     children: [
       { path: "/admin/vendor", element: <AdminManagement /> },
+      { path: "/admin/approved", element: <AdminApprovedVendorForm /> },
       { path: "/admin/pending", element: <ApproveVendor /> },
       { path: "/admin/category", element: <CategoryPage /> },
     ],
