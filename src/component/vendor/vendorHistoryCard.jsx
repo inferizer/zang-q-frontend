@@ -27,8 +27,8 @@ export default function VendorHistoryCard({ src, date, username, status, queue, 
                                 {time}
                             </div>
                         </div>
-                        <div className={status === "Accepted" ? 'text-green-500' : status === "cancelled" ? 'text-red-500' : ' text-orange-500'}>
-                            {status}
+                        <div className={status === "accepted" ? 'text-green-500' : status === "cancelled" ? 'text-red-500' : ' text-orange-500'}>
+                            {status[0].toUpperCase()+status.substring(1,status.length)}
                         </div>
                     </div>
                 </div>
