@@ -13,20 +13,8 @@ import { getCurrentQueue } from "../../utils/localStorage";
 
 export default function VendorOnsiteBook() {
   const { openShop, shopInfo, setShopInfo } = useQueue();
-  const [queue, setQueue] = useState(1);
   const [bookingList, setBookingList] = useState([]);
   const [addQueue, setAddQueue] = useState(false);
-  const [onsiteInfo, setOnsiteInfo] = useState({
-    data: "onsite booking",
-    // onsite input
-    name: "Mary",
-    // fecth shop data
-    shopId: "",
-    socket: "",
-    type: "one",
-  });
-
-  // console.log(shopInfo);
 
   useEffect(() => {
     socket.on("check_queue", (bookingInfo) => {
@@ -36,7 +24,7 @@ export default function VendorOnsiteBook() {
       socket.emit("confirm_booking", bookingInfo);
 
       setBookingList((prev) => {
-        const currentQueue = getCurrentQueue()
+        const currentQueue = getCurrentQueue();
         bookingInfo.queueNumber = +currentQueue;
         const updateQueue = +currentQueue + 1;
         localStorage.setItem("currentQueue", updateQueue);
@@ -47,24 +35,7 @@ export default function VendorOnsiteBook() {
     return () => {
       socket.off("check_queue");
     };
-  }, [queue]);
-  // useEffect(() => {
-  //   socket.on("check_queue", (bookingInfo) => {
-  //     console.log("check", bookingInfo);
-  //     setQueue((prevQ) => prevQ + 1);
-  //     bookingInfo.queueNumber = queue;
-  //     socket.emit("confirm_booking", bookingInfo);
-
-  //     setBookingList((prev) => {
-  //       bookingInfo.queueNumber = queue;
-  //       // window.location.reload();
-  //       return [...prev, bookingInfo];
-  //     });
-  //   });
-  //   return () => {
-  //     socket.off("check_queue");
-  //   };
-  // }, [queue]);
+  }, []);
 
   useEffect(() => {
     socket.connect();
@@ -109,15 +80,11 @@ export default function VendorOnsiteBook() {
               <VendorShopBanner
                 name={shopInfo && shopInfo?.shopName}
                 src={shopInfo && shopInfo?.shopPicture}
-
                 onClick={() => {
                   setAddQueue(true);
-                  
                 }}
                 setAddQueue={setAddQueue}
                 addQueue={addQueue}
-                
-               
               />
               <div className='max-w-[363px] mx-auto flex justify-between px-8'>
                 <div className='font-semibold'>Table Type</div>
@@ -139,11 +106,10 @@ export default function VendorOnsiteBook() {
           </div>
         </section>
       )}
-      <div className=" justify-center flex p-10">
-        <Link to={'/vendor/history'}>
-          <HistoryButton
-          text='check Queue Button'
-        /></Link>
+      <div className=' justify-center flex p-10'>
+        <Link to={"/vendor/history"}>
+          <HistoryButton text='check Queue Button' />
+        </Link>
       </div>
     </>
   );
