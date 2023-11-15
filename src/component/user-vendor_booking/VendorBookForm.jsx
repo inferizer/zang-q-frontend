@@ -3,11 +3,27 @@ import { useQueue } from "../../hook/useQueue";
 import { hdlAddSeat, hdlRmvSeat } from "../../utils/seat";
 import socket from "../../utils/socket";
 import TableType from "./TableType";
-import UserTicketPage from "../../pages/user/UserTicketPage";
+import { useState } from "react";
 
-export default function VendorBookForm() {
-  const { seat, setSeat, minSeat, maxSeat, setTableType, bookingQueue } =
-    useQueue();
+export default function VendorBookForm({ nameInput }) {
+  const {
+    seat,
+    setSeat,
+    minSeat,
+    maxSeat,
+    setTableType,
+    bookingQueue,
+    shopInfo,
+    onsiteBooking,
+  } = useQueue();
+
+  const [onsiteInfo, setOnsiteInfo] = useState({
+    data: "onsite booking",
+    shopId: shopInfo.id,
+    type: "one",
+  });
+  console.log(nameInput);
+  console.log(onsiteInfo);
 
   const hdlAddSeat1 = () => {
     hdlAddSeat(seat, setSeat, maxSeat);
@@ -19,12 +35,12 @@ export default function VendorBookForm() {
 
   const hdlTableType = (selectTableType) => {
     setTableType(selectTableType);
-    setBookingInfo({ ...bookingInfo, type: selectTableType });
+    setOnsiteInfo({ ...onsiteInfo, type: selectTableType });
   };
 
   const hdlSubmit = (e) => {
     e.preventDefault();
-    bookingQueue(bookingInfo, seat);
+    onsiteBooking(onsiteInfo, seat, nameInput);
   };
 
   return (
@@ -78,7 +94,7 @@ export default function VendorBookForm() {
 
         {/* booking btn */}
         <button className='mobile:  w-[350px] mx-auto flex justify-center items-center focus:outline-none text-white bg-primary-400 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 '>
-          Booking
+          Onsite Booking
         </button>
       </form>
     </>
