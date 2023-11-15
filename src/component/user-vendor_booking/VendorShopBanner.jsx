@@ -1,5 +1,11 @@
+import { Link } from "react-router-dom";
 import AddQueueButton from "../buttons/AddQueueButton";
+import axios from "../../config/axios";
 export default function ShopBanner({ src, name, onClick, AddQueue, markMap }) {
+  const handleCloseQueue = () => {
+    axios.patch('/vendor/close')
+    localStorage.setItem('currentQueue',1)
+  }
   return (
     <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex'>
       <div className='h-[133px] px-3.5 py-2.5 flex-col justify-start items-start gap-2.5 flex'>
@@ -22,7 +28,9 @@ export default function ShopBanner({ src, name, onClick, AddQueue, markMap }) {
                 <div>
                   {AddQueue ? null : (
                     <div className='flex'>
-                      <AddQueueButton text='Close Queue' />
+                      <Link to={'/vendor/home'}>
+                        <AddQueueButton text='Close Queue' onClick={handleCloseQueue}/>
+                        </Link>
                       <AddQueueButton text='Add Queue' onClick={onClick} />
                     </div>
                   )}
