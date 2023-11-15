@@ -84,19 +84,16 @@ export default function VendorContextProvider({ children }) {
     }
   };
 
-  const hdl_cancel_queue = async (id, userSocket) => {
-    console.log(userSocket);
+  const hdl_cancel_queue = async (id) => {
     await axios.patch("/vendor/canceled", { id }).then((res) => {
       setCancel(res.data.result);
-      socket.emit(userSocket);
       window.location.reload();
     });
   };
 
-  const hdl_accept_queue = async (id, socket) => {
+  const hdl_accept_queue = async (id) => {
     await axios.patch("/vendor/accept", { id }).then((res) => {
       setCancel(res.data.result);
-      socket.to(socket).emit("vendor_cancel");
       window.location.reload();
     });
   };

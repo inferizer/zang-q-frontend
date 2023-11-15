@@ -4,13 +4,11 @@ import VendorShopBanner from "../../component/user-vendor_booking/VendorShopBann
 import axios from "../../config/axios";
 import React, { useState } from "react";
 import VendorBookingCard from "../../component/vendor/vendorBookingCard";
-import UserBookingPage from "../user/UserBookPage";
 import { useQueue } from "../../hook/useQueue";
-import { useVendor } from "../../hook/useVendor";
+import VendorBookingPage from "./VendorBookPage";
 
 export default function VendorOnsiteBook() {
-  const { openShop, shopId, setShopId } = useQueue();
-  const { setShopInfo, shopInfo } = useVendor();
+  const { openShop, shopInfo, setShopInfo } = useQueue();
   const [queue, setQueue] = useState(1);
   const [bookingList, setBookingList] = useState([]);
   const [addQueue, setAddQueue] = useState(false);
@@ -24,16 +22,20 @@ export default function VendorOnsiteBook() {
     type: "one",
   });
 
+  // console.log(shopInfo);
+
   useEffect(() => {
     socket.on("check_queue", (bookingInfo) => {
-      console.log(bookingInfo);
       console.log("check", bookingInfo);
-      setQueue((prevQ) => prevQ + 1);
-      bookingInfo.queueNumber = queue;
+      const currentQueue = localStorage.getItem("currentQueue");
+      bookingInfo.queueNumber = +currentQueue;
       socket.emit("confirm_booking", bookingInfo);
 
       setBookingList((prev) => {
-        bookingInfo.queueNumber = queue;
+        const currentQueue = localStorage.getItem("currentQueue");
+        bookingInfo.queueNumber = +currentQueue;
+        const updateQueue = +currentQueue + 1;
+        localStorage.setItem("currentQueue", updateQueue);
         window.location.reload();
         return [...prev, bookingInfo];
       });
@@ -42,6 +44,23 @@ export default function VendorOnsiteBook() {
       socket.off("check_queue");
     };
   }, [queue]);
+  // useEffect(() => {
+  //   socket.on("check_queue", (bookingInfo) => {
+  //     console.log("check", bookingInfo);
+  //     setQueue((prevQ) => prevQ + 1);
+  //     bookingInfo.queueNumber = queue;
+  //     socket.emit("confirm_booking", bookingInfo);
+
+  //     setBookingList((prev) => {
+  //       bookingInfo.queueNumber = queue;
+  //       // window.location.reload();
+  //       return [...prev, bookingInfo];
+  //     });
+  //   });
+  //   return () => {
+  //     socket.off("check_queue");
+  //   };
+  // }, [queue]);
 
   useEffect(() => {
     socket.connect();
@@ -50,24 +69,15 @@ export default function VendorOnsiteBook() {
       setOnsiteInfo({ ...onsiteInfo, socket: socket.id });
     });
     axios.get("/vendor/getMyShop").then((res) => {
-      setShopId(res.data.result[0].id);
+      setShopInfo(res.data.result[0]);
     });
   }, []);
 
-  // useEffect(() => {
-  //   setOnsiteInfo({
-  //     ...onsiteInfo,
-  //     shopId: shopInfo?.id,
-  //   });
-  // }, []);
-
   useEffect(() => {
-    console.log("reservations");
     axios
       .get("/vendor/findallshop")
       .then((res) => {
         setBookingList(res.data.result);
-        console.log(res);
       })
       .catch((err) => {
         console.log(err);
@@ -86,7 +96,7 @@ export default function VendorOnsiteBook() {
   return (
     <>
       {addQueue ? (
-        <UserBookingPage />
+        <VendorBookingPage />
       ) : (
         <section className='w-screen bg-gray-50 px-4'>
           <div className='max-w-[800px] mx-auto desktop:max-w-[1024px]'>
