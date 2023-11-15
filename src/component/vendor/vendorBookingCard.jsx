@@ -42,7 +42,7 @@ export default function VendorBookingCard({ id, queueNumber, type, socket }) {
                 <div>
                   <CancelButton
                     onClick={(e) => {
-                      hdl_cancel_queue(e.target.id, socket);
+                      hdl_cancel_queue(e.target.id);
                     }}
                     id={id}
                   />
@@ -50,7 +50,7 @@ export default function VendorBookingCard({ id, queueNumber, type, socket }) {
                 <div>
                   <AcceptButton
                     onClick={(e) => {
-                      hdl_accept_queue(e.target.id, socket);
+                      hdl_accept_queue(e.target.id);
                     }}
                     id={id}
                     className='text-green-500'

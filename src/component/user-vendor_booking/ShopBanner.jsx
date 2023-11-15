@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
-export default function ShopBanner({ src, name, markMap }) {
+import shopDefault from "../../assets/image/shop-default.png";
+export default function ShopBanner({ src = shopDefault, name, markMap }) {
   return (
     <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex'>
       <div className='h-[133px] px-3.5 py-2.5 flex-col justify-start items-start gap-2.5 flex'>
