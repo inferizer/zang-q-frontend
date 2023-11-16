@@ -28,9 +28,9 @@ export default function ShopList() {
     setSearchBarResult,
   } = useUser();
 
-  const { activeMarkers, setActiveMarkers, disableMarkers, setDisableMarkers, loadingLocation, setLoadingLocation } = useMap()
+  const { activeMarkers, setActiveMarkers, disableMarkers, setDisableMarkers, loadingLocation, setLoadingLocation, } = useMap()
   const { initLoading, setInitLoading } = useAuth()
-
+  
   const [isShowMap, setIsShowMap] = useState(false)
 
   const navigate = useNavigate();
@@ -108,11 +108,20 @@ export default function ShopList() {
             {loadingLocation && <Loading className="h-auto p-10" />}
 
             {searchBarResult
-              ? searchBarResult.map((el) => (
+              ? searchBarResult.map((el) => {
+                
                 <ShopCard storeName={el.shopName} img={el.shopPicture} />
-              ))
+              }  
+                
+              )
               : filter
                 ? filterResult.ShopsCategories.map((el) => {
+
+                  for(let i of disableMarkers){
+                    if(i.id == el.shop.id){
+                      return null
+                    }
+                  }
                   if (el.shop.isApprove == "approved") {
                     return (
                       <ShopCard

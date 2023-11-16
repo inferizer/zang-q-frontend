@@ -7,7 +7,7 @@ export default function ShopMap() {
 
     const { authUser } = useAuth();
 
-    const { allShop, } = useUser();
+    const { allShop } = useUser();
 
     const data = [
         { lat: 13.7582, lng: 100.54, title: "ตี๋น้อย" },
