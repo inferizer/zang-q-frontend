@@ -14,7 +14,6 @@ import MapStore from "../pages/register/MapStore";
 import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
 // import { element } from "prop-types";
-import RestaurantDetailsForm from "../component/admin/RestaurantDetailsForm";
 import VendorFooter from "../component/footers/VendorFooter";
 import UserFooter from "../component/footers/UserFooter";
 import Calender from "../component/Calender";
@@ -25,21 +24,20 @@ import RedirectIfNotVendor from "../redirect/redirectIfNotVendor";
 import VendorContextProvider from "../context/vendor_context";
 import VendorLanding from "../pages/vendor/VendorLanding";
 import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
-import VendorManagement from "../pages/admin/VendorsManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
-import ApproveVendor from "../pages/admin/ApproveVendor";
+import ApprovedVendorList from "../pages/admin/ApprovedVendorList";
 import CategoryPage from "../pages/admin/categoryCRUD";
 import RedirectIfNotUser from "../redirect/redirectIfNotUser";
 import UserContextProvider from "../context/user_context";
 import ShopList from "../pages/user/ShopList";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
-import AdminManagement from "../pages/admin/AdminManagement";
 import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 import VendorHistory from "../pages/vendor/VendorHistory";
+import AdminManagement from "../pages/admin/AdminManagement";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -102,7 +100,7 @@ const router = createBrowserRouter([
       },
       { path: "/vendor/home", element: <VendorHome /> },
       { path: "/vendor/book", element: <VendorOnsiteBook /> },
-      { path: "/vendor/history", element: <VendorHistory/> }
+      { path: "/vendor/history", element: <VendorHistory /> },
     ],
   },
   {
@@ -115,13 +113,9 @@ const router = createBrowserRouter([
       </RedirectIfNotAdmin>
     ),
     children: [
-      { path: "/admin/vendor", element: <VendorManagement /> },
-      { path: "/admin/pending", element: <ApproveVendor /> },
+      { path: "/admin/pending", element: <AdminManagement /> },
+      { path: "/admin/approved", element: <ApprovedVendorList /> },
       { path: "/admin/category", element: <CategoryPage /> },
-      {
-        path: "/admin/management",
-        element: <AdminManagement />,
-      },
     ],
   },
   {
