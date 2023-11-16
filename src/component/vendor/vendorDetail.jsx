@@ -2,7 +2,7 @@ import { LiaGreaterThanSolid } from "react-icons/lia";
 import { RxExit } from "react-icons/rx";
 import {useAuth} from "../../hook/useAuthContext"
 
-export default function UserDetail({name,picture}){
+export default function VendorDetail({name,picture}){
     const {hdl_logout,setUserEditOpen,authUser} = useAuth()
     
     
@@ -27,7 +27,7 @@ export default function UserDetail({name,picture}){
               </div>
               <button className="mobile" onClick={()=>setUserEditOpen(true)}>
                 <div className="mobile: bg-black w-[160px] h-[30px] text-white rounded-[40px]  hover:text-white border border-gray-800 hover:bg-gray-700 pt-1 flex justify-center gap-2 ">
-                  แก้ไขข้อมูลส่วนตัว
+                  แก้ไขข้อมูลร้านค้า
                   <LiaGreaterThanSolid className=" mt-[2.5px]"/>
                 </div>
               </button>

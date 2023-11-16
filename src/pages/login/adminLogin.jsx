@@ -32,7 +32,10 @@ export default function AdminLogin() {
       return setError(validationError);
     }
     setError({});
-    await hdl_admin_login_submit().catch((err) => {
+    await hdl_admin_login_submit().then(res=>{
+      alert(res)
+    }
+      ).catch((err) => {
       console.log(err);
       toast.error("username or password was wrong!", error);
     });

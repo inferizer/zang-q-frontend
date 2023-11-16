@@ -27,7 +27,7 @@ export default function UserLogin() {
 
   const validateLogin = (input) => {
     const { error } = UserLoginSchema.validate(input, { abortEarly: false });
-    console.log(error);
+  
     toast.error("username or password was wrong!", error);
     if (error) {
       const result = error.details.reduce((acc, el) => {
@@ -50,10 +50,9 @@ export default function UserLogin() {
       return setError(validationError);
     }
     setError({});
-    await hdl_user_login_submit().catch((err) => {
-      console.log(err);
-      toast.error("username or password was wrong!", error);
-    });
+    await hdl_user_login_submit().then(res=>{
+      navaigate('/')
+    })
   };
   return (
     <>

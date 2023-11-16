@@ -126,7 +126,7 @@ function Map({ viewMode, adminLocation = null, data }) {
         setAllMarkers(markersWithinRadius);
     }, [markersWithinRadius]);
 
-    // if (!isLoaded) return <div>Loading...</div>;
+    
     if (!isLoaded || loadingLocation) return <Loading />;
 
     return (

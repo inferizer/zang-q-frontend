@@ -14,7 +14,7 @@ export default function CategoryCRUDPage() {
   return (
     <div>
       {isOpen ? (
-        <div>
+        <div className=" mt-20">
           {modal == "add" && (
             <form
               onSubmit={(e) => {
@@ -63,7 +63,7 @@ export default function CategoryCRUDPage() {
         </div>
       ) : (
         <>
-          <div>
+          <div className=" mt-20">
             <h1>all category</h1>
 
             {allCategory.map((el) => {
