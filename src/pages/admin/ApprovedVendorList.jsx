@@ -1,20 +1,13 @@
 import React, { useState } from "react";
 import Modal from "../../component/modal";
 import { useAdmin } from "../../hook/useAdmin";
-import {
-  RiCheckboxCircleFill,
-  RiCloseCircleFill,
-  RiEyeFill,
-  RiMapPinFill,
-} from "react-icons/ri";
+import { RiEyeFill, RiMapPinFill } from "react-icons/ri";
 
-export default function AdminManagement() {
+export default function ApprovedVendorList() {
   const {
-    pendingVendor,
-    hdl_view_pending_detail,
-    hdl_approved_submit,
-    hdl_reject_application,
-    singlePendingVendor,
+    approvedVendorsList,
+    hdl_view_approved_detail,
+    singleApprovedVendor,
   } = useAdmin();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,8 +15,8 @@ export default function AdminManagement() {
     return (
       <Modal onClose={() => setIsOpen(false)}>
         <div className="mobile:w-[80%] desktop:w-[70%] mx-auto mt-20 inset-0 z-60">
-          {singlePendingVendor ? (
-            singlePendingVendor.map((el) => (
+          {singleApprovedVendor ? (
+            singleApprovedVendor.map((el) => (
               <div
                 key={el.id}
                 className="bg-white p-4 rounded-lg shadow-xl gap-10"
@@ -116,7 +109,7 @@ export default function AdminManagement() {
           Pending Restaurant
         </h1>
         <div>
-          {pendingVendor.map((el) => (
+          {approvedVendorsList.map((el) => (
             <div
               key={el.id}
               className="flex items-center justify-between w-[900px] gap-12 py-6 px-8 shadow-xl rounded-lg"
@@ -140,21 +133,7 @@ export default function AdminManagement() {
                     className="text-primary-500 text-3xl cursor-pointer"
                     onClick={() => {
                       setIsOpen(true);
-                      hdl_view_pending_detail(el.shopAccountId);
-                    }}
-                  />
-
-                  <RiCloseCircleFill
-                    className="text-primary-500 text-3xl cursor-pointer"
-                    onClick={() => {
-                      hdl_reject_application(el.id);
-                    }}
-                  />
-
-                  <RiCheckboxCircleFill
-                    className="text-green-500 text-3xl cursor-pointer"
-                    onClick={() => {
-                      hdl_approved_submit(el.id);
+                      hdl_view_approved_detail(el.shopAccountId);
                     }}
                   />
                 </div>

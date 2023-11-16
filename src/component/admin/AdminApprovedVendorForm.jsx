@@ -1,50 +1,137 @@
-import { RiMapPinFill, RiEyeFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
-import Loading from "../loading";
-import { useAdmin } from "../../hook/useAdmin";
+// import { RiMapPinFill, RiEyeFill } from "react-icons/ri";
+// import { Link } from "react-router-dom";
+// import { useAdmin } from "../../hook/useAdmin";
 
-export default function AdminApprovedVendorForm() {
-  const { hdl_view_pending_detail, approvedVendorsList } = useAdmin();
+// export default function AdminApprovedVendorForm() {
+//   const { hdl_view_pending_detail, approvedVendorsList } = useAdmin();
+//   return (
+//     <div className="bg-white flex justify-center items-start h-screen">
+//       <div className="mobile:w-[800px] desktop:w-[1024px] flex flex-col items-center p-4 rounded-lg gap-4 mt-20 bg-white w-[800px]">
+//         <h1 className="w-[350px] text-center bg-primary-400 text-white py-2 rounded-xl font-semibold">
+//           Restaurant has been approved
+//         </h1>
+//         <div>
+//           {approvedVendorsList.map((el) => (
+//             <div
+//               key={el.id}
+//               className="flex items-center justify-between w-[900px] gap-12 py-6 px-8 shadow-xl rounded-lg"
+//             >
+//               <div className="flex flex-col items-start justify-start gap-2">
+//                 <div className="text-gray-900 font-semibold text-lg">
+//                   {el.shopName}
+//                 </div>
+//                 <div className="gap-2 flex justify-start">
+//                   <div className="flex gap-2">
+//                     <RiMapPinFill className="mobile:text-primary-500 text-3xl cursor-pointer" />
+//                     <div className="font-bold text-xs text-gray-700">
+//                       {el.address}
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//               <div>
+//                 <div className="flex justify-end gap-6 py-2 px-6">
+//                   <Link
+//                     to={`admin/restaurant/details/${el.id}`}
+//                     onClick={() => hdl_view_pending_detail()}
+//                   >
+//                     <RiEyeFill className="text-primary-500 text-3xl cursor-pointer" />
+//                   </Link>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+import React, { useState } from "react";
+import Modal from "../../component/modal";
+import { useAdmin } from "../../hook/useAdmin";
+import { RiEyeFill, RiMapPinFill } from "react-icons/ri";
+
+export default function ApproveVendor() {
+  const {
+    approvedVendorsList,
+    hdl_view_approved_detail,
+    singleApprovedVendor,
+  } = useAdmin();
+  const [isOpen, setIsOpen] = useState(false);
+
+  if (isOpen)
+    return (
+      <Modal onClose={() => setIsOpen(false)}>
+        <div>
+          {singleApprovedVendor ? (
+            singleApprovedVendor.map((el) => (
+              <div key={el.id}>
+                {el.registrationNumber ? (
+                  <h1>นิติบุคคล</h1>
+                ) : (
+                  <h1>บุคคลทั่วไป</h1>
+                )}
+                <img src={el.idCard} alt="ID Card" />
+                <img src={el.shopPicture} alt="Shop Picture" />
+                <h1>{el.shopName}</h1>
+                <h1>{el.shopLat}</h1>
+                <h1>{el.shopLan}</h1>
+                <h1>{el.shopMobile}</h1>
+                <h1>{el.openingTimes}</h1>
+                <h1>{el.closingTimes}</h1>
+                <h1>{el.ownerFirstName}</h1>
+                <h1>{el.ownerLastName}</h1>
+                <h1>{el.idNumber}</h1>
+              </div>
+            ))
+          ) : (
+            <h1>nothing selected</h1>
+          )}
+        </div>
+      </Modal>
+    );
+
   return (
-    <section className="w-screen bg-gray-50 px-4">
-      <div className="max-w-[800px] m-auto desktop:max-w-[1024px]">
-        <div className="mobile:justify-center items-center h-screen flex">
-          <div className="mobile: px-7 py-2 mx-auto top-20 float-none text-white flex flex-col fixed bg-primary-300 text-center rounded-2xl">
-            <p className="text-lg">ร้านรอการตรวจสอบ</p>
-            <div>
-              {approvedVendorsList.map((el) => (
-                <div
-                  key={el.id}
-                  className="mobile: col-start-2 col-span-4 bg-primaryWhite shadow-lg shadow-gray20 rounded-lg py-2 px-6"
-                >
-                  <div className="mobile: text-gray-700 font-semibold py-2">
-                    {el.shopName}
-                  </div>
-                  <div className="mobile: gap-2 flex justify-start">
-                    <Link to={`admin/restaurant/details/${el.id}`}>
-                      <RiEyeFill
-                        className="mobile: text-primary-500 w-4 h-4 cursor-pointer"
-                        onClick={() => {
-                          hdl_view_pending_detail(el.id);
-                        }}
-                      />
-                    </Link>
-                    <RiMapPinFill className=" mobile:  w-4 h-4 text-primary-500 cursor-pointer" />
-                    <div className="mobile: font-bold text-xs text-gray-700 ">
-                      {el.address}
+    <div className="bg-white flex justify-center items-start h-screen">
+      <div className="mobile:w-[800px] desktop:w-[1024px] flex flex-col items-center p-4 rounded-lg gap-4 mt-20 bg-white w-[800px]">
+        <h1 className="w-[220px] text-center bg-primary-400 text-white py-2 rounded-xl font-semibold">
+          Pending Restaurant
+        </h1>
+        <div>
+          {approvedVendorsList.map((el) => (
+            <div
+              key={el.id}
+              className="flex items-center justify-between w-[900px] gap-12 py-6 px-8 shadow-xl rounded-lg"
+            >
+              <div className="flex flex-col items-start justify-start gap-2">
+                <div className="text-gray-900 font-semibold text-lg">
+                  {el.shopName}
+                </div>
+                <div className="gap-2 flex justify-start">
+                  <div className="flex gap-2">
+                    <RiMapPinFill className="mobile:text-primary-500 text-3xl cursor-pointer" />
+                    <div className="font-bold text-xs text-gray-700 gap-4 mt-2">
+                      <p className="text-sm">Shop location</p>
                     </div>
                   </div>
-                  <div className="mobile: flex justify-end gap-6 py-2 px-6">
-                    <Link to={`/admin/restaurant/details/${el.id}`}>
-                      <RiEyeFill className="mobile: text-primary-500 w-4 h-4 cursor-pointer" />
-                    </Link>
-                  </div>
                 </div>
-              ))}
+              </div>
+              <div>
+                <div className="flex justify-end gap-6 py-2 px-6 mt-4">
+                  <RiEyeFill
+                    className="text-primary-500 text-3xl cursor-pointer"
+                    onClick={() => {
+                      setIsOpen(true);
+                      hdl_view_approved_detail(el.shopAccountId);
+                    }}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

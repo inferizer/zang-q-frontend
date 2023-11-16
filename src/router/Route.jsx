@@ -26,7 +26,7 @@ import VendorLanding from "../pages/vendor/VendorLanding";
 import VendorQueueManagement from "../pages/vendor/VendorQueueManagement";
 import RedirectIfNotAdmin from "../redirect/redirectIfNotAdmin";
 import AdminContextProvider from "../context/admin_context";
-import ApproveVendor from "../pages/admin/ApproveVendor";
+import ApprovedVendorList from "../pages/admin/ApprovedVendorList";
 import CategoryPage from "../pages/admin/categoryCRUD";
 import RedirectIfNotUser from "../redirect/redirectIfNotUser";
 import UserContextProvider from "../context/user_context";
@@ -37,8 +37,7 @@ import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 import VendorHistory from "../pages/vendor/VendorHistory";
-import AdminManagementMain from "../component/admin/AdminManagementMain";
-import AdminApprovedVendorForm from "../component/admin/AdminApprovedVendorForm";
+import AdminManagement from "../pages/admin/AdminManagement";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -114,9 +113,8 @@ const router = createBrowserRouter([
       </RedirectIfNotAdmin>
     ),
     children: [
-      { path: "/admin/vendor", element: <AdminManagementMain /> },
-      { path: "/admin/approved", element: <AdminApprovedVendorForm /> },
-      { path: "/admin/pending", element: <ApproveVendor /> },
+      { path: "/admin/pending", element: <AdminManagement /> },
+      { path: "/admin/approved", element: <ApprovedVendorList /> },
       { path: "/admin/category", element: <CategoryPage /> },
     ],
   },

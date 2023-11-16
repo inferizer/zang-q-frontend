@@ -10,8 +10,8 @@ export default function AdminContextProvider({ children }) {
   const [allCategory, setAllCategory] = useState([]);
   const [input, setInput] = useState({});
   const [selectCategory, setSelectCategory] = useState(0);
-  const [fetchApprovedVendors, setFetchApprovedVendors] = useState([]);
-  const [approvedVendorsList, setApprovedVendorsList] = useState([]);
+  const [singleApprovedVendor, setSingleApprovedVendor] = useState([]);
+  const [approvedVendorsList, setApprovedVendorList] = useState([]);
 
   useEffect(() => {
     axios.get("/admin/pending").then((res) => {
@@ -20,21 +20,10 @@ export default function AdminContextProvider({ children }) {
     axios.get("admin/category").then((res) => {
       setAllCategory(res.data.result);
     });
-    //Fetch approved vendors after approving or rejecting
-    const fetchApprovedVendors = async () => {
-      const response = await axios.get("/admin/approved-vendors");
-      setApprovedVendorsList(response.data.result);
-    };
-    fetchApprovedVendors();
-  }, []);
-
-  //Function to be called after approving or rejecting
-  const handleApprovalActions = (id) => {
-    axios.post(`/admin/pending/${id}`).then((res) => {
-      setPendingVendor(res.data.result);
-      fetchApprovedVendors(); //Fetch approved vendors after approval
+    axios.get("/admin/approved").then((res) => {
+      setApprovedVendorList(res.data.result);
     });
-  };
+  }, []);
 
   const hdl_input = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -48,9 +37,16 @@ export default function AdminContextProvider({ children }) {
   };
 
   const hdl_approved_submit = (id) => {
-    axios.post("/admin/pending", { id }).then((res) => {
-      setPendingVendor(res.data.result);
+    axios.post("/admin/approved", { id }).then((res) => {
+      setApprovedVendorList(res.data.result);
     });
+  };
+
+  const hdl_view_approved_detail = (input) => {
+    const singleApprovedApplication = approvedVendorsList.filter(
+      (el) => el.shopAccountId == input
+    );
+    setSingleApprovedVendor(singleApprovedApplication);
   };
 
   const hdl_reject_application = (id) => {
@@ -90,11 +86,13 @@ export default function AdminContextProvider({ children }) {
 
   const value = {
     pendingVendor,
-    handleApprovalActions,
     approvedVendorsList,
     hdl_view_pending_detail,
+    hdl_view_approved_detail,
     hdl_approve_application,
+    hdl_approved_submit,
     singlePendingVendor,
+    singleApprovedVendor,
     hdl_approved_submit,
     hdl_reject_application,
     allCategory,
