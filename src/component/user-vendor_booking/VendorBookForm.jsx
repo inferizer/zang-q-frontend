@@ -12,7 +12,6 @@ export default function VendorBookForm({ nameInput }) {
     minSeat,
     maxSeat,
     setTableType,
-    bookingQueue,
     shopInfo,
     onsiteBooking,
   } = useQueue();
