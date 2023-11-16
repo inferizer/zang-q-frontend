@@ -37,7 +37,10 @@ export default function AuthContextProvider({ children }) {
   const [initLoading, setInitLoading] = useState(true);
   const [authUser, setAuthUser] = useState(null);
   const [input, SetInput] = useState({});
-  const [userDetailOpen ,setUserDetailOpen] = useState(false)
+  const [userDetailOpen, setUserDetailOpen] = useState(false);
+  const [userEditOpen, setUserEditOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState(null);
+
   const hdl_google_login = (profileObj) => {
     const data = {};
     data.username = profileObj.givenName;
@@ -64,7 +67,9 @@ export default function AuthContextProvider({ children }) {
         addAccessToken(res.data.accessToken);
         setAuthUser(res.data.user);
       })
-      .catch(console.log)
+      .catch((error) => {
+        throw error;
+      })
       .finally(() => {
         setInitLoading(false);
       });
@@ -79,6 +84,11 @@ export default function AuthContextProvider({ children }) {
       })
       .catch((error) => {
         console.log(error.response.data.message);
+        toast.error(
+          "username or password was wrong!",
+          error.response.data.message
+        );
+        throw error;
       });
   };
   const hdl_vendor_login_submit = () => {
@@ -127,6 +137,34 @@ export default function AuthContextProvider({ children }) {
       });
   };
 
+  const hdl_formData = () => {
+    const formData = new FormData();
+    for (let k in input) {
+      formData.append(k, input[k]);
+    }
+    return formData;
+  };
+
+  const hdl_user_edit = (id) => {
+    const formData = hdl_formdata(input);
+    if (profileImage) formData.append("profileImage", profileImage);
+    setInitLoading(true);
+    axios
+      .put(`/auth/edit/${id}`, formData)
+      .then((res) => {
+        setAuthUser(res.data.result);
+        setUserEditOpen(false);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      })
+      .finally(setInitLoading(false));
+  };
+
+  const hdl_user_edit_picture = (e) => {
+    if (e.target.files[[0]]) setProfileImage(e.target.files[[0]]);
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -145,8 +183,15 @@ export default function AuthContextProvider({ children }) {
         failGoogle,
         setAuthUser,
         hdl_admin_login_submit,
+        hdl_user_edit,
         userDetailOpen,
-        setUserDetailOpen
+        setUserDetailOpen,
+        userEditOpen,
+        setUserEditOpen,
+        hdl_user_edit_picture,
+        profileImage,
+        SetInput,
+        setProfileImage,
       }}
     >
       {children}
