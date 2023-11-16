@@ -16,6 +16,7 @@ export default function AdminManagement() {
     hdl_reject_application,
     singlePendingVendor,
   } = useAdmin();
+
   const [isOpen, setIsOpen] = useState(false);
 
   if (isOpen)
@@ -121,7 +122,7 @@ export default function AdminManagement() {
               key={el.id}
               className="flex items-center justify-between w-[900px] gap-12 py-6 px-8 shadow-xl rounded-lg"
             >
-              <div className="flex flex-col items-start justify-start gap-2">
+              <div className="flex flex-col items-start justify-start gap-16 mt-2">
                 <div className="text-gray-900 font-semibold text-lg">
                   {el.shopName}
                 </div>

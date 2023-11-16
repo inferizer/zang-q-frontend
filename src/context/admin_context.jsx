@@ -12,6 +12,7 @@ export default function AdminContextProvider({ children }) {
   const [selectCategory, setSelectCategory] = useState(0);
   const [singleApprovedVendor, setSingleApprovedVendor] = useState([]);
   const [approvedVendorsList, setApprovedVendorList] = useState([]);
+  const [vendorAlreadyApproved, setVendorAlreadyApproved] = useState([]);
 
   useEffect(() => {
     axios.get("/admin/pending").then((res) => {
@@ -22,6 +23,9 @@ export default function AdminContextProvider({ children }) {
     });
     axios.get("/admin/approved").then((res) => {
       setApprovedVendorList(res.data.result);
+    });
+    axios.get("/admin/approved/list").then((res) => {
+      setVendorAlreadyApproved(res.data.result);
     });
   }, []);
 
@@ -36,9 +40,17 @@ export default function AdminContextProvider({ children }) {
     setSinglePendingVendor(singlePendingApplication);
   };
 
+  //main page is using it
   const hdl_approved_submit = (id) => {
     axios.post("/admin/approved", { id }).then((res) => {
       setApprovedVendorList(res.data.result);
+      window.location.reload();
+    });
+  };
+
+  const hdl_already_approved = (id) => {
+    axios.get("/admin/approved/list").then((res) => {
+      setVendorAlreadyApproved(res.data.result);
     });
   };
 
@@ -91,6 +103,7 @@ export default function AdminContextProvider({ children }) {
     hdl_view_approved_detail,
     hdl_approve_application,
     hdl_approved_submit,
+    hdl_already_approved,
     singlePendingVendor,
     singleApprovedVendor,
     hdl_approved_submit,
@@ -101,6 +114,7 @@ export default function AdminContextProvider({ children }) {
     hdl_new_category,
     hdl_update_category,
     hdl_delete_category,
+    vendorAlreadyApproved,
   };
 
   return (
