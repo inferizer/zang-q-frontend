@@ -1,16 +1,17 @@
 import { useState, useMemo, useEffect } from 'react'
 
 // npm i @react-google-maps/api    
-import { GoogleMap, useLoadScript, MarkerF, Marker, Circle, InfoWindow } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript, Marker, Circle, InfoWindow } from '@react-google-maps/api'
 import PlacesAutoComplete from "./PlacesAutoComplete"
 import { useVendor } from '../../hook/useVendor';
 import { useAuth } from '../../hook/useAuthContext';
 import Loading from '../../component/loading';
-import ghostIcon from '../../assets/image/ghost.png';
+import ghost from '../../assets/image/halloween.png';
+import { LocationIcon } from '../../assets/icon/Icon';
+import { useMap } from '../../hook/useMap';
 
 
-function Map({ viewMode, adminLocation = null, data }) {
-    const { initLoading } = useAuth()
+function Map({ viewMode, data }) {
 
     const bangkokBounds = {
         north: 14.0000,
@@ -19,22 +20,21 @@ function Map({ viewMode, adminLocation = null, data }) {
         west: 100.4000,
     };
 
-    const { mapClicked, setMapClicked, searchLocation, setSearchLocation } = useVendor();
     const [currentLocation, setCurrentLocation] = useState(null);
     const [error, setError] = useState(null);
     const [center, setCenter] = useState({ lat: 13.7462, lng: 100.5347 });
     const [selectedInfoWindow, setSelectedInfoWindow] = useState(null);
     const [libraries, setLibraries] = useState(['places', 'geometry']);
-    const [allMarkers, setAllMarkers] = useState();
+    // const [loadingLocation, setLoadingLocation] = useState(true);
+    const { mapClicked, setMapClicked, searchLocation, setSearchLocation, activeMarkers, setActiveMarkers, disableMarkers, setDisableMarkers, loadingLocation, setLoadingLocation } = useMap()
 
-    const [loadingLocation, setLoadingLocation] = useState(true);
-
-    console.log('clicked', mapClicked)
-    console.log('selected', searchLocation)
+    // console.log('clicked', mapClicked)
+    // console.log('selected', searchLocation)
 
     useEffect(() => {
         getLocation();
         // console.log(currentLocation)
+        // console.log(loadingLocation)
     }, []);
 
     const getLocation = () => {
@@ -95,7 +95,8 @@ function Map({ viewMode, adminLocation = null, data }) {
         };
     };
 
-    const markersWithinRadius = useMemo(() => {
+    const { markersWithinRadius, markersOutOfRadius } = useMemo(() => {
+
         if (!isLoaded || !currentLocation || !data) {
             return []; // จังหวะ render ครั้งแรก currentLocation ยังมาไม่ทัน
         }
@@ -103,44 +104,56 @@ function Map({ viewMode, adminLocation = null, data }) {
         const radius = 3500; // 5 km in meters
         const boundingBox = calculateBoundingBox(currentLocation, radius);
 
-        // First, filter markers within the bounding box
-        const markersInBoundingBox = data.filter(marker =>
-            marker.lat >= boundingBox.south &&
-            marker.lat <= boundingBox.north &&
-            marker.lng >= boundingBox.west &&
-            marker.lng <= boundingBox.east
-        );
+        return data.reduce((acc, marker) => {
 
-        // Further filter based on exact spherical distance
-        return markersInBoundingBox.filter(marker => {
-            const distance = google.maps.geometry.spherical.computeDistanceBetween(
-                new google.maps.LatLng(currentLocation),
-                new google.maps.LatLng(marker)
+            // Check if marker is within bounding box
+            const isWithinBoundingBox = (
+                marker.shopLat >= boundingBox.south &&
+                marker.shopLat <= boundingBox.north &&
+                marker.shopLan >= boundingBox.west &&
+                marker.shopLan <= boundingBox.east
             );
-            console.log(`Distance from ${marker.title}:`, distance);
-            return distance <= radius;
-        });
-    }, [isLoaded, currentLocation, data]);
+
+            if (!isWithinBoundingBox) {
+                acc.markersOutOfRadius.push(marker);
+                return acc;
+            }
+
+            // Compute spherical distance
+            const distance = google.maps.geometry.spherical.computeDistanceBetween(
+                new google.maps.LatLng({ lat: currentLocation.lat, lng: currentLocation.lng }),
+                new google.maps.LatLng({ lat: marker.shopLat, lng: marker.shopLan })
+            );
+
+            // Categorize markers based on distance
+            if (distance <= radius) {
+                acc.markersWithinRadius.push(marker);
+            } else {
+                acc.markersOutOfRadius.push(marker);
+            }
+            return acc;
+
+        }, { markersWithinRadius: [], markersOutOfRadius: [] });
+
+    }, [currentLocation]);
 
     useEffect(() => {
-        setAllMarkers(markersWithinRadius);
-    }, [markersWithinRadius]);
+        setActiveMarkers(markersWithinRadius);
+        setDisableMarkers(markersOutOfRadius);
+
+    }, [markersWithinRadius, markersOutOfRadius]);
 
     // if (!isLoaded) return <div>Loading...</div>;
-    if (!isLoaded || loadingLocation) return <Loading />;
+    if (!isLoaded || loadingLocation) {
+        return <Loading />
+    };
 
     return (
-        <div className='flex flex-col py-8'>
+        <div className='flex flex-col py-4'>
             <div>
                 <GoogleMap
                     center={searchLocation || center}
-                    mapContainerStyle={{
-                        display: 'flex',
-                        justifyContent: 'center',
-                        height: "500px",
-                        width: "100%",
-                        position: "relative",
-                    }}
+                    mapContainerClassName='map-container'
                     zoom={14}
                     options={{
                         mapId: '5313b71b2c9e0053',
@@ -172,35 +185,36 @@ function Map({ viewMode, adminLocation = null, data }) {
                                     <Marker
                                         position={currentLocation}
                                         icon={{
-                                            url: ghostIcon,
-                                            scaledSize: new window.google.maps.Size(44, 44)
+                                            url: ghost,
+                                            scaledSize: new window.google.maps.Size(36, 36)
                                         }}
-                                        options={{ zIndex: 11 }}
+                                        options={{ zIndex: 1 }}
 
                                     />
                                 </>
                             )}
 
                             {
-                                markersWithinRadius.map((geo, index) => (
+                                activeMarkers?.map((geo, index) => (
                                     <Marker
                                         key={index}
-                                        position={geo}
-                                        title={geo.title}
-                                        label={geo.title}
+                                        position={{ lat: geo.shopLat, lng: geo.shopLan }}
+                                        title={geo.shopName}
+                                        label={geo.shopName}
                                         options={{ zIndex: 10 }}
                                         onClick={() => setSelectedInfoWindow(geo)}
                                     />
                                 ))
                             }
+
                             {selectedInfoWindow && (
                                 <InfoWindow
-                                    position={selectedInfoWindow}
+                                    position={{ lat: selectedInfoWindow.shopLat, lng: selectedInfoWindow.shopLan }}
                                     onCloseClick={() => setSelectedInfoWindow(null)}
                                 >
                                     <div>
-                                        <h4>{selectedInfoWindow.title}</h4>
-                                        <img style={{ height: 100 }} src='https://yt3.googleusercontent.com/ytc/APkrFKbkBG77Mb_TaYVEZHr9Cz7q9UzN2EpD27WfOVT7=s900-c-k-c0x00ffffff-no-rj' />
+                                        <h4>{selectedInfoWindow.shopName}</h4>
+                                        <img style={{ height: 100 }} src={selectedInfoWindow.shopPicture} />
                                     </div>
                                 </InfoWindow>
                             )}
@@ -211,16 +225,17 @@ function Map({ viewMode, adminLocation = null, data }) {
                                 handleSearchLocation={handleSearchLocation}
                             />
                             {/* ถามว่า searchLocation กับ mapClicked มีไหม ถ้ามีตัวในตัวหนึ่ง ให้ set position MarkerF */}
-                            {(searchLocation || mapClicked) && <MarkerF position={mapClicked || searchLocation} />}
+                            {(searchLocation || mapClicked) && <Marker position={mapClicked || searchLocation} />}
                         </div>
                     )}
                 </GoogleMap>
             </div>
 
-            <div>
+            <div className='flex justify-center'>
                 <button
                     onClick={getLocation}
-                    className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+                    className="flex justify-between items-center gap-2 mt-4 shadow bg-gray-600 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-medium py-2 px-6 rounded">
+                    <LocationIcon className="w-6 h-6" />
                     track location
                 </button>
             </div>

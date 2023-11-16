@@ -1,49 +1,32 @@
-import {MdLocationOn, MdOutlineAccessTime} from "react-icons/md" 
+import { MdLocationOn, MdOutlineAccessTime } from "react-icons/md"
+import { useNavigate } from "react-router-dom";
 
 export default function ShopCard({ storeName, location, q, img, id }) {
-    return (
-      <div>
-        <div className="mobile:  justify-center items-center flex">
-          <div className="mobile:  bg-white flex-col justify-start items-start inline-flex">
-            <div className="mobile:self-stretch  px-4 flex-col justify-start items-start inline-flex">
-              <div className="mobile:self-stretch py-2.5 flex-col justify-start items-center gap-2.5 flex">
-                <div className="mobile:self-stretch  px-16 py-3  bg-white rounded-xl shadow justify-start items-center gap-[30px] inline-flex">
-                  <div className="mobile:w-[89px] h-[89px] bg-white rounded-xl border-2 border-zinc-100 justify-start items-start gap-2.5 flex">
-                    {" "}
-                    <img
-                      className=" mobile:grow shrink  basis-0 self-stretch
-                      "
-                      src={img}
-                    />
-                  </div>
-                  <div className="mobile:grow shrink basis-0 flex-col justify-start items-start gap-2 inline-flex">
-                    <div className="mobile:self-stretch justify-start items-center gap-2.5 inline-flex">
-                      <div className="mobile:grow shrink basis-0 text-black text-base font-bold font-['Nunito Sans']">
-                        {storeName}
-                      </div>
-                    </div>
-                    <div className="mobile:self-stretch justify-start items-center gap-2 inline-flex">
-                      <div className="mobile:w-[21px] h-5 px-[5px] py-0.5 justify-start items-start gap-2.5 flex">
-                        <MdLocationOn className="w-[30px] h-[15px] text-[#AAAAAA]" />
-                      </div>
-                      <div className="mobile:grow shrink basis-0 text-neutral-400 text-xs font-bold font-['Nunito Sans']">
-                        {location}
-                      </div>
-                    </div>
-                    <div className="mobile:self-stretch justify-start items-center gap-2 inline-flex">
-                      <div className="mobile:w-5 h-5 p-0.5 justify-start items-start gap-2.5 flex">
-                        <MdOutlineAccessTime className="w-[30px] h-[15px] text-[#FF20B1]" />
-                      </div>
-                      <div className="mobile:grow shrink basis-0 text-[#FF20B1] text-xs font-bold font-['Nunito Sans']">
-                        {q}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  const navigate = useNavigate()
+
+  return (
+    <div
+      className="flex min-w-[30%] gap-6 desktop:flex-col desktop:gap-4 shadow-lg rounded-xl p-4 transform transition duration-100 ease-in-out  hover:-translate-y-2 hover:shadow-2xl"
+      onClick={() => navigate(`/user/book/${id}`)}
+    >
+      <div className=" bg-white rounded-lg border-2 border-gray-100 ">
+        <img className="h-24 w-full object-cover desktop:h-44" src={img} alt="restaurantImage" />
       </div>
-    );
+
+      <div className="flex flex-col justify-center gap-2 desktop:px-2">
+        <h6 className="text-lg font-medium">{storeName}</h6>
+
+        <div className="flex gap-2 text-gray-400">
+          <MdLocationOn className="text-lg" />
+          <p className="text-sm">{location}</p>
+        </div>
+
+        <div className="flex gap-2 text-primary-500">
+          <MdOutlineAccessTime />
+          <p className="text-sm">รออีก 9 คิว</p>
+        </div>
+
+      </div>
+    </div>
+  );
 }

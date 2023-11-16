@@ -62,111 +62,104 @@ export default function UserRegister() {
       });
   };
   return (
-    <div className="mobile ">
-      <header className="mobile">
-        <div className="mobile:justify-center items-center h-screen flex">
-          <form className="mobile" onSubmit={hdl_submit}>
-            <h1 className="mobile:mb-[25px]">
-              <b className="mobile:text-[25px]">Signup</b>
-            </h1>
-            <div className=" flex flex-col border border-gray-400 rounded-md mx-auto">
-              <Input
-                onChange={hdl_input}
-                placeholder="username:"
-                type="text"
-                id="username"
-                name="username"
-                error={error.username}
-              />
-              {error.username && <InputErrorMessage message={error.username} />}
-              <Input
-                onChange={hdl_input}
-                type="password"
-                placeholder="password:"
-                name="password"
-                required
-                error={error.password}
-              />
-              {error.password && <InputErrorMessage message={error.password} />}
-              <Input
-                onChange={hdl_input}
-                type="password"
-                placeholder="confirmPassword"
-                name="confirmPassword"
-                required
-                error={error.confirmPassword}
-              />
-              {error.confirmPassword && (
-                <InputErrorMessage message={error.confirmPassword} />
-              )}
-              <Input
-                onChange={hdl_input}
-                placeholder="emailOrMobile:"
-                type="text"
-                id="emailOrMobile"
-                name="emailOrMobile"
-                error={error.emailOrMobile}
-              />
-              {error.emailOrMobile && (
-                <InputErrorMessage message={error.emailOrMobile} />
-              )}
-            </div>
-            <button
-              onClick={hdl_submit}
-              type="button"
-              className="mobile: mt-[25px] ml-[9px] w-[350px] flex justify-center items-center focus:outline-none text-white bg-primary-400 hover:bg-red-500 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 "
-            >
-              Continue
-            </button>
-            <div className="mobile: inline-flex items-center justify-center w-full">
-              <hr className="mobile: w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-700" />
-              <span className="mobile: absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
-                or
-              </span>
-            </div>
-
-            <div>
-              <LineLoginButtton />
-            </div>
-            <div className="mobile: pl-[10px]" >
-              <div>
-                <GoogleLogin
-                  clientId={clientId}
-                  buttonText="Continue with Google"
-                  onSuccess={SuccessGoogle}
-                  onFailure={failGoogle}
-                  cookiePolicy="single_host_origin"
-                  isSignedIn={false}
-                  type="button"
-                  render={renderProps => (
-                    <button onClick={renderProps.onClick} disabled={renderProps.disabled}
-                      className="mobile: w-[350px]  py-2.5 px-5  text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                      <div className="mobile: pr-[73px]">
-                        <img
-                          className="mobile: inline w-[45px] h-[45px] mr-[50px]"
-                          src={icongoogle}
-                          alt=""
-                        />
-                        Continue with Google
-                      </div></button>
-                  )}
-                />
-              </div>
-
-              <br className="mobile" />
-              <br className="mobile" />
-            </div>
-            <div className="mobile: text-center">
-              <span className="mobile">Don't have an account?</span>
-              <span className="mobile: ml-4">
-                <button className="mobile" onClick={() => { navigate('/login/user') }} >Sign in</button>
-
-              </span>
-            </div>
-          </form>
+    <section className="section h-screen flex gap-4">
+      <form
+        className="m-auto w-[600px] min-w-[240px] bg-white shadow-md rounded p-8 flex flex-col gap-4"
+        onSubmit={hdl_submit}
+      >
+        <h6 className="text-lg font-semibold">Register</h6>
+        <div className="flex flex-col gap-2 max-w-[600px]">
+          <Input
+            onChange={hdl_input}
+            placeholder="username:"
+            type="text"
+            id="username"
+            name="username"
+            error={error.username}
+          />
+          {error.username && <InputErrorMessage message={error.username} />}
+          <Input
+            onChange={hdl_input}
+            type="password"
+            placeholder="password:"
+            name="password"
+            required
+            error={error.password}
+          />
+          {error.password && <InputErrorMessage message={error.password} />}
+          <Input
+            onChange={hdl_input}
+            type="password"
+            placeholder="confirmPassword"
+            name="confirmPassword"
+            required
+            error={error.confirmPassword}
+          />
+          {error.confirmPassword && (
+            <InputErrorMessage message={error.confirmPassword} />
+          )}
+          <Input
+            onChange={hdl_input}
+            placeholder="emailOrMobile:"
+            type="text"
+            id="emailOrMobile"
+            name="emailOrMobile"
+            error={error.emailOrMobile}
+          />
+          {error.emailOrMobile && (
+            <InputErrorMessage message={error.emailOrMobile} />
+          )}
         </div>
-      </header>
-    </div>
+        <button
+          onClick={hdl_submit}
+          type="button"
+          className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        >
+          Continue
+        </button>
+
+        <div className="flex items-center justify-center w-full text-sm">
+          <hr className="w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-700" />
+          <span className="absolute px-3 text-gray-500 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
+            or
+          </span>
+        </div>
+
+        <LineLoginButtton />
+        <GoogleLogin
+          clientId={clientId}
+          buttonText="Continue with Google"
+          onSuccess={SuccessGoogle}
+          onFailure={failGoogle}
+          cookiePolicy="single_host_origin"
+          isSignedIn={false}
+          type="button"
+          render={renderProps => (
+            <button
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+              className="flex justify-center items-center gap-4 py-2 px-6 text-sm font-medium text-gray-900 rounded border-2 border-gray-200 hover:text-primary-500 hover:border-primary-500 focus:outline-none focus:bg-gray-100"
+            >
+              <img
+                className="w-9 h-9"
+                src={icongoogle}
+                alt=""
+              />
+              Continue with Google
+            </button>
+          )}
+        />
+
+        <div className="text-center mt-4 ">
+          <span className="text-gray-500">Already have an account?</span>
+          <span className="cursor-pointer underline text-primary-500 ml-2"
+            onClick={() => { navigate('/login/user') }}
+          >
+            Login
+          </span>
+        </div>
+      </form>
+    </section>
   );
 }
 

@@ -11,19 +11,15 @@ export default function LineLoginButton() {
   // const { handleLoginLiff} = useAuth()
 
   return (
-    <div className='mobile:pl-[10px]'>
-      <button
-        onClick={handleLoginLiff}
-        type='button'
-        className='mobile:w-[350px]  py-2.5 px-5  text-sm font-medium  text-gray60 focus:outline-none bg-primaryWhite rounded-lg border border-gray20 hover:bg-gray10 hover:text-blue60 focus:z-10 focus:ring-4 focus:ring-gray20 dark:focus:ring-gray60 dark:bg-gray60 dark:text-gray40 dark:border-gray50 dark:hover:text-primaryWhite dark:hover:bg-gray60'
+
+    <button
+      onClick={handleLoginLiff}
+      type='button'
+      className="flex justify-center items-center gap-4 py-2 px-6 text-sm font-medium text-gray-900 rounded border-2 border-gray-200 hover:text-primary-500 hover:border-primary-500 focus:outline-none focus:bg-gray-100"
       >
-        <div className='mobile:pr-[90px] flex justify-center items-center'>
-          <img className='mobile:inline mr-[50px]' src={iconline} alt='' />
-          <div>Continue with Line</div>
-        </div>
-      </button>
-      <br className='mobile' />
-      <br className='mobile' />
-    </div>
+      <img className='w-10 h-10' src={iconline} alt='' />
+      Continue with Line
+    </button>
+
   );
 }

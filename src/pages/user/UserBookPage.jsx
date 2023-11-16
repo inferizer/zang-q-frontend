@@ -1,13 +1,14 @@
 import UserBookTableForm from "../../component/user-vendor_booking/BookTableForm";
 import ShopBanner from "../../component/user-vendor_booking/ShopBanner";
+import ShopCard from "../../component/user/ShopCard";
 
 export default function UserBookingPage() {
   return (
-    <div className='justify-center items-center flex'>
-      <div className='w-[390px] h-[844px] pt-[47px] pb-[303px] bg-white flex-col justify-start items-start inline-flex'>
-        <ShopBanner />
-        <UserBookTableForm />
+    <section className="section desktop:pt-24">
+      <div className="container min-w-[360px] flex flex-col items-center">
+          <ShopBanner />
+          <UserBookTableForm />
       </div>
-    </div>
+    </section>
   );
 }

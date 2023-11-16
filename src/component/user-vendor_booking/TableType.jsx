@@ -14,15 +14,17 @@ export default function TableType({ onClick }) {
 
   return (
     <>
-      <div className='grow shrink basis-0 px-4 py-2 rounded-tl-2xl rounded-bl-2xl border border-neutral-400 flex-col justify-start items-center inline-flex '>
+      <div
+        className='cursor-pointer grow shrink basis-0 rounded-tl-2xl rounded-bl-2xl border border-gray-400 flex-col items-center'
+        onClick={() => hdlTableTypeClick("one", 1, 2)}
+        >
         <TableIconCard
           text='1-2'
           choice='1'
-          onClick={() => hdlTableTypeClick("one", 1, 2)}
         />
       </div>
 
-      <div className='grow shrink basis-0 px-4 py-2 border border-neutral-400 flex-col justify-start items-center inline-flex'>
+      <div className='cursor-pointer grow shrink basis-0 border border-gray-400 flex-col items-center'>
         <TableIconCard
           text='2-4'
           choice='2'
@@ -30,7 +32,7 @@ export default function TableType({ onClick }) {
         />
       </div>
 
-      <div className='grow shrink basis-0 px-4 py-2 border border-neutral-400 flex-col justify-start items-center inline-flex'>
+      <div className='cursor-pointer grow shrink basis-0 border border-gray-400 flex-col items-center'>
         <TableIconCard
           text='4-6'
           choice='3'
@@ -38,7 +40,7 @@ export default function TableType({ onClick }) {
         />
       </div>
 
-      <div className='grow shrink basis-0 px-4 py-2 rounded-tr-2xl rounded-br-2xl border border-neutral-400 flex-col justify-start items-center inline-flex'>
+      <div className='cursor-pointer grow shrink basis-0 rounded-tr-2xl rounded-br-2xl border border-gray-400 flex-col items-center'>
         <TableIconCard
           text='6+'
           choice='4'

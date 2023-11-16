@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 import axios from "../config/axios";
+import { useMap } from "../hook/useMap";
 export const VendorContext = createContext();
 export default function VendorContextProvider({ children }) {
   const [shopPictureFile, setShopPictureFile] = useState(null);
   const [idCardFile, setIdCardFile] = useState(null);
-  const [juristicFile,setJuristicFile] = useState(null);
+  const [juristicFile, setJuristicFile] = useState(null);
   const [appInput, setAppInput] = useState({});
   const [allCategory, setAllCtegory] = useState([]);
-  // map
-  const [searchLocation, setSearchLocation] = useState(null);
-  const [mapClicked, setMapClicked] = useState(null);
   const [checkInput, setCheckInput] = useState([]);
+
+  const { searchLocation, setSearchLocation, mapClicked, setMapClicked } = useMap();
 
   useEffect(() => {
     axios.get("/vendor/category").then((res) => {
@@ -37,41 +37,41 @@ export default function VendorContextProvider({ children }) {
     formData.append("idCard", idCardFile);
     formData.append("shopLat", mapClicked?.lat || searchLocation?.lat);
     formData.append("shopLan", mapClicked?.lng || searchLocation?.lng);
-    
-    
+
+
     axios
       .post("/vendor/application", formData)
-      .then(res=>{
+      .then(res => {
 
-        axios.post(`/vendor/category/${res.data.result.id}`,checkInput)
+        axios.post(`/vendor/category/${res.data.result.id}`, checkInput)
         alert(res.data.message)
       })
       .catch((error) => {
         alert(error.response.data.message);
       });
-      
+
   };
 
   const hdl_checkBox = (e) => {
-    let existData = checkInput.findIndex( el => el.id === e.target.value)
-    if(existData < 0){
-      setCheckInput( prev=>{
-        let data = {categoriesId:e.target.value}
-          let oldArr = [...prev]
-          let newArr = [...oldArr,data]
+    let existData = checkInput.findIndex(el => el.id === e.target.value)
+    if (existData < 0) {
+      setCheckInput(prev => {
+        let data = { categoriesId: e.target.value }
+        let oldArr = [...prev]
+        let newArr = [...oldArr, data]
         return newArr
       })
     }
-    if(existData >= 0){
+    if (existData >= 0) {
       setCheckInput((prev) => {
         let oldArr = [...prev];
         let newArr = oldArr.filter((el) => el.categoriesId != e.target.value);
         return newArr;
       });
     }
-   
-  
- 
+
+
+
   };
 
   return (
@@ -83,12 +83,8 @@ export default function VendorContextProvider({ children }) {
         setIdCardFile,
         shopPictureFile,
         idCardFile,
-        juristicFile
-        ,setJuristicFile,
-        searchLocation,
-        setSearchLocation,
-        mapClicked,
-        setMapClicked,
+        juristicFile,
+        setJuristicFile,
         appInput,
         hdl_checkBox,
         allCategory,

@@ -10,7 +10,6 @@ import RedirectIfAuth from "../redirect/redirectIfAuth";
 import VendorAttatch from "../pages/vendor/VendorAttachfile";
 import UploadIdUser from "../pages/register/UploadIdUser";
 import UploadIdPeople from "../pages/register/UploadIdPeople";
-import AddStore from "../pages/register/AddStore";
 import MapStore from "../pages/register/MapStore";
 import VendorApplicationEnd from "../pages/vendor/VendorApplicationEnd";
 import RegisterVender from "../pages/register/RegisterVender";
@@ -38,12 +37,22 @@ import ShopList from "../pages/user/ShopList";
 import UserBookPage from "../pages/user/UserBookPage";
 import QueueContextProvider from "../context/queue_context";
 import AdminManagementVendorForm from "../component/admin/AdminManagementVendorForm";
+import VendorHome from "../pages/vendor/VendorHome";
+import ShopMap from "../pages/user/ShopMap";
+import MapContextProvider from "../context/map_context";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    children: [{ path: "", element: <HomePage /> }],
+    children: [
+      { path: "", element: <HomePage /> },
+      { path: "Category", element: <CategoryPage /> },
+      { path: "test/book", element: <UserBookPage /> },
+      { path: "user", element: <BookingPage /> },
+      { path: "shop", element: <VendorQueueManagement /> },
+
+    ],
   },
   {
     path: "/login",
@@ -56,6 +65,7 @@ const router = createBrowserRouter([
       { path: "/login/user", element: <UserLogin /> },
       { path: "/login/vendor", element: <VendorLogin /> },
       { path: "/login/line", element: <LinePage /> },
+      { path: "/login/admin", element: <AdminLogin /> },
     ],
   },
   {
@@ -78,9 +88,11 @@ const router = createBrowserRouter([
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
-        <VendorContextProvider>
-          <Layout />
-        </VendorContextProvider>
+        <MapContextProvider>
+          <VendorContextProvider>
+            <Layout />
+          </VendorContextProvider>
+        </MapContextProvider>
       </RedirectIfNotVendor>
     ),
     children: [
@@ -91,6 +103,7 @@ const router = createBrowserRouter([
         path: "/vendor/VendorApplicationEnd",
         element: <VendorApplicationEnd />,
       },
+      { path: "/vendor/home", element: <VendorHome /> }
     ],
   },
   {
@@ -110,7 +123,6 @@ const router = createBrowserRouter([
         path: "/admin/management",
         element: <AdminManagementVendorForm />,
       },
-      { path: "/admin/login", element: <AdminLogin /> },
     ],
   },
   {
@@ -118,14 +130,17 @@ const router = createBrowserRouter([
     element: (
       <RedirectIfNotUser>
         <QueueContextProvider>
-          <UserContextProvider>
-            <Layout />
-          </UserContextProvider>
+          <MapContextProvider>
+            <UserContextProvider>
+              <Layout />
+            </UserContextProvider>
+          </MapContextProvider>
         </QueueContextProvider>
       </RedirectIfNotUser>
     ),
     children: [
       { path: "/user/shopList", element: <ShopList /> },
+      { path: "/user/shopMap", element: <ShopMap /> },
       { path: "/user/book", element: <UserBookPage /> },
     ],
   },

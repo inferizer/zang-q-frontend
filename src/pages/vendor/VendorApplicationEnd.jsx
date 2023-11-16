@@ -1,22 +1,15 @@
 import React from "react";
-import VendorApplicationPic from '../../assets/logo/VendorApplicationEnd.png'
+import shop from '../../assets/image/shop.svg'
+import { ChevronRightIcon } from "../../assets/icon/Icon";
+
 export default function VendorApplicationEnd() {
   return (
-    <>
-      <div className="mobile:justify-center items-center h-screen flex">
-        <div className="w-[389px] h-[664px] flex-col justify-center items-center gap-5 inline-flex">
-          <div className="text-center text-red-500 text-2xl font-bold font-['IBM Plex Sans Thai']">
-            Zang Q! <br className="mobile" />
-            ขอบคุณที่ลงทะเบียนกับเรา
-          </div>
-          <img src={VendorApplicationPic}
-          className=" w-[290px] h-[290px]"
-          />
-          <div className="mobile: text-center text-neutral-700 text-xl font-semibold font-['IBM Plex Sans Thai']">
-            เรากำลังตรวจสอบข้อมูลของคุณ
-          </div>
-        </div>
+    <section className="section h-screen flex items-center">
+      <div className="container min-w-[360px flex flex-col items-center gap-4">
+        <h6 className="text-xl font-bold text-center text-primary-500">Zang Q!<br /> ขอบคุณที่ลงทะเบียนกับเรา</h6>
+        <img src={shop} className="w-80 h-80 object-fit" />
+        <h6 className="text-lg font-medium">เรากำลังตรวจสอบข้อมูลของคุณ</h6>
       </div>
-    </>
+    </section>
   );
 }

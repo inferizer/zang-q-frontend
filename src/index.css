@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-  h1, h2, h3, h4, h5, h6, p, span, button,ul, li, label {
+  h1, h2, h3, h4, h5, h6, p, span, button,ul, li, label, div {
     font-family: 'IBM Plex Sans Thai', sans-serif;
   }
 }
@@ -15,12 +15,16 @@
 }
 
 .map-container {
-  /* width: 60vw; */
-  height: 60vh;
-  border-radius: 16px;
+  height: 74vh;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   padding: 20px;
   overflow: hidden;
-  z-index: 1 !important;
+}
+
+@media (min-width: 800px) {
+  .map-container {
+      height: 550px; 
+  }
 }

@@ -67,9 +67,8 @@ export default function VendorApplication() {
 		hdl_application_submit();
 	};
 	return (
-
-		<section className="section my-24 flex flex-col gap-12">
-			<div className="container flex justify-center gap-8">
+		<section className="section flex flex-col gap-12 pb-16 desktop:pt-16">
+			<div className="container flex justify-center gap-8 pt-10">
 				<div
 					className={`flex flex-col gap-2 cursor-pointer text-sm rounded-lg px-8 py-2 justify-center items-center border-solid border-2 border-gray-300 text-gray-400 desktop:text-lg hover:bg-primary-50 ${selectedItem === 'personal' ? 'border-primary-500 text-primary-500' : ''}`}
 					onClick={() => setSelectedItem('personal')}
@@ -173,7 +172,6 @@ export default function VendorApplication() {
 				{authUser.role === "user" ? (
 					<Map
 						viewMode={true}
-						location={{ lat: 13.7462, lng: 100.5347 }}
 						data={data}
 					/>
 				) : (
