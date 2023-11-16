@@ -23,6 +23,7 @@ export default function AdminContextProvider({ children }) {
     });
     axios.get("/admin/approved").then((res) => {
       setApprovedVendorList(res.data.result);
+      console.log(res);
     });
     axios.get("/admin/approved/list").then((res) => {
       setVendorAlreadyApproved(res.data.result);
@@ -59,6 +60,7 @@ export default function AdminContextProvider({ children }) {
       (el) => el.shopAccountId == input
     );
     setSingleApprovedVendor(singleApprovedApplication);
+    console.log(singleApprovedApplication);
   };
 
   const hdl_reject_application = (id) => {
