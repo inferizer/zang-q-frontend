@@ -3,12 +3,13 @@ import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { useQueue } from "../../hook/useQueue";
 import { useAuth } from "../../hook/useAuthContext";
 import { hdlAddSeat, hdlRmvSeat } from "../../utils/seat";
+import { useUser } from "../../hook/useUser";
 import socket from "../../utils/socket";
 import TableType from "./TableType";
 import UserTicketPage from "../../pages/user/UserTicketPage";
 import axios from "axios";
 
-export default function UserBookTableForm() {
+export default function UserBookTableForm({id}) {
   const {
     seat,
     setSeat,
@@ -19,24 +20,26 @@ export default function UserBookTableForm() {
     ticketInfo,
     setTicketInfo,
   } = useQueue();
+
+  const {singleShop} = useUser()
   const { authUser } = useAuth();
   const [bookingInfo, setBookingInfo] = useState({
     userId: authUser.id,
     name: authUser.username,
     // mocking shopname
-    shopId: 1,
+    shopId: id,
     socket: "",
     type: "one",
   });
 
   console.log(bookingInfo);
+  console.log(singleShop)
   useEffect(() => {
     socket.connect();
     socket.on("connect", () => {
       setBookingInfo({ ...bookingInfo, socket: socket.id });
     });
   }, []);
-
   // fecth ticket
   useEffect(() => {
     console.log("fetch ticket");

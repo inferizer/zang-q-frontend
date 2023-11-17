@@ -17,7 +17,7 @@ export default function ShopList() {
   } = useUser();
 
   return (
-    <div className=" w-screen bg-gray-50 px-4">
+    <div className=" w-screen bg-gray-50 px-4 desktop:mt-20 mt-4">
       <div className=" max-w-[800px] m-auto desktop:max-w-[1024px]">
         <div className="mobile:flex flex-col items-center ">
           <div className="mobile:self-stretch h-28 px-2.5 py-5 w-[350px] bg-gradient-to-b from-rose-50 to-rose-50 flex-col justify-center items-center gap-2.5 inline-flex m-auto">
@@ -44,7 +44,7 @@ export default function ShopList() {
                 />
               </div>
             </div>
-            {filterResult && <div></div>}
+            
           </div>
           <div className="mobile:self-stretch  px-4 flex-col justify-start items-start inline-flex m-auto  ">
             <div className="mobile:w-[10rem] h-[4rem] py-2.5 flex-col justify-start items-center gap-2.5 inline-flex  ">
@@ -78,7 +78,7 @@ export default function ShopList() {
           </div>
           {searchBarResult
             ? searchBarResult.map((el) => (
-                <ShopCard storeName={el.shopName} img={el.shopPicture} />
+                <ShopCard storeName={el.shopName} img={el.shopPicture} id={el.id} />
               ))
             : filter
             ? filterResult.ShopsCategories.map((el) => {
@@ -87,12 +87,13 @@ export default function ShopList() {
                     <ShopCard
                       storeName={el.shop.shopName}
                       img={el.shop.shopPicture}
+                      id={el.shop.id}
                     />
                   );
                 }
               })
             : allShop.map((el) => (
-                <ShopCard storeName={el.shopName} img={el.shopPicture} />
+                <ShopCard storeName={el.shopName} img={el.shopPicture} id={el.id} />
               ))}
         </div>
       </div>

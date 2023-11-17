@@ -8,7 +8,7 @@ export default function UserDetail({name,picture}){
     
     return(
         <>
-    
+    <div className="  bg-white   h-fit p-4 absolute inset-0 mt-20 desktop:mt-4 desktop:h-[15rem] desktop:top-16 w-fit m-auto border border-solid desktop:max-w-[1024px]">
         <div className="flex flex-col justify-center items-center">
         <div className="mobile:w-[390px] h-[133px] px-4 py-2.5 flex-col justify-start items-start gap-2.5 inline-flex   ">
           <div className="mobile:w-[363px] px-6 py-3  rounded-xl justify-start items-center gap-[30px] inline-flex">
@@ -48,7 +48,7 @@ export default function UserDetail({name,picture}){
             </div>
           
         </div>
-      
+        </div>
       </>
     ) 
 }
