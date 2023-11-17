@@ -6,8 +6,7 @@ import Map from "../map/Map";
 import { useEffect } from "react";
 import { useState } from "react";
 import { PersonalIcon, GroupIcon } from "../../assets/icon/Icon";
-
-
+import { DesktopTimePicker } from "@mui/x-date-pickers";
 export default function VendorApplication() {
 	const {
 		hdl_input,
@@ -21,6 +20,9 @@ export default function VendorApplication() {
 		appInput,
 		hdl_checkBox,
 		allCategory,
+		hdl_MUI_timePicker_opening,
+		hdl_MUI_timePicker_closing,
+
 	} = useVendor();
 
 	const [selectedItem, setSelectedItem] = useState('personal');
@@ -29,7 +31,7 @@ export default function VendorApplication() {
 	// console.log(authUser);
 
 	useEffect(() => {
-		console.log("appInput", appInput);
+	
 	}, []);
 
 	const data = [
@@ -54,13 +56,16 @@ export default function VendorApplication() {
 	const inputTag = [
 		{ id: 1, name: "shopName", label: "restaurant name", picture: false },
 		{ id: 4, name: "shopMobile", label: "restaurant tel.", picture: false },
-		{ id: 5, name: "openingTimes", label: "opening times", picture: false },
-		{ id: 6, name: "closingTimes", label: "closing times", picture: false },
 		{ id: 7, name: "ownerFirstName", label: "owner firstName", picture: false },
 		{ id: 8, name: "ownerLastName", label: "owner lastName", picture: false },
 		{ id: 9, name: "idNumber", label: "id number", picture: true },
 		{ id: 10, name: "juristicId", label: "juristic id", picture: true },
 	];
+
+	const DatePicker = [
+		{id:1, name:"",label:"",},
+		{id:1, name:"",label:"",},
+	]
 
 	const hdl_submit = async (e) => {
 		e.preventDefault();
@@ -89,7 +94,6 @@ export default function VendorApplication() {
 			</div>
 
 			<form key="1" className="container min-w-[240px] flex flex-col gap-4" onSubmit={hdl_submit} >
-
 				{inputTag.map((el) => {
 					if (selectedItem === 'personal' && el.name === "juristicId") {
 						return null
@@ -179,7 +183,14 @@ export default function VendorApplication() {
 				) : (
 					<Map viewMode={false} />
 				)}
+				<DesktopTimePicker  onChange={e=> hdl_MUI_timePicker_opening(e)} label="Opening time"/>
+				<DesktopTimePicker onChange={e=> hdl_MUI_timePicker_closing(e)} label="Closing time"/>
+
 				<button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
+			
+			
+			
+			
 			</form>
 
 		</section>

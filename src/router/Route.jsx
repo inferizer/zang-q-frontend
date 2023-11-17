@@ -40,14 +40,13 @@ import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 import VendorHistory from "../pages/vendor/VendorHistory";
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
       { path: "", element: <HomePage /> },
-      { path: "Category", element: <CategoryPage /> },
-      { path: "test/book", element: <UserBookPage /> },
       { path: "shop", element: <VendorQueueManagement /> },
     ],
   },
