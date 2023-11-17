@@ -8,7 +8,9 @@ export default function UserBookingPage() {
   return (
     <div className='justify-center items-center flex'>
       <div className='w-[390px] h-[844px] pt-[47px] pb-[303px] bg-white flex-col justify-start items-start inline-flex'>
-        {ticketInfo.hasOwnProperty("queueNumber") ? null : <ShopBanner />}
+        {ticketInfo && ticketInfo.hasOwnProperty("queueNumber") ? null : (
+          <ShopBanner />
+        )}
         <UserBookTableForm />
       </div>
     </div>
