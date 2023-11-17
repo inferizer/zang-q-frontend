@@ -68,7 +68,7 @@ export default function UserRegister() {
       });
   };
   return (
-    <div className="mobile ">
+    <div className="mobile desktop:mt-8 ">
       <header className="mobile">
         <div className="mobile:justify-center items-center h-screen flex flex-col">
           <form className="mobile" onSubmit={hdl_submit}>

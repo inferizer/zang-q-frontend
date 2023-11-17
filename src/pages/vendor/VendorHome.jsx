@@ -32,6 +32,8 @@ export default function VendorHome() {
       })
   }, [])
 
+  console.log(shop)
+
   return (
     <section className='w-screen bg-gray-50 px-4 desktop:mt-[2rem]'>
       <div className='max-w-[800px] m-auto desktop:max-w-[1024px]'>

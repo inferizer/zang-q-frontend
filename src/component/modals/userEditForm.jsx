@@ -29,7 +29,8 @@ export default function UserEditForm() {
     ];
 
     return (
-      <div className=" bg-white p-4 z-20">
+      <div className=" bg-white   h-fit p-4 absolute inset-0 mt-20 desktop:mt-4 desktop:h-[15rem] desktop:top-16 w-fit m-auto border border-solid desktop:max-w-[1024px]">
+        
         <div className=" m-auto desktop:max-w-[1024px]  z-30  ">
           <div className=" flex justify-center items-center">
           <div className="w-24 h-24 rounded-full overflow-hidden ">
@@ -107,7 +108,7 @@ export default function UserEditForm() {
     ];
 
     return (
-      <div className=" bg-white p-4 z-20">
+      <div className="  bg-white   h-fit p-4 absolute inset-0 mt-20 desktop:mt-4 desktop:h-[15rem] desktop:top-16 w-fit m-auto border border-solid desktop:max-w-[1024px]">
         <div className=" m-auto desktop:max-w-[1024px]  z-30 ">
         <div className=" flex justify-center items-center">
           <div className="w-24 h-24 rounded-full overflow-hidden ">
@@ -187,7 +188,7 @@ export default function UserEditForm() {
     ];
 
     return (
-      <div className=" bg-white p-4 z-20">
+      <div className="  bg-white   h-fit p-4 absolute inset-0 mt-20 desktop:mt-4 desktop:h-[15rem] desktop:top-16 w-fit m-auto border border-solid desktop:max-w-[1024px]">
         <div className=" m-auto desktop:max-w-[1024px]  z-30 ">
         <div className=" flex justify-center items-center">
           <div className="w-24 h-24 rounded-full overflow-hidden ">

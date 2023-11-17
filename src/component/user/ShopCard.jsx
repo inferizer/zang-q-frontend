@@ -1,9 +1,18 @@
 import {MdLocationOn, MdOutlineAccessTime} from "react-icons/md" 
-
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../hook/useUser";
 export default function ShopCard({ storeName, location, q, img, id }) {
+  const {hdl_shopList_navigation} = useUser()
+  const navigate = useNavigate()
+
+  console.log(id)
     return (
-      <div>
-        <div className="mobile:justify-center items-center flex">
+      
+        <div className="mobile:justify-center items-center flex" onClick={()=> {
+          
+          navigate(`/user/book`)
+          hdl_shopList_navigation(id)
+          }}>
           <div className="mobile: bg-white flex-col justify-start items-start inline-flex">
             <div className="mobile:self-stretch  px-4 flex-col justify-start items-start inline-flex">
               <div className="mobile:self-stretch py-2.5 flex-col justify-start items-center gap-2.5 flex">
@@ -44,6 +53,6 @@ export default function ShopCard({ storeName, location, q, img, id }) {
             </div>
           </div>
         </div>
-      </div>
+      
     );
 }

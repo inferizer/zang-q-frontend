@@ -7,13 +7,14 @@ export default function UserContextProvider({ children }) {
   const [filter, setFilter] = useState(null);
   const [filterResult, setFilterResult] = useState(null);
   const [searchBarResult, setSearchBarResult] = useState(null);
+  const [singleShop,setSingleShop] = useState(null)
   useEffect(() => {
     axios.get("/user/shop").then((res) => {
       setAllShop(res.data.result);
     });
-    // axios.get("/user/category").then((res) => {
-    //   setAllCategory(res.data.result);
-    // });
+    axios.get("/user/category").then((res) => {
+      setAllCategory(res.data.result);
+    });
   }, []);
   const hdl_filter_search = (id) => {
     const [ShopCategories] = allCategory.filter((el) => el.id == id);
@@ -32,6 +33,14 @@ export default function UserContextProvider({ children }) {
     }
     setSearchBarResult(result);
   };
+
+
+  const hdl_shopList_navigation = (id) =>{
+    axios.get(`/vendor/getSingle/${id}`).then(res=>{
+      setSingleShop(res.data.result[0])
+    })
+
+  }
   return (
     <UserContext.Provider
       value={{
@@ -44,6 +53,8 @@ export default function UserContextProvider({ children }) {
         hdl_searchBar,
         searchBarResult,
         setSearchBarResult,
+        hdl_shopList_navigation,
+        singleShop,
       }}
     >
       {children}
