@@ -40,9 +40,7 @@ export default function VendorOnsiteBook() {
   useEffect(() => {
     socket.connect();
     openShop();
-    socket.on("connect", () => {
-      setOnsiteInfo({ ...onsiteInfo, socket: socket.id });
-    });
+
     axios.patch("/vendor/open");
     axios.get("/vendor/getMyShop").then((res) => {
       setShopInfo(res.data.result[0]);

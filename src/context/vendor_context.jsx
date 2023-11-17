@@ -10,7 +10,7 @@ export default function VendorContextProvider({ children }) {
   const [idCardFile, setIdCardFile] = useState(null);
   const [juristicFile, setJuristicFile] = useState(null);
   const [appInput, setAppInput] = useState({});
-  const [allCategory, setAllCtegory] = useState([]);
+  const [allCategory, setAllCategory] = useState([]);
   const [shopInfo, setShopInfo] = useState();
   
   const [loading, setLoading] = useState(true);
@@ -18,7 +18,7 @@ export default function VendorContextProvider({ children }) {
   const [searchLocation, setSearchLocation] = useState(null);
   const [mapClicked, setMapClicked] = useState(null);
   const [checkInput, setCheckInput] = useState([]);
-  const [cancel, setCancel] = useState([])
+  const [cancel, setCancel] = useState([]);
   const [value, setValue] = useState(new Date());
   const [time,setTime] = useState({})
 const { setInitLoading} = useAuth()
@@ -26,7 +26,7 @@ const { setInitLoading} = useAuth()
     axios
       .get("/vendor/category")
       .then((res) => {
-        setAllCtegory(res.data.result);
+        setAllCategory(res.data.result);
       })
       axios
         .get("/vendor/getMyShop")
@@ -39,7 +39,7 @@ const { setInitLoading} = useAuth()
       });
   }, []);
 
-  const hdl_formdata = (appInput, mapClicked) => {
+  const hdl_formData = (appInput, mapClicked) => {
     const formData = new FormData();
     for (let k in appInput) {
       formData.append(k, appInput[k]);
@@ -52,7 +52,7 @@ const { setInitLoading} = useAuth()
   };
 
   const hdl_application_submit = () => {
-    const formData = hdl_formdata(appInput, searchLocation);
+    const formData = hdl_formData(appInput, searchLocation);
     formData.append("shopPicture", shopPictureFile);
     formData.append("openingTimes", time.openingTimes)
     formData.append("closingTimes",time.closingTimes)
