@@ -3,9 +3,11 @@ import { FoodIcon, HomeIcon, MapIcon, PendingIcon, QueueIcon, UserIcon } from ".
 import logo from '../assets/logo/logo.svg'
 import { useAuth } from "../hook/useAuthContext";
 import { getAccessToken } from "../utils/localStorage";
+import { useNavigate } from "react-router-dom";
 export default function Header() {
 	const { authUser, hdl_logout } = useAuth();
 	const [selectedItem, setSelectedItem] = useState(null);
+	const navigate = useNavigate();
 
 	if (getAccessToken()) {
 		if (authUser.role == "user") {
@@ -17,7 +19,10 @@ export default function Header() {
 							<ul className='flex'>
 								<li
 									className={`cursor-pointer text-sm px-4 flex flex-col justify-center items-center desktop:flex-row desktop:text-lg desktop:gap-1 desktop:py-2 hover:bg-primary-50 hover:rounded-md ${selectedItem === 'home' ? 'text-primary-500' : ''}`}
-									onClick={() => setSelectedItem('home')}>
+									onClick={() => {
+										setSelectedItem('home')
+										navigate('/user/shopList')
+									}}>
 									<HomeIcon className={`${selectedItem === 'home' ? 'primary-500 fill-current' : ''}`} />
 									Home
 								</li>

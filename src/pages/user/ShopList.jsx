@@ -53,11 +53,11 @@ export default function ShopList() {
               <br />ใช้งานง่าย ไม่ต้องติดตั้งแอป
             </p>
             <button
-              className='flex justify-center items-center text-md desktop:text-xl bg-primary-400 hover:opacity-60 rounded-3xl text-white px-5 py-1.5'
+              className='flex justify-center items-center text-md desktop:text-xl bg-primary-400 hover:opacity-60 rounded-3xl text-white px-5 py-2'
               onClick={handleShowMap}
             >
               ร้านใกล้คุณ
-              <ChevronRightIcon />
+              <ChevronRightIcon className="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function ShopList() {
             <ChevronLeftIcon className="w-6 h-6" />
             back
           </button>
-          
+
         </div>
       </section>
 
