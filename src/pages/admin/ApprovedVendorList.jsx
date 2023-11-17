@@ -5,94 +5,96 @@ import { RiEyeFill, RiMapPinFill } from "react-icons/ri";
 
 export default function ApprovedVendorList() {
   const {
-    singleApprovedVendor,
+    approvedVendorsList,
     vendorAlreadyApproved,
     hdl_view_approved_detail,
   } = useAdmin();
   const [isOpen, setIsOpen] = useState(false);
 
-  if (isOpen)
+  if (isOpen) {
     return (
       <Modal onClose={() => setIsOpen(false)}>
         <div className="mobile:w-[80%] desktop:w-[70%] mx-auto mt-20 inset-0 z-60">
-          {singleApprovedVendor ? (
-            singleApprovedVendor.map((el) => (
-              <div
-                key={el.id}
-                className="bg-white p-4 rounded-lg shadow-xl gap-10"
-              >
-                <div className="flex flex-col justify-center items-center">
-                  {el.registrationNumber ? (
-                    <div className="items-center py-2 rounded-lg px-14 bg-primary-200 ">
-                      <h1 className="text-3xl text-center text-white font-semibold">
-                        {" "}
-                        Juristic person
-                      </h1>
+          {approvedVendorsList ? (
+            approvedVendorsList.map((el) => {
+              return (
+                <div
+                  key={el.id}
+                  className="bg-white p-4 rounded-lg shadow-xl gap-10"
+                >
+                  <div className="flex flex-col justify-center items-center">
+                    {el.registrationNumber ? (
+                      <div className="items-center py-2 rounded-lg px-14 bg-primary-200 ">
+                        <h1 className="text-3xl text-center text-white font-semibold">
+                          {" "}
+                          Juristic person
+                        </h1>
+                      </div>
+                    ) : (
+                      <div className="mb-10 items-center py-2 rounded-lg px-14 bg-primary-100">
+                        <h1 className="text-3xl text-center text-gray-600 font-semibold">
+                          General public
+                        </h1>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-row justify-center items-center gap-20">
+                    <div className="items-center">
+                      <p className="flex justify-center text-center text-lg text-gray-600 font-semibold">
+                        Photo identification
+                      </p>
+                      <img
+                        src={el.idCard}
+                        alt="ID Card"
+                        className="w-[250px] h-[250px] border border-md-primary-200"
+                      />
                     </div>
-                  ) : (
-                    <div className="mb-10 items-center py-2 rounded-lg px-14 bg-primary-100">
-                      <h1 className="text-3xl text-center text-gray-600 font-semibold">
-                        General public
-                      </h1>
+                    <div className="items-center">
+                      <p className="flex justify-center text-center text-lg text-gray-600 font-semibold">
+                        Photo restaurant
+                      </p>
+                      <img
+                        src={el.shopPicture}
+                        alt="Shop Picture"
+                        className="w-[250px] h-[250px]"
+                      />
                     </div>
-                  )}
-                </div>
-                <div className="flex flex-row justify-center items-center gap-20">
-                  <div className="items-center">
-                    <p className="flex justify-center text-center text-lg text-gray-600 font-semibold">
-                      Photo identification
-                    </p>
-                    <img
-                      src={el.idCard}
-                      alt="ID Card"
-                      className="w-[250px] h-[250px] border border-md-primary-200"
-                    />
                   </div>
-                  <div className="items-center">
-                    <p className="flex justify-center text-center text-lg text-gray-600 font-semibold">
-                      Photo restaurant
-                    </p>
-                    <img
-                      src={el.shopPicture}
-                      alt="Shop Picture"
-                      className="w-[250px] h-[250px]"
-                    />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center justify-center mt-6">
-                  <p className="text-3xl font-extrabold text-gray-600">
-                    Restaurant name : {el.shopName}
-                  </p>
-                </div>
-                <div className="flex flex-col w-[500px] justify-center">
-                  <div className="flex flex-col items-start justify-start mt-6">
-                    <p className="text-xl font-extrabold text-gray-600">
-                      phone number : {el.shopMobile}
+                  <div className="flex flex-col items-center justify-center mt-6">
+                    <p className="text-3xl font-extrabold text-gray-600">
+                      Restaurant name : {el.shopName}
                     </p>
                   </div>
-                  <div className="flex flex-col items-start justify-start mt-6">
-                    <p className="text-xl font-extrabold text-gray-600">
-                      Opening times : {el.openingTimes}
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-start justify-start mt-6">
-                    <p className="text-xl font-extrabold text-gray-600">
-                      Closing times : {el.closingTimes}
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-start justify-start mt-6">
-                    <p className="text-xl font-extrabold text-gray-600">
-                      Owner : {el.ownerFirstName} {el.ownerLastName}
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-start justify-start mt-6">
-                    <p className="text-xl font-extrabold text-gray-600">
-                      ID number: {el.idNumber}
-                    </p>
+                  <div className="flex flex-col w-[500px] justify-center">
+                    <div className="flex flex-col items-start justify-start mt-6">
+                      <p className="text-xl font-extrabold text-gray-600">
+                        phone number : {el.shopMobile}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-start justify-start mt-6">
+                      <p className="text-xl font-extrabold text-gray-600">
+                        Opening times : {el.openingTimes}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-start justify-start mt-6">
+                      <p className="text-xl font-extrabold text-gray-600">
+                        Closing times : {el.closingTimes}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-start justify-start mt-6">
+                      <p className="text-xl font-extrabold text-gray-600">
+                        Owner : {el.ownerFirstName} {el.ownerLastName}
+                      </p>
+                    </div>
+                    <div className="flex flex-col items-start justify-start mt-6">
+                      <p className="text-xl font-extrabold text-gray-600">
+                        ID number: {el.idNumber}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           ) : (
             <h1 className="text-xl font-extrabold text-red-500">
               Nothing selected!
@@ -101,6 +103,7 @@ export default function ApprovedVendorList() {
         </div>
       </Modal>
     );
+  }
 
   return (
     <div className="bg-white flex justify-center items-start h-screen">
