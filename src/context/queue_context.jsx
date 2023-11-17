@@ -16,12 +16,13 @@ export default function QueueContextProvider({ children }) {
   const [historyBooking, setHistoryBooking] = useState([]);
   const [shopInfo, setShopInfo] = useState();
 
-  const selectShop = () => {
-    socket.emit("join_room", shopData.id + shopData.name, authUser.id);
+  const selectShop = (id) => {
+    socket.emit("join_room", String(id));
   };
 
-  const openShop = async () => {
-    socket.emit("join_room", "1");
+  const openShop = async (id) => {
+    console.log(id);
+    socket.emit("join_room", String(id));
   };
 
   const bookingQueue = (bookingInfo, seat) => {
