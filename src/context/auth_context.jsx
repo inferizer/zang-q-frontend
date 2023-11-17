@@ -31,6 +31,7 @@ export default function AuthContextProvider({ children }) {
     }
 
         , [])
+    const [isShowMap, setIsShowMap] = useState(false)
     const [initLoading, setInitLoading] = useState(true)
     const [authUser, setAuthUser] = useState(null)
     const [input, SetInput] = useState({})
@@ -123,6 +124,10 @@ export default function AuthContextProvider({ children }) {
         })
     }
 
+    const handleShowMap = () => {
+        setIsShowMap(!isShowMap)
+    }
+
     return (<AuthContext.Provider value={{
         hdl_user_register_submit,
         hdl_user_login_submit,
@@ -138,7 +143,8 @@ export default function AuthContextProvider({ children }) {
         SuccessGoogle,
         failGoogle,
         setAuthUser,
-        hdl_admin_login_submit
+        hdl_admin_login_submit,
+        isShowMap, setIsShowMap, handleShowMap
     }}>
         {children}
     </AuthContext.Provider>)

@@ -25,6 +25,6 @@
 
 @media (min-width: 800px) {
   .map-container {
-      height: 550px; 
+      height: 72vh; 
   }
 }

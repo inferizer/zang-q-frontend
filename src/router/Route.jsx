@@ -44,7 +44,11 @@ import MapContextProvider from "../context/map_context";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <RedirectIfAuth>
+        <Layout />
+      </RedirectIfAuth>
+    ),
     children: [
       { path: "", element: <HomePage /> },
       { path: "Category", element: <CategoryPage /> },

@@ -28,16 +28,10 @@ export default function ShopList() {
     setSearchBarResult,
   } = useUser();
 
-  const { activeMarkers, setActiveMarkers, disableMarkers, setDisableMarkers, loadingLocation, setLoadingLocation } = useMap()
-  const { initLoading, setInitLoading } = useAuth()
-
-  const [isShowMap, setIsShowMap] = useState(false)
+  const { activeMarkers, setActiveMarkers, disableMarkers, setDisableMarkers, loadingLocation, setLoadingLocation, } = useMap()
+  const { isShowMap, setIsShowMap, handleShowMap } = useAuth()
 
   const navigate = useNavigate();
-
-  const handleShowMap = () => {
-    setIsShowMap(!isShowMap)
-  }
 
   // console.log(loadingLocation)
   // if (loadingLocation) return <Loading/>
@@ -105,14 +99,23 @@ export default function ShopList() {
           <div className="flex flex-col gap-4 desktop:flex-row desktop:flex-wrap desktop:justify-start">
 
             {/* If the map is still loading, show the Loading component */}
-            {loadingLocation && <Loading className="h-auto p-10" />}
+            {loadingLocation && <Loading className="h-[200px] p-10" />}
 
             {searchBarResult
-              ? searchBarResult.map((el) => (
+              ? searchBarResult.map((el) => {
+
                 <ShopCard storeName={el.shopName} img={el.shopPicture} />
-              ))
+              }
+
+              )
               : filter
                 ? filterResult.ShopsCategories.map((el) => {
+
+                  for (let i of disableMarkers) {
+                    if (i.id == el.shop.id) {
+                      return null
+                    }
+                  }
                   if (el.shop.isApprove == "approved") {
                     return (
                       <ShopCard
@@ -130,16 +133,15 @@ export default function ShopList() {
       </section >
 
       <section className="section">
-        <div className={`container pt-2 pb-16 ${isShowMap ? "visible" : "invisible h-0 overflow-hidden"}`}>
+        <div className={`container pb-16 ${isShowMap ? "visible" : "invisible h-0 overflow-hidden"}`}>
           <ShopMap />
           <button
-            className="m-auto flex justify-between items-center gap-2 text-primary-500 border-2 border-primary-500 py-2 px-6 rounded hover:bg-primary-100"
+            className="m-auto flex justify-between items-center gap-2 text-primary-500 border-2 border-primary-500 py-1.5 px-6 rounded hover:bg-primary-50"
             onClick={handleShowMap}
           >
             <ChevronLeftIcon className="w-6 h-6" />
             back
           </button>
-
         </div>
       </section>
 
