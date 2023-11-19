@@ -34,6 +34,8 @@ export default function AuthContextProvider({ children }) {
         });
     } else setInitLoading(false);
   }, []);
+
+  const [isShowMap, setIsShowMap] = useState(false)
   const [initLoading, setInitLoading] = useState(true);
   const [authUser, setAuthUser] = useState(null);
   const [input, SetInput] = useState({});
@@ -49,6 +51,7 @@ export default function AuthContextProvider({ children }) {
     data.profileImage = profileObj.imageUrl;
     return data;
   };
+
   const SuccessGoogle = (res) => {
     let data = hdl_google_login(res.profileObj);
     axios.post("/auth/login/google", data).then((res) => {
@@ -56,6 +59,7 @@ export default function AuthContextProvider({ children }) {
       addAccessToken(res.data.accessToken);
     });
   };
+
   const failGoogle = (res) => {
     console.log("google login fail", alert(res));
   };
@@ -74,6 +78,7 @@ export default function AuthContextProvider({ children }) {
         setInitLoading(false);
       });
   };
+
   const hdl_user_login_submit = () => {
     axios
       .post("/auth/login", input)
@@ -91,6 +96,7 @@ export default function AuthContextProvider({ children }) {
         throw error;
       });
   };
+
   const hdl_vendor_login_submit = () => {
     axios.post("/vendor/login", input).then((res) => {
       setAuthUser(res.data.user);
@@ -165,36 +171,40 @@ export default function AuthContextProvider({ children }) {
     if (e.target.files[[0]]) setProfileImage(e.target.files[[0]]);
   };
 
-  return (
-    <AuthContext.Provider
-      value={{
-        hdl_user_register_submit,
-        hdl_user_login_submit,
-        hdl_vendor_register_submit,
-        initLoading,
-        setInitLoading,
-        hdl_input,
-        input,
-        authUser,
-        hdl_logout,
-        hdl_vendor_register_submit,
-        hdl_vendor_login_submit,
-        SuccessGoogle,
-        failGoogle,
-        setAuthUser,
-        hdl_admin_login_submit,
-        hdl_user_edit,
-        userDetailOpen,
-        setUserDetailOpen,
-        userEditOpen,
-        setUserEditOpen,
-        hdl_user_edit_picture,
-        profileImage,
-        SetInput,
-        setProfileImage,
-      }}
-    >
-      {children}
-    </AuthContext.Provider>
+  const handleShowMap = () => {
+    setIsShowMap(!isShowMap)
+  }
+
+  return (<AuthContext.Provider value={{
+
+    hdl_user_register_submit,
+    hdl_user_login_submit,
+    hdl_vendor_register_submit,
+    initLoading,
+    setInitLoading,
+    hdl_input,
+    input,
+    authUser,
+    hdl_logout,
+    hdl_vendor_register_submit,
+    hdl_vendor_login_submit,
+    SuccessGoogle,
+    failGoogle,
+    setAuthUser,
+    hdl_admin_login_submit,
+    hdl_user_edit,
+    userDetailOpen,
+    setUserDetailOpen,
+    userEditOpen,
+    setUserEditOpen,
+    hdl_user_edit_picture,
+    profileImage,
+    SetInput,
+    setProfileImage,
+    isShowMap, setIsShowMap, handleShowMap
+  }}
+  >
+    {children}
+  </AuthContext.Provider>
   );
 }

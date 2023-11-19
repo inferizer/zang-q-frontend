@@ -1,5 +1,6 @@
 import axios from "../config/axios";
 import { useEffect, useState, createContext } from "react";
+import { useMap } from "../hook/useMap";
 export const UserContext = createContext();
 export default function UserContextProvider({ children }) {
   const [allShop, setAllShop] = useState([]);
@@ -7,7 +8,8 @@ export default function UserContextProvider({ children }) {
   const [filter, setFilter] = useState(null);
   const [filterResult, setFilterResult] = useState(null);
   const [searchBarResult, setSearchBarResult] = useState(null);
-  const [singleShop, setSingleShop] = useState(null);
+  const {disableMarkers} = useMap()
+  const [singleShop,setSingleShop] = useState(null)
   useEffect(() => {
     axios.get("/user/shop").then((res) => {
       setAllShop(res.data.result);
@@ -21,12 +23,33 @@ export default function UserContextProvider({ children }) {
     setFilterResult(ShopCategories);
   };
 
+  const inboundShop = (allShop,disableMarkers) =>{
+    let result = []
+    for(let i of allShop){
+      let found = false
+      for(let j of disableMarkers){
+        
+        if(i.id == j.id){
+          found = true
+        }
+        
+      }
+    if(!found) result.push(i)
+    }
+    return result
+
+  }
+
   const hdl_searchBar = (e) => {
-    setFilter(null);
-    let result = [];
-    for (let i of allShop) {
+    setFilter(null)
+    let result = []
+    
+    let inbound = inboundShop(allShop,disableMarkers)
+    console.log(inbound)
+    for (let i of inbound) {
       let input = e.target.value.trim().toUpperCase();
       let allShop = i.shopName.trim().toUpperCase();
+      console.log(allShop)
       if (allShop.includes(input)) {
         result.push(i);
       }

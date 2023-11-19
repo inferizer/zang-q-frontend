@@ -1,16 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../hook/useAuthContext";
+import { ADMIN, USER, VENDOR } from "../constant/role"
+import { getAccessToken } from "../utils/localStorage";
 
 export default function RedirectIfAuth({ children }) {
-  const { authUser } = useAuth();
-  console.log(authUser);
-  if (authUser) {
-    if (authUser.role !== "vendor" && authUser.role !== "admin") {
-      return <Navigate to='/' />;
-    } else if (authUser.role === "vendor") {
-      return <Navigate to='/vendor/home' />;
+    const { authUser } = useAuth()
+    if (getAccessToken()) {
+        if (authUser.role === ADMIN) return < Navigate to="/admin/pending" />
+        if (authUser.role === USER) return < Navigate to="/user/shopList" />
+        if (authUser.role === VENDOR) return < Navigate to="/vendor" />
     }
-    return <Navigate to='/admin/pending' />;
-  }
-  return children;
+    return children
 }

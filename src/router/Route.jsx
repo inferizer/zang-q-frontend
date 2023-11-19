@@ -37,11 +37,17 @@ import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 import VendorHistory from "../pages/vendor/VendorHistory";
-import AdminManagement from "../pages/admin/AdminManagement";
+import AdminManagement from "../pages/admin/AdminManagement";import ShopMap from "../pages/user/ShopMap";
+import MapContextProvider from "../context/map_context";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <RedirectIfAuth>
+        <Layout />
+      </RedirectIfAuth>
+    ),
     children: [
       { path: "", element: <HomePage /> },
       { path: "shop", element: <VendorQueueManagement /> },
@@ -81,11 +87,13 @@ const router = createBrowserRouter([
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
-        <VendorContextProvider>
+        <MapContextProvider>
+          <VendorContextProvider>
           <QueueContextProvider>
-            <Layout />
+              <Layout />
           </QueueContextProvider>
-        </VendorContextProvider>
+          </VendorContextProvider>
+        </MapContextProvider>
       </RedirectIfNotVendor>
     ),
     children: [
@@ -121,14 +129,17 @@ const router = createBrowserRouter([
     element: (
       <RedirectIfNotUser>
         <QueueContextProvider>
-          <UserContextProvider>
-            <Layout />
-          </UserContextProvider>
+          <MapContextProvider>
+            <UserContextProvider>
+              <Layout />
+            </UserContextProvider>
+          </MapContextProvider>
         </QueueContextProvider>
       </RedirectIfNotUser>
     ),
     children: [
       { path: "/user/shopList", element: <ShopList /> },
+      { path: "/user/shopMap", element: <ShopMap /> },
       { path: "/user/book", element: <UserBookPage /> },
       { path: "/user/ticket", element: <UserTicketPage /> },
     ],

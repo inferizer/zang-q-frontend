@@ -3,6 +3,18 @@ import { IoSearchSharp } from "react-icons/io5";
 import { useUser } from "../../hook/useUser";
 import Category from "../../component/user/Category";
 import ShopCard from "../../component/user/ShopCard";
+import maps from '../../assets/image/maps.png'
+import { ChevronLeftIcon, ChevronRightIcon, SearchIcon } from "../../assets/icon/Icon";
+import { useNavigate } from "react-router-dom";
+import { useMap } from "../../hook/useMap";
+import { useAuth } from "../../hook/useAuthContext";
+import Map from "../map/Map";
+import ShopMap from "./ShopMap";
+import { useState } from "react";
+import { useEffect } from "react";
+import { set } from "date-fns";
+import Loading from "../../component/loading";
+
 export default function ShopList() {
   const {
     allShop,
@@ -16,87 +28,121 @@ export default function ShopList() {
     setSearchBarResult,
   } = useUser();
 
+  const { activeMarkers, setActiveMarkers, disableMarkers, setDisableMarkers, loadingLocation, setLoadingLocation, } = useMap()
+  const { isShowMap, setIsShowMap, handleShowMap } = useAuth()
+
+  const navigate = useNavigate();
+
+  // console.log(loadingLocation)
+  // if (loadingLocation) return <Loading/>
+
   return (
-    <div className=" w-screen bg-gray-50 px-4 desktop:mt-20 mt-4">
-      <div className=" max-w-[800px] m-auto desktop:max-w-[1024px]">
-        <div className="mobile:flex flex-col items-center ">
-          <div className="mobile:self-stretch h-28 px-2.5 py-5 w-[350px] bg-gradient-to-b from-rose-50 to-rose-50 flex-col justify-center items-center gap-2.5 inline-flex m-auto">
-            <div className="mobile:justify-start items-center gap-[38px] inline-flex">
-              <img
-                className="mobile: w-[85px] h-[85px]"
-                src="https://via.placeholder.com/85x85"
-              />
-              <button className="mobile">
-                <div className="mobile: bg-black w-[130px] h-[30px] text-white rounded-[40px]  hover:text-white border border-gray-800 hover:bg-gray-700 ">
-                  ร้านใกล้คุณ
-                  <LiaGreaterThanSolid className="mobile: inline ml-[10px]" />
-                </div>
+    <>
+      <section className={`section bg-gray-50 desktop:pt-16 ${!isShowMap ? "visible" : "invisible h-0 overflow-hidden"}`}>
+        <div className='container flex justify-center gap-6 items-center py-10 desktop:gap-20'>
+          <img src={maps} alt='hero-image' className='h-40 desktop:h-72 ' />
+          <div className='flex flex-col gap-6 items-start'>
+            <p className="text-md desktop:text-xl text-gray-500">
+              ซังคิว เว็บให้บริการจองคิวร้านอาหารแบบเรียลไทม์
+              <br />ใช้งานง่าย ไม่ต้องติดตั้งแอป
+            </p>
+            <button
+              className='flex justify-center items-center text-md desktop:text-xl bg-primary-400 hover:opacity-60 rounded-3xl text-white px-5 py-2'
+              onClick={handleShowMap}
+            >
+              ร้านใกล้คุณ
+              <ChevronRightIcon className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className={`section ${!isShowMap ? "visible" : "invisible h-0 overflow-hidden"}`}>
+        <div className="container flex flex-col gap-2 min-w-[240px] pt-8 desktop:max-w-[800px]">
+          <h6 className="font-semibold ml-4">ค้นหาร้าน</h6>
+          <div className="relative">
+            <SearchIcon className="text-gray-500 absolute h-full left-3 p-1" />
+            <input
+              onChange={hdl_searchBar}
+              placeholder="search restaurant"
+              className="w-full py-2 pl-12 pr-4 bg-white rounded-3xl shadow-lg justify-start items-center gap-2"
+            />
+          </div>
+
+
+          <div className="flex items-center justify-center gap-2 py-3">
+            <div
+              className={`px-2.5 py-0.5 rounded-2xl border border-primary-500 justify-center items-center gap-2.5 flex ${searchBarResult ? "" : filter ? "" : "bg-primary-100"
+                } `}
+            >
+              <button
+                onClick={() => {
+                  setFilter(null);
+                  setSearchBarResult(null);
+                }}
+                className="text-primary-500 text-sm"
+              >
+                All
               </button>
             </div>
+            {allCategory.map((el) => (
+              <Category
+                name={el.name}
+                setFilter={setFilter}
+                setSearchBarResult={setSearchBarResult}
+                hdl_filter_search={hdl_filter_search}
+                id={el.id}
+              />
+            ))}
           </div>
-          <div className="mobile:self-stretch h-20 p-4 flex-col justify-start items-start gap-2.5 inline-flex w-[350px] m-auto">
-            <div className="mobile:self-stretch p-2.5 bg-white rounded-[100px] shadow justify-start items-center gap-2.5 inline-flex ">
-              <div className="mobile:w-7 h-7 relative flex gap-4">
-                <IoSearchSharp className="w-[30px] h-[25px] " />
-                <input
-                  onChange={hdl_searchBar}
-                  placeholder="search restaurant"
-                />
-              </div>
-            </div>
-            
-          </div>
-          <div className="mobile:self-stretch  px-4 flex-col justify-start items-start inline-flex m-auto  ">
-            <div className="mobile:w-[10rem] h-[4rem] py-2.5 flex-col justify-start items-center gap-2.5 inline-flex  ">
-              <div className="mobile:justify-start items-start gap-2 inline-flex">
-                <div
-                  className={`mobile:px-2.5 py-0.5 rounded-2xl border border-pink-600 justify-center items-center gap-2.5 flex ${
-                    searchBarResult ? "" : filter ? "" : "bg-red-800"
-                  } `}
-                >
-                  <button
-                    onClick={() => {
-                      setFilter(null);
-                      setSearchBarResult(null);
-                    }}
-                    className="text-pink-600 text-sm font-normal font-['IBM Plex Sans Thai']"
-                  >
-                    All
-                  </button>
-                </div>
-                {allCategory.map((el) => (
-                  <Category
-                    name={el.name}
-                    setFilter={setFilter}
-                    setSearchBarResult={setSearchBarResult}
-                    hdl_filter_search={hdl_filter_search}
-                    id={el.id}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-          {searchBarResult
-            ? searchBarResult.map((el) => (
-                <ShopCard storeName={el.shopName} img={el.shopPicture} id={el.id} />
-              ))
-            : filter
-            ? filterResult.ShopsCategories.map((el) => {
-                if (el.shop.isApprove == "approved") {
-                  return (
-                    <ShopCard
-                      storeName={el.shop.shopName}
-                      img={el.shop.shopPicture}
-                      id={el.shop.id}
-                    />
-                  );
-                }
+
+          <div className="flex flex-col gap-4 desktop:flex-row desktop:flex-wrap desktop:justify-start">
+
+            {/* If the map is still loading, show the Loading component */}
+            {loadingLocation && <Loading className="h-[200px] p-10" />}
+
+            {searchBarResult
+              ? searchBarResult.map((el) => {
+                return <ShopCard storeName={el.shopName} img={el.shopPicture} id={el.id} />
               })
-            : allShop.map((el) => (
-                <ShopCard storeName={el.shopName} img={el.shopPicture} id={el.id} />
-              ))}
+              : filter
+                ? filterResult.ShopsCategories.map((el) => {
+
+                  for (let i of disableMarkers) {
+                    if (i.id == el.shop.id) {
+                      return null
+                    }
+                  }
+                  if (el.shop.isApprove == "approved") {
+                    return (
+                      <ShopCard
+                        storeName={el.shop.shopName}
+                        img={el.shop.shopPicture}
+                        id={el.shop.id}
+                      />
+                    );
+                  }
+                })
+                : activeMarkers?.map((el) => (
+                  <ShopCard storeName={el.shopName} img={el.shopPicture} id={el.id} />
+                ))}
+          </div>
         </div>
-      </div>
-    </div>
+      </section >
+
+      <section className="section">
+        <div className={`container pb-16 ${isShowMap ? "visible" : "invisible h-0 overflow-hidden"}`}>
+          <ShopMap />
+          <button
+            className="m-auto flex justify-between items-center gap-2 text-primary-500 border-2 border-primary-500 py-1.5 px-6 rounded hover:bg-primary-50"
+            onClick={handleShowMap}
+          >
+            <ChevronLeftIcon className="w-6 h-6" />
+            back
+          </button>
+        </div>
+      </section>
+
+    </>
   );
 }

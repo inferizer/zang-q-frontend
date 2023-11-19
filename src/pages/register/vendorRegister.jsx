@@ -48,6 +48,15 @@ export default function VendorRegistor() {
         <button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
           Continue
         </button>
+
+        <div className="text-center mt-4 ">
+          <span className="text-gray-500">Already have an account?</span>
+          <span className="cursor-pointer underline text-primary-500 ml-2"
+            onClick={() => { navigate('/login/vendor') }}
+          >
+            Login
+          </span>
+        </div>
       </form>
     </section>
   );

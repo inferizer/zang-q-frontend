@@ -1,29 +1,25 @@
-import React from "react";
-import { LiaGreaterThanSolid } from "react-icons/lia";
-import { useNavigate } from "react-router-dom";
-import VendorAttach from '../../assets/logo/VendorAttach.png'
-import VendorLanding from "./VendorLanding";
-import { ChevronRightIcon } from "../../assets/icon/Icon";
+import { useNavigate } from "react-router-dom"
+import document from '../../assets/image/document.svg'
+import { ChevronRightIcon } from "../../assets/icon/Icon"
 
-export default function VendorAttachfile() {
+export default function VendorLanding() {
   const navigate = useNavigate()
-
   return (
     <section className="section h-screen flex items-center">
-      <div className="container flex flex-col items-center justify-center gap-4">
-        <img src={VendorAttach} className=" max-w-[300px] h-[300px]" />
-        <h5 className="text-lg font-semibold">กรุณาแนบเอกสารข้อมูล</h5>
-        <button className="mobile" >
-          <div
-            className="bg-black rounded-3xl text-white px-4 py-2 flex items-center justify-between gap-2 hover:opacity-60"
-            onClick={() => navigate('/vendor/application')}
-          >
-            แนบเอกสาร
-            <ChevronRightIcon />
-          </div>
+      <div className="container min-w-[360px flex flex-col items-center gap-4">
+        <img src={document} className="w-80 h-80 object-fit" />
+        <h6 className="text-lg font-medium">กรุณาแนบเอกสารข้อมูล</h6>
+        <button
+          className="flex items-center gap-2 mt-3 shadow bg-black hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-3xl"
+          onClick={() => {
+            navigate('/vendor/application')
+          }}
+        >
+          แนบเอกสาร
+          <ChevronRightIcon />
         </button>
-        <VendorLanding />
+
       </div>
     </section>
-  );
+  )
 }

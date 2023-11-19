@@ -83,22 +83,22 @@ export default function UserBookTableForm({id}) {
         <UserTicketPage />
       ) : (
         <form
-          className='self-stretch flex-col justify-start items-start inline-flex'
+          className='flex flex-col self-stretch'
           onSubmit={hdlSubmit}
         >
-          <div className='h-[150px] px-4 py-3 mx-auto flex-col justify-start items-start gap-2 flex'>
+          <div className='flex flex-col gap-2 py-3 desktop:py-6'>
             {/* type header */}
-            <div className="self-stretch text-black text-base font-medium font-['IBM Plex Sans Thai']">
+            <div className="font-medium self-stretch">
               Table Type
             </div>
-            <div className='self-stretch rounded-2xl justify-center items-start inline-flex'>
+            <div className='self-stretch rounded-2xl flex justify-center items-center'>
               {/* TableType */}
               <TableType onClick={hdlTableType} />
             </div>
           </div>
           {/* seat number section */}
-          <div className='h-[137px] w-full px-6 py-3 mx-auto flex-col justify-start items-start gap-2 flex'>
-            <div className="self-stretch text-black text-base font-medium font-['IBM Plex Sans Thai']">
+          <div className='flex flex-col gap-2 py-3 desktop:py-6'>
+            <div className="font-medium self-stretch">
               Amount of Peoples
             </div>
             <div className='self-stretch rounded-2xl justify-center items-center gap-4 inline-flex'>
@@ -113,7 +113,7 @@ export default function UserBookTableForm({id}) {
               {/* seat number */}
               <div className='justify-center items-center flex'>
                 <div className='px-14 py-2 rounded-2xl border border-neutral-400 flex-col justify-start items-center'>
-                  <div className="text-pink-600 text-4xl font-bold font-['IBM Plex Sans Thai'] tracking-widest">
+                  <div className="text-pink-600 text-4xl font-bold tracking-widest">
                     {seat}
                   </div>
                 </div>
@@ -130,7 +130,7 @@ export default function UserBookTableForm({id}) {
           </div>
 
           {/* booking btn */}
-          <button className='mobile:  w-[350px] mx-auto flex justify-center items-center focus:outline-none text-white bg-primary-400 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 '>
+          <button className='mt-4 flex justify-center items-center focus:outline-none text-white bg-primary-400 hover:bg-primary-800 font-medium rounded-lg text-sm px-5 py-2.5 '>
             Booking
           </button>
         </form>

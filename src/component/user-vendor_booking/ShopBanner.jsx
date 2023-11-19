@@ -1,30 +1,25 @@
-import shopDefault from "../../assets/image/shop-default.png";
-export default function ShopBanner({ src = shopDefault, name, markMap }) {
+import { MdLocationOn, MdOutlineAccessTime } from "react-icons/md"
+
+export default function ShopBanner({ shopName, location, q, shopPicture }) {
   return (
-    <div className='self-stretch border-b border-zinc-100 flex-col justify-start items-start inline-flex'>
-      <div className='h-[133px] px-3.5 py-2.5 flex-col justify-start items-start gap-2.5 flex'>
-        <div className='w-[363px] px-6 py-3 bg-white rounded-xl justify-start items-center gap-[30px] inline-flex'>
-          <div className='w-[89px] h-[89px] bg-white rounded-xl border-2 border-zinc-100 justify-start items-start gap-2.5 flex'>
-            {/* shop picture */}
-            <img className='grow shrink rounded-xl' 
-            
-            src={src} />
-          </div>
-          <div className='grow shrink basis-0 flex-col justify-start items-start gap-2 inline-flex'>
-            <div className='self-stretch justify-start items-center gap-2.5 inline-flex'>
-              {/* shop name */}
-              <div className="grow shrink basis-0 text-black text-base font-bold font-['Nunito Sans']">
-                {name}
-              </div>
-            </div>
-            <div className='self-stretch justify-start items-center gap-2 inline-flex'>
-              {/* google map marker */}
-              <div className="grow shrink basis-0 text-neutral-400 text-xs font-bold font-['Nunito Sans']">
-                <div>{markMap}</div>
-              </div>
-            </div>
-          </div>
+    <div className="flex gap-6 p-4 border-b border-gray-100 ">
+      <div className=" bg-white rounded-lg border-2 border-gray-100 ">
+        <img className="h-24 w-full object-cover desktop:h-44" src={shopPicture} alt="restaurantImage" />
+      </div>
+
+      <div className="flex flex-col grow justify-center gap-2 desktop:px-2">
+        <h6 className="text-lg font-medium">{shopName}</h6>
+
+        <div className="flex gap-2 text-gray-400">
+          <MdLocationOn className="text-lg" />
+          <p className="text-sm">{location}</p>
         </div>
+
+        <div className="flex gap-2 text-primary-500">
+          <MdOutlineAccessTime />
+          <p className="text-sm">{q}</p>
+        </div>
+
       </div>
     </div>
   );

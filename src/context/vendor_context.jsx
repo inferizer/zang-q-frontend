@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 import axios from "../config/axios";
+import { useMap } from "../hook/useMap";
 import { useAuth } from "../hook/useAuthContext";
 import socket from "../utils/socket";
 
@@ -12,28 +13,27 @@ export default function VendorContextProvider({ children }) {
   const [appInput, setAppInput] = useState({});
   const [allCategory, setAllCategory] = useState([]);
   const [shopInfo, setShopInfo] = useState();
-  
   const [loading, setLoading] = useState(true);
   // map
-  const [searchLocation, setSearchLocation] = useState(null);
-  const [mapClicked, setMapClicked] = useState(null);
   const [checkInput, setCheckInput] = useState([]);
   const [cancel, setCancel] = useState([]);
   const [value, setValue] = useState(new Date());
-  const [time,setTime] = useState({})
-const { setInitLoading} = useAuth()
+  const [time, setTime] = useState({})
+  const { setInitLoading } = useAuth()
+  const { searchLocation, setSearchLocation, mapClicked, setMapClicked } = useMap();
+
   useEffect(() => {
     axios
       .get("/vendor/category")
       .then((res) => {
         setAllCategory(res.data.result);
       })
-      axios
-        .get("/vendor/getMyShop")
-        .then((res) => {
-          setShopInfo(res.data.result[0]);
-          console.log("vendor context result", res.data.result[0]);
-        })
+    axios
+      .get("/vendor/getMyShop")
+      .then((res) => {
+        setShopInfo(res.data.result[0]);
+        console.log("vendor context result", res.data.result[0]);
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -55,7 +55,7 @@ const { setInitLoading} = useAuth()
     const formData = hdl_formData(appInput, searchLocation);
     formData.append("shopPicture", shopPictureFile);
     formData.append("openingTimes", time.openingTimes)
-    formData.append("closingTimes",time.closingTimes)
+    formData.append("closingTimes", time.closingTimes)
     formData.append("idCard", idCardFile);
     formData.append("shopLat", mapClicked?.lat || searchLocation?.lat);
     formData.append("shopLan", mapClicked?.lng || searchLocation?.lng);
@@ -106,24 +106,23 @@ const { setInitLoading} = useAuth()
     });
   };
 
-  const hdl_MUI_timePicker_opening = e =>
-  {
+  const hdl_MUI_timePicker_opening = e => {
     const time = e.$d
-    setTime(prev=>{
-      let obj = {openingTimes:time}
-        let newData = {...prev,...obj}
+    setTime(prev => {
+      let obj = { openingTimes: time }
+      let newData = { ...prev, ...obj }
       return newData
     })
-  
+
   }
-  const hdl_MUI_timePicker_closing = e =>{
+  const hdl_MUI_timePicker_closing = e => {
     const time = e.$d
-    setTime(prev=>{
-      let obj = {closingTimes:time}
-        let newData = {...prev,...obj}
+    setTime(prev => {
+      let obj = { closingTimes: time }
+      let newData = { ...prev, ...obj }
       return newData
     })
-    
+
   }
 
   return (

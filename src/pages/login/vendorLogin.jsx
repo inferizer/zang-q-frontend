@@ -1,5 +1,7 @@
 import Input from "../../component/input";
 import { useAuth } from "../../hook/useAuthContext";
+import { useNavigate } from "react-router-dom";
+
 export default function VendorLogin() {
   const { hdl_input, hdl_vendor_login_submit } = useAuth();
 
@@ -7,6 +9,9 @@ export default function VendorLogin() {
     { id: 4, name: "email", type: "text" },
     { id: 2, name: "password", type: "Password" },
   ];
+
+  const navigate = useNavigate();
+  
   return (
     <section className="section h-screen flex">
       <form
@@ -34,9 +39,16 @@ export default function VendorLogin() {
           );
         })}
 
-        <button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
-          Continue
-        </button>
+        <button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
+
+        <div className="text-center mt-4 ">
+          <span className="text-gray-500">Don’t have an account?</span>
+          <span className="cursor-pointer underline text-primary-500 ml-2"
+            onClick={() => { navigate('/register/vendor') }}
+          >
+            Register
+          </span>
+        </div>
       </form>
     </section>
   );

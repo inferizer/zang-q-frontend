@@ -23,11 +23,11 @@ export default function UserLogin() {
     useAuth();
 
   // const [inputError,setInputError] = useState({})
-  const navaigate = useNavigate();
+  const navigate = useNavigate();
 
   const validateLogin = (input) => {
     const { error } = UserLoginSchema.validate(input, { abortEarly: false });
-  
+
     toast.error("username or password was wrong!", error);
     if (error) {
       const result = error.details.reduce((acc, el) => {
@@ -50,117 +50,93 @@ export default function UserLogin() {
       return setError(validationError);
     }
     setError({});
-    await hdl_user_login_submit().then(res=>{
+    await hdl_user_login_submit().then(res => {
       navaigate('/')
     })
   };
   return (
-    <>
-      <section className="w-screen px-4">
-        <header className="max-w-[800px] m-auto desktop:max-w-[1024px]">
-          <div className="justify-center items-center h-screen flex">
-            <form className="mobile:lg" onSubmit={hdl_login_submit}>
-              <h1 className="mobile:mb-[25px] text-center">
-                <b className="mobile:text-[25px]">Login</b>
-              </h1>
-              <div>
-                <div className="mobile: border-[#BDBDBD] flex flex-col gap-2">
-                  <div className="mobile: flex flex-col gap-2 rounded-md mx-auto">
-                    <Input
-                      onChange={hdl_input}
-                      placeholder="Email or Mobile:"
-                      type="text"
-                      id="emailOrMobile"
-                      name="emailOrMobile"
-                      value={input.emailOrMobile}
-                      error={error.emailOrMobile}
-                    />
-                    {error.emailOrMobile && (
-                      <InputErrorMessage message={error.emailOrMobile} />
-                    )}
+    <section className="section h-screen flex gap-4">
+      <div className="m-auto w-[600px] min-w-[240px] bg-white shadow-md rounded p-8 flex flex-col gap-4">
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={hdl_login_submit}
+        >
+          <h6 className="text-lg font-semibold">Login</h6>
+          <div className="flex flex-col gap-2 max-w-[600px]">
+            <Input
+              onChange={hdl_input}
+              placeholder='Email or Mobile:'
+              type='text'
+              id='emailOrMobile'
+              name='emailOrMobile'
+              value={input.emailOrMobile}
+              error={error.emailOrMobile}
+            />
+            {error.emailOrMobile && (
+              <InputErrorMessage message={error.emailOrMobile} />
+            )}
 
-                    <Input
-                      onChange={hdl_input}
-                      type="password"
-                      placeholder="password:"
-                      name="password"
-                      required
-                      value={input.password}
-                      error={error.password}
-                    />
-                    {error.password && (
-                      <InputErrorMessage message={error.password} />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <button
-                className="mobile:mt-[25px] ml-[9px] w-[358px] flex justify-center 
-                items-center focus:outline-none text-white bg-primary-400 hover:bg-red-500
-                font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
-              >
-                Continue
-              </button>
-              <div className="mobile:inline-flex items-center justify-center w-full">
-                <hr className="mobile:w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-600" />
-                <span className="mobile:absolute px-3 font-medium text-gray-600-translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-500">
-                  or
-                </span>
-              </div>
-
-              <div>
-                <LineLoginButton />
-              </div>
-
-              <div className="mobile: pl-[10px]">
-                <div>
-                  <GoogleLogin
-                    clientId={clientId}
-                    buttonText="Continue with Google"
-                    onSuccess={SuccessGoogle}
-                    onFailure={failGoogle}
-                    cookiePolicy="single_host_origin"
-                    isSignedIn={false}
-                    type="button"
-                    render={(renderProps) => (
-                      <button
-                        onClick={renderProps.onClick}
-                        disabled={renderProps.disabled}
-                        className="mobile:w-[350px]  py-2.5 px-5  text-sm font-medium  text-gray60 focus:outline-none bg-primaryWhite rounded-lg border border-gray20 hover:bg-gray10 hover:text-blue60 focus:z-10 focus:ring-4 focus:ring-gray20 dark:focus:ring-gray60 dark:bg-gray60 dark:text-gray40 dark:border-gray50 dark:hover:text-primaryWhite dark:hover:bg-gray60"
-                      >
-                        <div className="mobile: pr-[73px]">
-                          <img
-                            className="mobile: inline w-[45px] h-[45px] mr-[50px]"
-                            src={icongoogle}
-                            alt=""
-                          />
-                          Continue with Google
-                        </div>
-                      </button>
-                    )}
-                  />
-                </div>
-
-                <br className="mobile" />
-                <br className="mobile" />
-              </div>
-              <div className="mobile:text-center">
-                <span className="mobile">Don't have an account?</span>
-                <span className="mobile:ml-4">
-                  <button
-                    className="mobile"
-                    onClick={() => {
-                      navaigate("/register/user");
-                    }}
-                  >
-                    Sign up
-                  </button>
-                </span>
-              </div>
-            </form>
+            <Input
+              onChange={hdl_input}
+              type='password'
+              placeholder='password:'
+              name='password'
+              required
+              value={input.password}
+              error={error.password}
+            />
+            {error.password && (
+              <InputErrorMessage message={error.password} />
+            )}
           </div>
-        </header>
-      </section>
-    </>
+
+          <button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+            Continue
+          </button>
+
+          <div className="flex items-center justify-center w-full">
+            <hr className="w-64 h-px my-8 bg-gray-300 border-0" />
+            <span className="absolute px-3 text-gray-500 -translate-x-1/2 bg-white left-1/2">
+              or
+            </span>
+          </div>
+        </form>
+
+        <LineLoginButton />
+        <GoogleLogin
+          clientId={clientId}
+          buttonText='Continue with Google'
+          onSuccess={SuccessGoogle}
+          onFailure={failGoogle}
+          cookiePolicy='single_host_origin'
+          isSignedIn={false}
+          type='button'
+          render={(renderProps) => (
+            <button
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+              className="flex justify-center items-center gap-4 py-2 px-6 text-sm font-medium text-gray-900 rounded border-2 border-gray-200 hover:text-primary-500 hover:border-primary-500 focus:outline-none focus:bg-gray-100"
+            >
+              <img
+                className="w-9 h-9"
+                src={icongoogle}
+                alt=''
+              />
+              Continue with Google
+            </button>
+          )}
+        />
+
+        <div className="text-center mt-4 ">
+          <span className="text-gray-500">Don’t have an account?</span>
+          <span className="cursor-pointer underline text-primary-500 ml-2"
+            onClick={() => { navigate('/register/user') }}
+          >
+            Register
+          </span>
+        </div>
+
+      </div>
+    </section >
   );
 }
