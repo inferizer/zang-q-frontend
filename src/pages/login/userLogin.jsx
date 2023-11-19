@@ -27,7 +27,7 @@ export default function UserLogin() {
 
   const validateLogin = (input) => {
     const { error } = UserLoginSchema.validate(input, { abortEarly: false });
-  
+
     toast.error("username or password was wrong!", error);
     if (error) {
       const result = error.details.reduce((acc, el) => {
@@ -50,55 +50,57 @@ export default function UserLogin() {
       return setError(validationError);
     }
     setError({});
-    await hdl_user_login_submit().then(res=>{
+    await hdl_user_login_submit().then(res => {
       navaigate('/')
     })
   };
   return (
     <section className="section h-screen flex gap-4">
-      <form
-        className="m-auto w-[600px] min-w-[240px] bg-white shadow-md rounded p-8 flex flex-col gap-4"
-        onSubmit={hdl_login_submit}
-      >
-        <h6 className="text-lg font-semibold">Login</h6>
-        <div className="flex flex-col gap-2 max-w-[600px]">
-          <Input
-            onChange={hdl_input}
-            placeholder='Email or Mobile:'
-            type='text'
-            id='emailOrMobile'
-            name='emailOrMobile'
-            value={input.emailOrMobile}
-            error={error.emailOrMobile}
-          />
-          {error.emailOrMobile && (
-            <InputErrorMessage message={error.emailOrMobile} />
-          )}
+      <div className="m-auto w-[600px] min-w-[240px] bg-white shadow-md rounded p-8 flex flex-col gap-4">
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={hdl_login_submit}
+        >
+          <h6 className="text-lg font-semibold">Login</h6>
+          <div className="flex flex-col gap-2 max-w-[600px]">
+            <Input
+              onChange={hdl_input}
+              placeholder='Email or Mobile:'
+              type='text'
+              id='emailOrMobile'
+              name='emailOrMobile'
+              value={input.emailOrMobile}
+              error={error.emailOrMobile}
+            />
+            {error.emailOrMobile && (
+              <InputErrorMessage message={error.emailOrMobile} />
+            )}
 
-          <Input
-            onChange={hdl_input}
-            type='password'
-            placeholder='password:'
-            name='password'
-            required
-            value={input.password}
-            error={error.password}
-          />
-          {error.password && (
-            <InputErrorMessage message={error.password} />
-          )}
-        </div>
+            <Input
+              onChange={hdl_input}
+              type='password'
+              placeholder='password:'
+              name='password'
+              required
+              value={input.password}
+              error={error.password}
+            />
+            {error.password && (
+              <InputErrorMessage message={error.password} />
+            )}
+          </div>
 
-        <button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
-          Continue
-        </button>
+          <button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">
+            Continue
+          </button>
 
-        <div className="flex items-center justify-center w-full">
-          <hr className="w-64 h-px my-8 bg-gray-300 border-0" />
-          <span className="absolute px-3 text-gray-500 -translate-x-1/2 bg-white left-1/2">
-            or
-          </span>
-        </div>
+          <div className="flex items-center justify-center w-full">
+            <hr className="w-64 h-px my-8 bg-gray-300 border-0" />
+            <span className="absolute px-3 text-gray-500 -translate-x-1/2 bg-white left-1/2">
+              or
+            </span>
+          </div>
+        </form>
 
         <LineLoginButton />
         <GoogleLogin
@@ -133,7 +135,8 @@ export default function UserLogin() {
             Register
           </span>
         </div>
-      </form>
+
+      </div>
     </section >
   );
 }

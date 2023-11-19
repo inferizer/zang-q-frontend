@@ -69,101 +69,104 @@ export default function UserRegister() {
   };
   return (
     <section className="section h-screen flex gap-4">
-      <form
-        className="m-auto w-[600px] min-w-[240px] bg-white shadow-md rounded p-8 flex flex-col gap-4"
-        onSubmit={hdl_submit}
-      >
-        <h6 className="text-lg font-semibold">Register</h6>
-        <div className="flex flex-col gap-2 max-w-[600px]">
-          <Input
-            onChange={hdl_input}
-            placeholder="username:"
-            type="text"
-            id="username"
-            name="username"
-            error={error.username}
-          />
-          {error.username && <InputErrorMessage message={error.username} />}
-          <Input
-            onChange={hdl_input}
-            type="password"
-            placeholder="password:"
-            name="password"
-            required
-            error={error.password}
-          />
-          {error.password && <InputErrorMessage message={error.password} />}
-          <Input
-            onChange={hdl_input}
-            type="password"
-            placeholder="confirmPassword"
-            name="confirmPassword"
-            required
-            error={error.confirmPassword}
-          />
-          {error.confirmPassword && (
-            <InputErrorMessage message={error.confirmPassword} />
-          )}
-          <Input
-            onChange={hdl_input}
-            placeholder="emailOrMobile:"
-            type="text"
-            id="emailOrMobile"
-            name="emailOrMobile"
-            error={error.emailOrMobile}
-          />
-          {error.emailOrMobile && (
-            <InputErrorMessage message={error.emailOrMobile} />
-          )}
-        </div>
-        <button
-          onClick={hdl_submit}
-          type="button"
-          className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+      <div className="m-auto w-[600px] min-w-[240px] bg-white shadow-md rounded p-8 flex flex-col gap-4">
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={hdl_submit}
         >
-          Continue
-        </button>
+          <h6 className="text-lg font-semibold">Register</h6>
+          <div className="flex flex-col gap-2 max-w-[600px]">
+            <Input
+              onChange={hdl_input}
+              placeholder="username:"
+              type="text"
+              id="username"
+              name="username"
+              error={error.username}
+            />
+            {error.username && <InputErrorMessage message={error.username} />}
+            <Input
+              onChange={hdl_input}
+              type="password"
+              placeholder="password:"
+              name="password"
+              required
+              error={error.password}
+            />
+            {error.password && <InputErrorMessage message={error.password} />}
+            <Input
+              onChange={hdl_input}
+              type="password"
+              placeholder="confirmPassword"
+              name="confirmPassword"
+              required
+              error={error.confirmPassword}
+            />
+            {error.confirmPassword && (
+              <InputErrorMessage message={error.confirmPassword} />
+            )}
+            <Input
+              onChange={hdl_input}
+              placeholder="emailOrMobile:"
+              type="text"
+              id="emailOrMobile"
+              name="emailOrMobile"
+              error={error.emailOrMobile}
+            />
+            {error.emailOrMobile && (
+              <InputErrorMessage message={error.emailOrMobile} />
+            )}
+          </div>
+          <button
+            onClick={hdl_submit}
+            type="button"
+            className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+          >
+            Continue
+          </button>
 
-        <div className="flex items-center justify-center w-full">
-          <hr className="w-64 h-px my-8 bg-gray-300 border-0" />
-          <span className="absolute px-3 text-gray-500 -translate-x-1/2 bg-white left-1/2">
-            or
+          <div className="flex items-center justify-center w-full">
+            <hr className="w-64 h-px my-8 bg-gray-300 border-0" />
+            <span className="absolute px-3 text-gray-500 -translate-x-1/2 bg-white left-1/2">
+              or
+            </span>
+          </div>
+        </form>
+
+        <LineLoginButtton />
+        <GoogleLogin
+          clientId={clientId}
+          buttonText="Continue with Google"
+          onSuccess={SuccessGoogle}
+          onFailure={failGoogle}
+          cookiePolicy="single_host_origin"
+          isSignedIn={false}
+          type="button"
+          render={renderProps => (
+            <button
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+              className="flex justify-center items-center gap-4 py-2 px-6 text-sm font-medium text-gray-900 rounded border-2 border-gray-200 hover:text-primary-500 hover:border-primary-500 focus:outline-none focus:bg-gray-100"
+            >
+              <img
+                className="w-9 h-9"
+                src={icongoogle}
+                alt=""
+              />
+              Continue with Google
+            </button>
+          )}
+        />
+
+        <div className="text-center mt-4 ">
+          <span className="text-gray-500">Already have an account?</span>
+          <span className="cursor-pointer underline text-primary-500 ml-2"
+            onClick={() => { navigate('/login/user') }}
+          >
+            Login
           </span>
         </div>
-      </form>
-
-      <LineLoginButtton />
-      <GoogleLogin
-        clientId={clientId}
-        buttonText="Continue with Google"
-        onSuccess={SuccessGoogle}
-        onFailure={failGoogle}
-        cookiePolicy="single_host_origin"
-        isSignedIn={false}
-        type="button"
-        render={renderProps => (
-          <button
-            onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
-            className="flex justify-center items-center gap-4 py-2 px-6 text-sm font-medium text-gray-900 rounded border-2 border-gray-200 hover:text-primary-500 hover:border-primary-500 focus:outline-none focus:bg-gray-100"
-          >
-            <img
-              className="w-9 h-9"
-              src={icongoogle}
-              alt=""
-            />
-            Continue with Google
-          </button>
-        )}
-      />
-
-      <div className="text-center mt-4 ">
-        <span className="text-gray-500">Already have an account?</span>
-        <span className="cursor-pointer underline text-primary-500 ml-2"
-          onClick={() => { navigate('/login/user') }}
-        >
-          Login
-        </span>
+        
       </div>
     </section>
   );
