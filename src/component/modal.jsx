@@ -1,7 +1,13 @@
-export default function Modal({children,onClose}){
-    return<div>
-    
-    <button className=" bg-red-200 p-2 rounded-full" onClick={onClose}>close</button>
-    {children}
-    </div> 
+export default function Modal({ children, onClose }) {
+  return (
+    <div>
+      <button
+        className=" bg-primary-100 p-3 text-white font-bold rounded-full mt-16"
+        onClick={onClose}
+      >
+        close
+      </button>
+      {children}
+    </div>
+  );
 }

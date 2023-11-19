@@ -3,11 +3,11 @@ import { useAuth } from "../../hook/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import Joi from "joi";
 import { useState } from "react";
-import LineLoginButtton from '../../component/LineLoginButton'
+import LineLoginButtton from "../../component/LineLoginButton";
 import liff from "@line/liff";
-import icongoogle from '../../assets/images/icongoogle.svg'
+import icongoogle from "../../assets/images/icongoogle.svg";
 import InputErrorMessage from "./InputErrorMessage";
-import { GoogleLogin } from "react-google-login"
+import { GoogleLogin } from "react-google-login";
 
 export default function UserRegister() {
   const registerSchema = Joi.object({
@@ -36,13 +36,19 @@ export default function UserRegister() {
     }
   };
 
-  liff.init({ liffId: '2001390459-y9GRwgp7' })
-  const clientId = "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com"
+  liff.init({ liffId: "2001390459-y9GRwgp7" });
+  const clientId =
+    "25769644481-it9q9s3alpf30c274qlqgepm7tppqr07.apps.googleusercontent.com";
 
   const [error, setError] = useState({});
-  const { hdl_input, hdl_user_register_submit, input, SuccessGoogle, failGoogle } = useAuth();
+  const {
+    hdl_input,
+    hdl_user_register_submit,
+    input,
+    SuccessGoogle,
+    failGoogle,
+  } = useAuth();
   const navigate = useNavigate();
-
 
   const hdl_submit = async (e) => {
     e.preventDefault();
@@ -124,42 +130,41 @@ export default function UserRegister() {
             or
           </span>
         </div>
-
-        <LineLoginButtton />
-        <GoogleLogin
-          clientId={clientId}
-          buttonText="Continue with Google"
-          onSuccess={SuccessGoogle}
-          onFailure={failGoogle}
-          cookiePolicy="single_host_origin"
-          isSignedIn={false}
-          type="button"
-          render={renderProps => (
-            <button
-              onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
-              className="flex justify-center items-center gap-4 py-2 px-6 text-sm font-medium text-gray-900 rounded border-2 border-gray-200 hover:text-primary-500 hover:border-primary-500 focus:outline-none focus:bg-gray-100"
-            >
-              <img
-                className="w-9 h-9"
-                src={icongoogle}
-                alt=""
-              />
-              Continue with Google
-            </button>
-          )}
-        />
-
-        <div className="text-center mt-4 ">
-          <span className="text-gray-500">Already have an account?</span>
-          <span className="cursor-pointer underline text-primary-500 ml-2"
-            onClick={() => { navigate('/login/user') }}
-          >
-            Login
-          </span>
-        </div>
       </form>
+
+      <LineLoginButtton />
+      <GoogleLogin
+        clientId={clientId}
+        buttonText="Continue with Google"
+        onSuccess={SuccessGoogle}
+        onFailure={failGoogle}
+        cookiePolicy="single_host_origin"
+        isSignedIn={false}
+        type="button"
+        render={renderProps => (
+          <button
+            onClick={renderProps.onClick}
+            disabled={renderProps.disabled}
+            className="flex justify-center items-center gap-4 py-2 px-6 text-sm font-medium text-gray-900 rounded border-2 border-gray-200 hover:text-primary-500 hover:border-primary-500 focus:outline-none focus:bg-gray-100"
+          >
+            <img
+              className="w-9 h-9"
+              src={icongoogle}
+              alt=""
+            />
+            Continue with Google
+          </button>
+        )}
+      />
+
+      <div className="text-center mt-4 ">
+        <span className="text-gray-500">Already have an account?</span>
+        <span className="cursor-pointer underline text-primary-500 ml-2"
+          onClick={() => { navigate('/login/user') }}
+        >
+          Login
+        </span>
+      </div>
     </section>
   );
 }
-

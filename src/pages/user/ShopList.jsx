@@ -103,11 +103,8 @@ export default function ShopList() {
 
             {searchBarResult
               ? searchBarResult.map((el) => {
-
-                <ShopCard storeName={el.shopName} img={el.shopPicture} />
-              }
-
-              )
+                return <ShopCard storeName={el.shopName} img={el.shopPicture} id={el.id} />
+              })
               : filter
                 ? filterResult.ShopsCategories.map((el) => {
 
@@ -121,12 +118,13 @@ export default function ShopList() {
                       <ShopCard
                         storeName={el.shop.shopName}
                         img={el.shop.shopPicture}
+                        id={el.shop.id}
                       />
                     );
                   }
                 })
                 : activeMarkers?.map((el) => (
-                  <ShopCard storeName={el.shopName} img={el.shopPicture} />
+                  <ShopCard storeName={el.shopName} img={el.shopPicture} id={el.id} />
                 ))}
           </div>
         </div>

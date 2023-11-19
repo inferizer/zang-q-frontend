@@ -5,7 +5,7 @@ import { useAuth } from "../hook/useAuthContext";
 import { getAccessToken } from "../utils/localStorage";
 import { useNavigate } from "react-router-dom";
 export default function Header() {
-	const { authUser, hdl_logout, isShowMap, setIsShowMap, handleShowMap } = useAuth();
+	const { authUser,setUserDetailOpen,userDetailOpen, isShowMap, setIsShowMap, handleShowMap } = useAuth();
 	const [selectedItem, setSelectedItem] = useState(null);
 	const navigate = useNavigate();
 
@@ -18,7 +18,8 @@ export default function Header() {
 	if (getAccessToken()) {
 		if (authUser.role == "vendor") {
 			return (
-				<header className="section shadow-md z-50 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
+				<header className="section shadow-md z-50  bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0 desktop:flex desktop:flex-col-reverse  ">
+					
 					<div className="container flex justify-between items-center">
 						<img src={logo} alt="logo" />
 						<nav>
@@ -45,7 +46,8 @@ export default function Header() {
 									className={`cursor-pointer text-sm px-4 flex flex-col justify-center items-center desktop:flex-row desktop:text-lg desktop:gap-1 desktop:py-2 hover:bg-primary-50 hover:rounded-md ${selectedItem === 'user' ? 'text-primary-500' : ''}`}
 									onClick={() => {
 										setSelectedItem('user')
-									}}>
+										setUserDetailOpen(!userDetailOpen)
+										}}>
 									<UserIcon className={`${selectedItem === 'user' ? 'primary-500 fill-current' : ''}`} />
 									User
 								</li>
@@ -58,7 +60,9 @@ export default function Header() {
 
 		if (authUser.role == "user") {
 			return (
-				<header className="section shadow-md z-50 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
+				<header className="section shadow-md z-50  bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0 desktop:flex desktop:flex-col-reverse">
+					<div className=" bg-white"></div>
+		
 					<div className="container flex justify-between items-center">
 						<img src={logo} alt="logo" />
 						<nav>
@@ -84,20 +88,24 @@ export default function Header() {
 								</li>
 								<li
 									className={`cursor-pointer text-sm px-4 flex flex-col justify-center items-center desktop:flex-row desktop:text-lg desktop:gap-1 desktop:py-2 hover:bg-primary-50 hover:rounded-md ${selectedItem === 'user' ? 'text-primary-500' : ''}`}
-									onClick={() => setSelectedItem('user')}>
+									onClick={() => {
+										setUserDetailOpen(!userDetailOpen)
+										setSelectedItem('user')}}>
 									<UserIcon className={`${selectedItem === 'user' ? 'primary-500 fill-current' : ''}`} />
 									User
 								</li>
 							</ul>
 						</nav>
 					</div>
+					
 				</header>
 			);
 
 		}
 		if (authUser.role == "admin") {
 			return (
-				<header className="section shadow-md z-50 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0">
+				<header className="section shadow-md z-50 bg-white fixed py-2 bottom-0 top-auto desktop:bottom-auto desktop:top-0 desktop:flex desktop:flex-col-reverse">
+				
 					<div className="container flex justify-between items-center">
 						<img src={logo} alt="logo" />
 						<nav>
@@ -122,7 +130,9 @@ export default function Header() {
 								</li>
 								<li
 									className={`cursor-pointer text-sm px-4 flex flex-col justify-center items-center desktop:flex-row desktop:text-lg desktop:gap-1 desktop:py-2 hover:bg-primary-50 hover:rounded-md ${selectedItem === 'user' ? 'text-primary-500' : ''}`}
-									onClick={() => setSelectedItem('user')}>
+									onClick={() => {
+										setUserDetailOpen(!userDetailOpen)
+										setSelectedItem('user')}}>
 									<UserIcon className={`${selectedItem === 'user' ? 'primary-500 fill-current' : ''}`} />
 									User
 								</li>

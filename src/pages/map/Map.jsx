@@ -29,7 +29,7 @@ function Map({ viewMode, data }) {
   const [center, setCenter] = useState({ lat: 13.7462, lng: 100.5347 });
   const [selectedInfoWindow, setSelectedInfoWindow] = useState(null);
   const [libraries, setLibraries] = useState(["places", "geometry"]);
-  // const [loadingLocation, setLoadingLocation] = useState(true);
+
   const {
     mapClicked,
     setMapClicked,
@@ -42,8 +42,6 @@ function Map({ viewMode, data }) {
     loadingLocation,
     setLoadingLocation,
   } = useMap();
-
-
 
   useEffect(() => {
     

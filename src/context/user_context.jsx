@@ -9,6 +9,7 @@ export default function UserContextProvider({ children }) {
   const [filterResult, setFilterResult] = useState(null);
   const [searchBarResult, setSearchBarResult] = useState(null);
   const {disableMarkers} = useMap()
+  const [singleShop,setSingleShop] = useState(null)
   useEffect(() => {
     axios.get("/user/shop").then((res) => {
       setAllShop(res.data.result);
@@ -55,6 +56,14 @@ export default function UserContextProvider({ children }) {
     }
     setSearchBarResult(result);
   };
+
+
+  const hdl_shopList_navigation = (id) =>{
+    axios.get(`/vendor/getSingle/${id}`).then(res=>{
+      setSingleShop(res.data.result[0])
+    })
+
+  }
   return (
     <UserContext.Provider
       value={{
@@ -67,6 +76,8 @@ export default function UserContextProvider({ children }) {
         hdl_searchBar,
         searchBarResult,
         setSearchBarResult,
+        hdl_shopList_navigation,
+        singleShop,
       }}
     >
       {children}

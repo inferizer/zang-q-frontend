@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../hook/useAuthContext";
 import Input from "../../component/input";
 import InputErrorMessage from "../register/InputErrorMessage";
 import Joi from "joi";
-export default function AdminLogin() {
+import React from "react";
+import { toast } from "react-toastify";
 
+export default function AdminLogin() {
   const adminLoginSchema = Joi.object({
     username: Joi.string().required(),
     password: Joi.string().required(),
   });
   const validateLogin = (input) => {
-
     const { error } = adminLoginSchema.validate(input, { abortEarly: false });
     console.log(error);
     if (error) {
@@ -23,19 +24,24 @@ export default function AdminLogin() {
     }
   };
   const { hdl_input, hdl_admin_login_submit, input } = useAuth();
-  const [error, setError] = useState({})
+  const [error, setError] = useState({});
+
   const hdl_submit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const validationError = validateLogin(input, { abortEarly: false });
     if (validationError) {
       return setError(validationError);
     }
-    setError({})
-    await hdl_admin_login_submit()
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+    setError({});
+    await hdl_admin_login_submit().then(res => {
+      alert(res)
+    }
+    ).catch((err) => {
+      console.log(err);
+      toast.error("username or password was wrong!", error);
+    });
+  };
+
   return (
     <section className="section h-screen flex gap-4">
       <form
@@ -78,5 +84,4 @@ export default function AdminLogin() {
       </form>
     </section>
   );
-
 }

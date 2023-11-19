@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom"
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../hook/useAuthContext";
 import { ADMIN, USER, VENDOR } from "../constant/role"
 import { getAccessToken } from "../utils/localStorage";
@@ -10,7 +10,5 @@ export default function RedirectIfAuth({ children }) {
         if (authUser.role === USER) return < Navigate to="/user/shopList" />
         if (authUser.role === VENDOR) return < Navigate to="/vendor" />
     }
-
     return children
-
 }
