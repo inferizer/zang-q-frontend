@@ -57,13 +57,12 @@ export default function UserContextProvider({ children }) {
     setSearchBarResult(result);
   };
 
-
-  const hdl_shopList_navigation = (id) =>{
-    axios.get(`/vendor/getSingle/${id}`).then(res=>{
-      setSingleShop(res.data.result[0])
-    })
-
-  }
+  const hdl_shopList_navigation = (id, selectShop) => {
+    axios.get(`/vendor/getSingle/${id}`).then((res) => {
+      setSingleShop(res.data.result[0]);
+    });
+    // selectShop(id);
+  };
   return (
     <UserContext.Provider
       value={{

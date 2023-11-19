@@ -15,7 +15,7 @@ export default function VendorOnsiteBook() {
   const { openShop, shopInfo, setShopInfo } = useQueue();
   const [bookingList, setBookingList] = useState([]);
   const [addQueue, setAddQueue] = useState(false);
-
+  console.log(shopInfo);
   useEffect(() => {
     socket.on("check_queue", (bookingInfo) => {
       console.log("check", bookingInfo);
@@ -38,13 +38,13 @@ export default function VendorOnsiteBook() {
   }, []);
 
   useEffect(() => {
-    socket.connect();
-    openShop();
-
     axios.patch("/vendor/open");
     axios.get("/vendor/getMyShop").then((res) => {
       setShopInfo(res.data.result[0]);
+      openShop(res.data.result[0].id);
+      // openShop("1");
     });
+    socket.connect();
   }, []);
 
   useEffect(() => {

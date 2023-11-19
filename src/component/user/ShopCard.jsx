@@ -1,6 +1,7 @@
 import { MdLocationOn, MdOutlineAccessTime } from "react-icons/md"
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hook/useUser";
+import { useQueue } from "../../hook/useQueue";
 export default function ShopCard({ storeName, location, q, img, id }) {
   const { hdl_shopList_navigation } = useUser()
   const navigate = useNavigate()

@@ -16,7 +16,7 @@ export default function UserTicketPage() {
       socket: ticketInfo.socket,
       id,
     });
-    window.location.reload();
+    window.location.replace("/user/shoplist");
   };
 
   return (
@@ -61,6 +61,7 @@ export default function UserTicketPage() {
           </div>
         </div>
         <hr className='border border-dashed border-gray-400' />
+
         <button
           onClick={cancelQueue}
           className='border border-dashed border-red-700 p-2 font-bold text-red-500 '

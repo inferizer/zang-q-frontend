@@ -94,8 +94,8 @@ export default function UserLogin() {
         </button>
 
         <div className="flex items-center justify-center w-full">
-          <hr className="w-64 h-px my-8 bg-gray-300 border-0 dark:bg-gray-700" />
-          <span className="absolute px-3 text-gray-500 -translate-x-1/2 bg-white left-1/2 dark:text-white dark:bg-gray-900">
+          <hr className="w-64 h-px my-8 bg-gray-300 border-0" />
+          <span className="absolute px-3 text-gray-500 -translate-x-1/2 bg-white left-1/2">
             or
           </span>
         </div>

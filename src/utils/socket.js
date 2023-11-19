@@ -1,3 +1,3 @@
 import io from "socket.io-client";
-
-export default io("http://localhost:4000", { autoConnect: false });
+import { BACKEND_URL } from "../config/env";
+export default io(BACKEND_URL, { autoConnect: false });
