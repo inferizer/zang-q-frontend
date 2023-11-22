@@ -1,9 +1,12 @@
 import ShopBanner from "../../component/user-vendor_booking/ShopBanner";
 import { useQueue } from "../../hook/useQueue";
+import { useUser } from "../../hook/useUser";
 import socket from "../../utils/socket";
 
 export default function UserTicketPage() {
   const { ticketInfo, setTicketInfo } = useQueue();
+  const {singleShop} = useUser()
+
   console.log(ticketInfo);
   const { id, userId, shopId, name, date, time, type, queueNumber } =
     ticketInfo;
@@ -20,16 +23,16 @@ export default function UserTicketPage() {
   };
 
   return (
-    <div className='mx-auto min-w-[391px] shadow-lg'>
+    <div className='mt-8 shadow-lg rounded-xl overflow-hidden'>
       {/* Header Ticket */}
-      <h1 className='min-w-[360px] text-3xl px-4 py-3 border border-gray-400 text-center font-bold rounded-t-xl bg-primary-300'>
+      <h1 className='text-2xl px-4 py-3  text-center font-bold bg-primary-500 text-white'>
         Your Ticket
       </h1>
       {/* Card Body */}
-      <div className='p-4 flex flex-col gap-4 border border-gray-400 rounded-b-xl '>
+      <div className='flex flex-col'>
         {/* Queue */}
-        <ShopBanner />
-        <div className='text-center'>
+        <ShopBanner shopPicture={singleShop.shopPicture} shopName={singleShop.shopName} />
+        <div className='text-center py-4'>
           <p className='font-semibold text-xl'>Your queue number </p>
           <p className='text-6xl font-semibold p-2 text-primary-500'>
             {type === "one"
@@ -48,7 +51,7 @@ export default function UserTicketPage() {
           <p>{name}</p>
         </div> */}
         {/* Date & Time */}
-        <div className='flex gap-28 justify-center'>
+        <div className='flex gap-28 justify-center py-6 border-t-2 border-dashed border-gray-300'>
           {/* Date */}
           <div className='flex flex-col'>
             <p className='font-semibold text-xl text-center'>Date</p>
@@ -60,11 +63,10 @@ export default function UserTicketPage() {
             <p>{time}</p>
           </div>
         </div>
-        <hr className='border border-dashed border-gray-400' />
 
         <button
           onClick={cancelQueue}
-          className='border border-dashed border-red-700 p-2 font-bold text-red-500 '
+          className='bg-gray-200 p-4 font-medium text-lg text-red-600 border-t-2 border-dashed border-gray-300'
         >
           Cancel Queue
         </button>

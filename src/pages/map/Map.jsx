@@ -15,6 +15,8 @@ import Loading from "../../component/loading";
 import ghost from "../../assets/image/halloween.png";
 import { LocationIcon } from "../../assets/icon/Icon";
 import { useMap } from "../../hook/useMap";
+import { useUser } from "../../hook/useUser";
+import { useNavigate } from "react-router-dom";
 
 function Map({ viewMode, data }) {
   const bangkokBounds = {
@@ -43,13 +45,16 @@ function Map({ viewMode, data }) {
     setLoadingLocation,
   } = useMap();
 
+  const { hdl_shopList_navigation } = useUser()
+  const navigate = useNavigate()
+
   useEffect(() => {
-    
+
     getLocation();
-   
+
   }, []);
 
-  const getLocation =  () => {
+  const getLocation = () => {
     setLoadingLocation(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, handleError);
@@ -126,7 +131,7 @@ function Map({ viewMode, data }) {
           acc.markersOutOfRadius.push(marker);
           return acc;
         }
-        
+
         // Compute spherical distance
         const distance = google.maps.geometry.spherical.computeDistanceBetween(
           new google.maps.LatLng({
@@ -221,12 +226,20 @@ function Map({ viewMode, data }) {
                   }}
                   onCloseClick={() => setSelectedInfoWindow(null)}
                 >
-                  <div>
+                  <div
+                    className="cursor-pointer hover:text-primary-500 flex flex-col items-center"
+                    onClick={() => {
+                      navigate(`/user/book`)
+                      hdl_shopList_navigation(selectedInfoWindow.id)
+                    }}
+                  >
                     <h4>{selectedInfoWindow.shopName}</h4>
-                    <img
-                      style={{ height: 100 }}
-                      src={selectedInfoWindow.shopPicture}
-                    />
+                    <div className=" bg-white rounded-lg border-2 border-gray-100 ">
+                      <img
+                        className="h-24 w-full object-cover"
+                        src={selectedInfoWindow.shopPicture}
+                        alt="restaurantImage" />
+                    </div>
                   </div>
                 </InfoWindow>
               )}

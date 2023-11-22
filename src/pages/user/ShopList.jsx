@@ -40,7 +40,7 @@ export default function ShopList() {
     <>
       <section className={`section bg-gray-50 desktop:pt-16 ${!isShowMap ? "visible" : "invisible h-0 overflow-hidden"}`}>
         <div className='container flex justify-center gap-6 items-center py-10 desktop:gap-20'>
-          <img src={maps} alt='hero-image' className='h-40 desktop:h-72 ' />
+          <img src={maps} alt='hero-image' className='h-40 desktop:h-56 ' />
           <div className='flex flex-col gap-6 items-start'>
             <p className="text-md desktop:text-xl text-gray-500">
               ซังคิว เว็บให้บริการจองคิวร้านอาหารแบบเรียลไทม์
@@ -99,7 +99,7 @@ export default function ShopList() {
           <div className="flex flex-col gap-4 desktop:flex-row desktop:flex-wrap desktop:justify-start">
 
             {/* If the map is still loading, show the Loading component */}
-            {loadingLocation && <Loading className="h-[200px] p-10" />}
+            {loadingLocation && <Loading className="h-[160px] p-10" />}
 
             {searchBarResult
               ? searchBarResult.map((el) => {
