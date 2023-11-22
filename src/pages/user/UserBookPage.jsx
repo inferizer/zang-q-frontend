@@ -16,8 +16,8 @@ export default function UserBookingPage() {
     console.log(ticketInfo);
     return (
       <section className="section desktop:pt-16 pt-4">
-        <div className="m-auto max-w-[600px] min-w-[320px] flex flex-col">
-          {ticketInfo.hasOwnProperty("queueNumber") ? null : <ShopBanner shopPicture={shopPicture} shopName={shopName} />}
+        <div className="m-auto max-w-[600px] min-w-[240px] flex flex-col">
+          {ticketInfo? null : <ShopBanner shopPicture={shopPicture} shopName={shopName} />}
           <UserBookTableForm id={id} />
         </div>
       </section>
