@@ -31,27 +31,8 @@ export default function VendorApplication() {
 	// console.log(authUser);
 
 	useEffect(() => {
-	
+
 	}, []);
-
-	const data = [
-		{ lat: 13.7582, lng: 100.54, title: "ตี๋น้อย" },
-		{ lat: 13.762, lng: 100.5352833, title: "after you" },
-		{ lat: 13.755, lng: 100.532, title: "ถ้วยถัง" },
-		{ lat: 13.76, lng: 100.53, title: "อี้จาสุกี้หม่าล่า" },
-		{ lat: 13.751, lng: 100.538, title: "นักล่าหมูกระทะ" },
-		{ lat: 13.748, lng: 100.55, title: "bar b gon" },
-		{ lat: 13.745, lng: 100.55, title: "ไอติมทุนจีน" },
-
-		{ lat: 13.802, lng: 100.537, title: "4868.204100256101" },
-		{ lat: 13.709, lng: 100.532, title: "5499.429088629627" },
-		{ lat: 13.762, lng: 100.586, title: "5502.696668591629" },
-		{ lat: 13.758, lng: 100.482, title: "5757.836659596614" },
-		{ lat: 13.759, lng: 100.493, title: "out of area example" },
-		{ lat: 13.715, lng: 100.511, title: "out of area example 5" },
-		{ lat: 13.805, lng: 100.53, title: "out of area example 6" },
-		{ lat: 13.764, lng: 100.589, title: "out of area example 7" },
-	];
 
 	const inputTag = [
 		{ id: 1, name: "shopName", label: "restaurant name", picture: false },
@@ -63,8 +44,8 @@ export default function VendorApplication() {
 	];
 
 	const DatePicker = [
-		{id:1, name:"",label:"",},
-		{id:1, name:"",label:"",},
+		{ id: 1, name: "", label: "", },
+		{ id: 1, name: "", label: "", },
 	]
 
 	const hdl_submit = async (e) => {
@@ -72,7 +53,7 @@ export default function VendorApplication() {
 		hdl_application_submit();
 	};
 	return (
-		<section className="section flex flex-col gap-12 pb-16 desktop:pt-16">
+		<section className="section flex flex-col gap-12 pb-20 desktop:pt-16">
 			<div className="container flex justify-center gap-8 pt-10">
 				<div
 					className={`flex flex-col gap-2 cursor-pointer text-sm rounded-lg px-8 py-2 justify-center items-center border-solid border-2 border-gray-300 text-gray-400 desktop:text-lg hover:bg-primary-50 ${selectedItem === 'personal' ? 'border-primary-500 text-primary-500' : ''}`}
@@ -171,24 +152,13 @@ export default function VendorApplication() {
 					);
 				})}
 
-				<h1>google map api</h1>
-				{/* <Map viewMode={false} /> */}
-				{authUser.role === "user" ? (
-					<Map
-						viewMode={true}
-						data={data}
-					/>
-				) : (
-					<Map viewMode={false} />
-				)}
-				<DesktopTimePicker  onChange={e=> hdl_MUI_timePicker_opening(e)} label="Opening time"/>
-				<DesktopTimePicker onChange={e=> hdl_MUI_timePicker_closing(e)} label="Closing time"/>
+				<Map viewMode={false} />
+
+				<DesktopTimePicker onChange={e => hdl_MUI_timePicker_opening(e)} label="Opening time" />
+				<DesktopTimePicker onChange={e => hdl_MUI_timePicker_closing(e)} label="Closing time" />
 
 				<button className="mt-3 shadow bg-primary-500 hover:opacity-60 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded">Continue</button>
-			
-			
-			
-			
+
 			</form>
 
 		</section>

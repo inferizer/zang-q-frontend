@@ -127,7 +127,7 @@ export default function AuthContextProvider({ children }) {
       window.location.replace("http://localhost:5173");
     }
     removeAccessToken();
-    setAuthUser(null);
+    setUserDetailOpen(false);
   };
 
   const hdl_admin_login_submit = () => {

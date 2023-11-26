@@ -6,7 +6,7 @@ import { getAccessToken } from "../utils/localStorage";
 import { useNavigate } from "react-router-dom";
 export default function Header() {
 	const { authUser,setUserDetailOpen,userDetailOpen, isShowMap, setIsShowMap, handleShowMap } = useAuth();
-	const [selectedItem, setSelectedItem] = useState(null);
+	const [selectedItem, setSelectedItem] = useState('home');
 	const navigate = useNavigate();
 
 	const handleIsShowMap = () => {
