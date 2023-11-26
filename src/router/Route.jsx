@@ -37,7 +37,7 @@ import VendorHome from "../pages/vendor/VendorHome";
 import UserTicketPage from "../pages/user/UserTicketPage";
 import VendorOnsiteBook from "../pages/vendor/VendorOnsiteBook";
 import VendorHistory from "../pages/vendor/VendorHistory";
-import AdminManagement from "../pages/admin/AdminManagement";import ShopMap from "../pages/user/ShopMap";
+import AdminManagement from "../pages/admin/AdminManagement"; import ShopMap from "../pages/user/ShopMap";
 import MapContextProvider from "../context/map_context";
 
 const router = createBrowserRouter([
@@ -87,13 +87,13 @@ const router = createBrowserRouter([
     path: "/vendor",
     element: (
       <RedirectIfNotVendor>
-        <MapContextProvider>
-          <VendorContextProvider>
-          <QueueContextProvider>
+        <QueueContextProvider>
+          <MapContextProvider>
+            <VendorContextProvider>
               <Layout />
-          </QueueContextProvider>
-          </VendorContextProvider>
-        </MapContextProvider>
+            </VendorContextProvider>
+          </MapContextProvider>
+        </QueueContextProvider>
       </RedirectIfNotVendor>
     ),
     children: [

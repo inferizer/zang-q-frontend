@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../hook/useUser";
 import { useQueue } from "../../hook/useQueue";
 export default function ShopCard({ storeName, location, q, img, id }) {
-  const { hdl_shopList_navigation } = useUser()
+  const { hdl_shopList_navigation } = useQueue()
   const navigate = useNavigate()
 
-  console.log(id)
+  // console.log(id)
   return (
 
     <div className="flex min-w-[30%] gap-6 desktop:flex-col desktop:gap-4 shadow-lg rounded-xl p-4 transform transition duration-100 ease-in-out  hover:-translate-y-2 hover:shadow-2xl"
@@ -14,7 +14,7 @@ export default function ShopCard({ storeName, location, q, img, id }) {
         navigate(`/user/book`)
         hdl_shopList_navigation(id)
       }}>
-      <div className=" bg-white rounded-lg border-2 border-gray-100 ">
+      <div className=" bg-white rounded-lg border-2 border-gray-100 overflow-hidden">
         <img className="h-24 w-full object-cover desktop:h-44" src={img} alt="restaurantImage" />
       </div>
 

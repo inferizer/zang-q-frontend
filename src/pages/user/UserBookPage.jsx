@@ -6,7 +6,7 @@ import { useUser } from "../../hook/useUser";
 import { useQueue } from "../../hook/useQueue";
 
 export default function UserBookingPage() {
-  const { singleShop } = useUser()
+  const { singleShop } = useQueue()
 
   if (singleShop) {
     const { shopPicture, shopName, id } = (singleShop)
@@ -17,7 +17,7 @@ export default function UserBookingPage() {
     return (
       <section className="section desktop:pt-16 pt-4">
         <div className="m-auto max-w-[600px] min-w-[240px] flex flex-col">
-          {ticketInfo? null : <ShopBanner shopPicture={shopPicture} shopName={shopName} />}
+          {ticketInfo?.shopId === singleShop?.id ? (null) : (<ShopBanner shopPicture={shopPicture} shopName={shopName} />)}
           <UserBookTableForm id={id} />
         </div>
       </section>

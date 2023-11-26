@@ -99,7 +99,7 @@ export default function ShopList() {
           <div className="flex flex-col gap-4 desktop:flex-row desktop:flex-wrap desktop:justify-start">
 
             {/* If the map is still loading, show the Loading component */}
-            {loadingLocation && <Loading className="h-[160px] p-10" />}
+            {loadingLocation && <Loading className="h-[180px] p-10" />}
 
             {searchBarResult
               ? searchBarResult.map((el) => {

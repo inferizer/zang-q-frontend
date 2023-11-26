@@ -17,6 +17,7 @@ import { LocationIcon } from "../../assets/icon/Icon";
 import { useMap } from "../../hook/useMap";
 import { useUser } from "../../hook/useUser";
 import { useNavigate } from "react-router-dom";
+import { useQueue } from "../../hook/useQueue";
 
 function Map({ viewMode, data }) {
   const bangkokBounds = {
@@ -45,7 +46,6 @@ function Map({ viewMode, data }) {
     setLoadingLocation,
   } = useMap();
 
-  const { hdl_shopList_navigation } = useUser()
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -163,6 +163,8 @@ function Map({ viewMode, data }) {
     return <Loading />;
   }
 
+  const { hdl_shopList_navigation } = useQueue()
+
   return (
     <div className="flex flex-col py-5">
       <div>
@@ -245,7 +247,7 @@ function Map({ viewMode, data }) {
               )}
             </div>
           ) : (
-            <div className="absolute z-50 top-4 left-4 right-4">
+            <div className="absolute z-30 top-4 left-4 right-4">
               <PlacesAutoComplete handleSearchLocation={handleSearchLocation} />
               {/* ถามว่า searchLocation กับ mapClicked มีไหม ถ้ามีตัวในตัวหนึ่ง ให้ set position MarkerF */}
               {(searchLocation || mapClicked) && (

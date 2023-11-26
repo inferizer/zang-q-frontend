@@ -8,8 +8,9 @@ import socket from "../../utils/socket";
 import TableType from "./TableType";
 import UserTicketPage from "../../pages/user/UserTicketPage";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-export default function UserBookTableForm({id}) {
+export default function UserBookTableForm({ id }) {
   const {
     seat,
     setSeat,
@@ -21,7 +22,7 @@ export default function UserBookTableForm({id}) {
     setTicketInfo,
   } = useQueue();
 
-  const {singleShop} = useUser()
+  const { singleShop } = useQueue()
   const { authUser } = useAuth();
   const [bookingInfo, setBookingInfo] = useState({
     userId: authUser.id,
@@ -32,8 +33,9 @@ export default function UserBookTableForm({id}) {
     type: "one",
   });
 
+  console.log(ticketInfo, 'TICKET_INFO')
   console.log(bookingInfo);
-  console.log(singleShop)
+  console.log(singleShop, 'singleShop')
   useEffect(() => {
     socket.connect();
     socket.on("connect", () => {
@@ -43,6 +45,7 @@ export default function UserBookTableForm({id}) {
   // fecth ticket
   useEffect(() => {
     console.log("fetch ticket");
+    console.log(ticketInfo, 'TICKET_INFO')
     axios
       .post("/user/ticket", bookingInfo)
       .then((res) => {
@@ -50,6 +53,9 @@ export default function UserBookTableForm({id}) {
       })
       .catch((error) => console.log(error));
   }, []);
+
+  const navigate = useNavigate()
+
   const hdlAddSeat1 = () => {
     hdlAddSeat(seat, setSeat, maxSeat);
   };
@@ -66,6 +72,7 @@ export default function UserBookTableForm({id}) {
   const hdlSubmit = (e) => {
     e.preventDefault();
     bookingQueue(bookingInfo, seat);
+    // navigate('/user/ticket')
   };
 
   socket.on("ticket", (bookingConfirm) => {
@@ -79,7 +86,7 @@ export default function UserBookTableForm({id}) {
 
   return (
     <>
-      {ticketInfo?.hasOwnProperty("queueNumber") ? (
+      {ticketInfo?.hasOwnProperty("queueNumber") && ticketInfo?.shopId == singleShop?.id ? (
         <UserTicketPage />
       ) : (
         <form

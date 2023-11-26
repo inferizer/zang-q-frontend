@@ -2,12 +2,13 @@ import ShopBanner from "../../component/user-vendor_booking/ShopBanner";
 import { useQueue } from "../../hook/useQueue";
 import { useUser } from "../../hook/useUser";
 import socket from "../../utils/socket";
+import { useNavigate } from "react-router-dom";
 
 export default function UserTicketPage() {
   const { ticketInfo, setTicketInfo } = useQueue();
-  const {singleShop} = useUser()
+  const {singleShop} = useQueue()
+  const navigate = useNavigate();
 
-  console.log(ticketInfo);
   const { id, userId, shopId, name, date, time, type, queueNumber } =
     ticketInfo;
 
@@ -19,7 +20,8 @@ export default function UserTicketPage() {
       socket: ticketInfo.socket,
       id,
     });
-    window.location.replace("/user/shoplist");
+    // window.location.replace("/user/shoplist");
+    navigate('/user/shoplist')
   };
 
   return (
@@ -66,7 +68,7 @@ export default function UserTicketPage() {
 
         <button
           onClick={cancelQueue}
-          className='bg-gray-200 p-4 font-medium text-lg text-red-600 border-t-2 border-dashed border-gray-300'
+          className='bg-gray-200 p-4 font-medium text-lg text-red-600 border-t-2 border-dashed border-gray-300 hover:opacity-70'
         >
           Cancel Queue
         </button>

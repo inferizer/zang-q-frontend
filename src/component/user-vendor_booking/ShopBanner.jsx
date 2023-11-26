@@ -3,7 +3,7 @@ import { MdLocationOn, MdOutlineAccessTime } from "react-icons/md"
 export default function ShopBanner({ shopName, location, q, shopPicture }) {
   return (
     <div className="flex gap-6 p-4 border-b border-gray-100 ">
-      <div className=" bg-white rounded-lg border-2 border-gray-100 ">
+      <div className=" bg-white rounded-lg border-2 border-gray-100 overflow-hidden">
         <img className="h-24 w-full object-cover desktop:h-44" src={shopPicture} alt="restaurantImage" />
       </div>
 
